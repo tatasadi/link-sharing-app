@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.0",
-    "@storybook/addon-themes": "^8.1.10",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.396.0",
@@ -28,6 +27,8 @@
     "@storybook/addon-interactions": "^8.1.10",
     "@storybook/addon-links": "^8.1.10",
     "@storybook/addon-onboarding": "^8.1.10",
+    "@storybook/addon-styling-webpack": "^1.0.0",
+    "@storybook/addon-themes": "^8.1.10",
     "@storybook/blocks": "^8.1.10",
     "@storybook/nextjs": "^8.1.10",
     "@storybook/react": "^8.1.10",
