@@ -1,6 +1,14 @@
+import InputWithIcon from '@/components/ui/inputWithIcon'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { Input } from '@/components/ui/Input'
 import Image from 'next/image'
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from '@/components/ui/select'
 
 export default function Home() {
 	return (
@@ -18,39 +26,17 @@ export default function Home() {
 			<Button variant="secondary" className="opacity-25">
 				Get Started
 			</Button>
-			<div className="flex relative">
-				<Input
-					type="text"
-					placeholder="Text Field Empty"
-					className="px-9 py-3 opacity-50"
-				/>
-				<img
-					src="/icon-arrow.svg"
-					className="absolute top-3 left-2"
-				/>
-			</div>
-			<div className="flex relative">
-				<Input
-					type="text"
-					placeholder="Text Field Filled"
-					className="cursor-pointer px-9 py-3 hover:border-royal-violet hover:box-shadow:0px 0px 32px 0px rgba(99, 60, 255, 0.25)"
-				/>
-				<img
-					src="/icon-arrow.svg"
-					className="absolute top-3 left-2"
-				/>
-			</div>
-			<div className="flex relative">
-				<Input
-					type="text"
-					placeholder="Text Field Error"
-					className="cursor-pointer px-9 py-3"
-				/>
-				<img
-					src="/icon-arrow.svg"
-					className="absolute top-3 left-2"
-				/>
-			</div>
+			<InputWithIcon />
+			<Select>
+				<SelectTrigger className="max-w-[30rem]">
+					<SelectValue placeholder="Dropdown Field Default" />
+				</SelectTrigger>
+				<SelectContent>
+					<SelectItem value="light">Item 1</SelectItem>
+					<SelectItem value="dark">Item 2</SelectItem>
+					<SelectItem value="system">Item 3</SelectItem>
+				</SelectContent>
+			</Select>
 		</main>
 	)
 }
