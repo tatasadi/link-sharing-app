@@ -60,6 +60,7 @@ const config = {
 				'dark-gray': '#D9D9D9',
 				'pure-snow': '#FAFAFA',
 				'crimson-blaze': '#FF3939',
+				'pure-gray': '#333',
 			},
 			fontSize: {
 				'heading-m': [

@@ -9,34 +9,48 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select'
+import Card from '@/components/ui/Card'
 
 export default function Home() {
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between p-24 gap-4">
-			<h1 className="text-4xl font-bold text-center">
-				Welcome to the Link Sharing App
-			</h1>
-			<Button>Get Started</Button>
-			<Button className="bg-lavender-dream">Get Started</Button>
-			<Button className="opacity-25">Get Started</Button>
-			<Button variant="secondary">Get Started</Button>
-			<Button variant="secondary" className="bg-soft-lilac">
-				Get Started
-			</Button>
-			<Button variant="secondary" className="opacity-25">
-				Get Started
-			</Button>
-			<InputWithIcon />
-			<Select>
-				<SelectTrigger className="max-w-[30rem]">
-					<SelectValue placeholder="Dropdown Field Default" />
-				</SelectTrigger>
-				<SelectContent>
-					<SelectItem value="light">Item 1</SelectItem>
-					<SelectItem value="dark">Item 2</SelectItem>
-					<SelectItem value="system">Item 3</SelectItem>
-				</SelectContent>
-			</Select>
+		<main className="flex flex-col justify-center items-center mx-auto min-h-screen gap-4 py-4">
+			<div className="flex gap-4">
+				<Button variant="secondary">Back to Editor</Button>
+				<Button>Share Link</Button>
+			</div>
+			<img src="/Ellipse 3.svg" />
+			<h1 className="text-heading-m text-[#333]">Ben Wright</h1>
+			<p className="text-heading-s text-[#737373]">ben@example.com</p>
+			<Card
+				color="#1A1A1A"
+				text="GitHub"
+				icon="/teenyicons_github-solid.svg"
+			/>
+			<Card
+				color="#EE3939"
+				text="YouTube"
+				icon="/ri_youtube-fill.svg"
+			/>
+			<Card
+				color="#2D68FF"
+				text="LinkedIn"
+				icon="/mdi_linkedin.svg"
+			/>
+			<Card
+				color="#333333"
+				text="Dev.to"
+				icon="/skill-icons_devto-dark.svg"
+			/>
+			<Card
+				color="#8A1A50"
+				text="Codewars"
+				icon="/cib_codewars.svg"
+			/>
+			<Card
+				color="#302267"
+				text="freeCodeCamp"
+				icon="/ri_codepen-line.svg"
+			/>
 		</main>
 	)
 }
