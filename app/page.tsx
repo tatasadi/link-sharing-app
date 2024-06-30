@@ -56,49 +56,72 @@ export default function Home() {
 				/>
 			</div>
 			*/ profile /*
-			<section className="flex flex-col gap-4 p-6 bg-white rounded-xl">
-				<div>
-					<h2 className="text-2xl font-bold leading-9 text-pure-gray">
-						Profile Details
-					</h2>
-					<p className="text-body-m text-stone-gray">
-						Add your details to create a personal touch to your
-						profile.
-					</p>
-				</div>
-				<div className="bg-pure-snow rounded-xl p-5 mt-4">
-					<h3 className="text-body-m text-stone-gray">
-						Profile picture
-					</h3>
-					<div className="bg-soft-lilac rounded-xl flex flex-col justify-center items-center w-[12rem] h-[12rem] my-8">
-						<img src="/ph_image.svg" />
-						<a
-							href="#"
-							aria-label="+ Upload Image"
-							className="text-heading-s text-royal-violet"
-						>
-							+ Upload Image
-						</a>
+			<div className="flex gap-5 justify-center items-center">
+				<div className="hidden lg:block">
+					<img />
+					<div className="flex flex-col gap-4 p-6">
+						<Card
+							color="#1A1A1A"
+							text="GitHub"
+							icon="/teenyicons_github-solid.svg"
+						/>
+						<Card
+							color="#EE3939"
+							text="YouTube"
+							icon="/ri_youtube-fill.svg"
+						/>
+						<Card
+							color="#2D68FF"
+							text="LinkedIn"
+							icon="/mdi_linkedin.svg"
+						/>
 					</div>
-					<p className="text-body-s text-stone-gray">
-						Image must be below 1024x1024px. Use PNG or JPG format.
-					</p>
 				</div>
-				<div className="bg-pure-snow rounded-xl p-5">
-					<label className="text-body-s text-pure-gray">
-						First name*
-					</label>
-					<Input placeholder="First Name" />
-					<label className="text-body-s text-pure-gray">
-						Last name*
-					</label>
-					<Input placeholder="Last Name" />
-					<label className="text-body-s text-pure-gray">Email*</label>
-					<Input placeholder="Email" type="email" />
-				</div>
-				<div></div>
-				<Button className="w-full mb-8">Save</Button>
-			</section>
+				<section className="flex flex-col gap-4 p-6 bg-white rounded-xl">
+					<div>
+						<h2 className="text-2xl font-bold leading-9 text-pure-gray">
+							Profile Details
+						</h2>
+						<p className="text-body-m text-stone-gray">
+							Add your details to create a personal touch to your
+							profile.
+						</p>
+					</div>
+					<div className="bg-pure-snow rounded-xl p-5 mt-4 md:flex md:items-center md:gap-4">
+						<h3 className="text-body-m text-stone-gray md:w-1/2">
+							Profile picture
+						</h3>
+						<div className="bg-soft-lilac rounded-xl flex flex-col justify-center items-center w-[12rem] md:w-1/2 h-[12rem] my-8">
+							<img src="/ph_image.svg" />
+							<a
+								href="#"
+								aria-label="+ Upload Image"
+								className="text-heading-s text-royal-violet"
+							>
+								+ Upload Image
+							</a>
+						</div>
+						<p className="text-body-s text-stone-gray md:w-1/3">
+							Image must be below 1024x1024px. Use PNG or JPG format.
+						</p>
+					</div>
+					<div className="bg-pure-snow rounded-xl p-5 md:grid md:grid-cols-2 md:gap-4">
+						<label className="item">First name*</label>
+						<Input placeholder="e.g. John" />
+						<label className="item">Last name*</label>
+						<Input placeholder="e.g. Appleseed" />
+						<label className="item">Email*</label>
+						<Input
+							placeholder="e.g. email@example.com"
+							type="email"
+						/>
+					</div>
+					<div className="w-full h-[.15rem] bg-dark-gray"></div>
+					<Button className="w-full mb-8 md:w-[6rem] md:ml-auto">
+						Save
+					</Button>
+				</section>
+			</div>
 		</main>
 	)
 }
