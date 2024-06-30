@@ -20,8 +20,8 @@ export default function Home() {
 			</div>
 			<div className="flex flex-col justify-center items-center gap-4 md:bg-white md:rounded-3xl md:py-12 px-14 md:mt-10">
 				<img src="/Ellipse 3.svg" />
-				<h1 className="text-heading-m text-[#333]">Ben Wright</h1>
-				<p className="text-heading-s text-[#737373]">
+				<h1 className="text-heading-m text-pure-gray">Ben Wright</h1>
+				<p className="text-heading-s text-stone-gray">
 					ben@example.com
 				</p>
 				<Card
@@ -55,6 +55,50 @@ export default function Home() {
 					icon="/ri_codepen-line.svg"
 				/>
 			</div>
+			*/ profile /*
+			<section className="flex flex-col gap-4 p-6 bg-white rounded-xl">
+				<div>
+					<h2 className="text-2xl font-bold leading-9 text-pure-gray">
+						Profile Details
+					</h2>
+					<p className="text-body-m text-stone-gray">
+						Add your details to create a personal touch to your
+						profile.
+					</p>
+				</div>
+				<div className="bg-pure-snow rounded-xl p-5 mt-4">
+					<h3 className="text-body-m text-stone-gray">
+						Profile picture
+					</h3>
+					<div className="bg-soft-lilac rounded-xl flex flex-col justify-center items-center w-[12rem] h-[12rem] my-8">
+						<img src="/ph_image.svg" />
+						<a
+							href="#"
+							aria-label="+ Upload Image"
+							className="text-heading-s text-royal-violet"
+						>
+							+ Upload Image
+						</a>
+					</div>
+					<p className="text-body-s text-stone-gray">
+						Image must be below 1024x1024px. Use PNG or JPG format.
+					</p>
+				</div>
+				<div className="bg-pure-snow rounded-xl p-5">
+					<label className="text-body-s text-pure-gray">
+						First name*
+					</label>
+					<Input placeholder="First Name" />
+					<label className="text-body-s text-pure-gray">
+						Last name*
+					</label>
+					<Input placeholder="Last Name" />
+					<label className="text-body-s text-pure-gray">Email*</label>
+					<Input placeholder="Email" type="email" />
+				</div>
+				<div></div>
+				<Button className="w-full mb-8">Save</Button>
+			</section>
 		</main>
 	)
 }
