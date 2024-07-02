@@ -282,6 +282,62 @@ export default function Home() {
 					Save
 				</Button>
 			</section>
+			*/ Added One Link /*
+			<section className="bg-white p-8 rounded-xl">
+				<div className="mb-28">
+					<h5 className="text-2xl font-bold leading-9 text-pure-gray">
+						Customize your links
+					</h5>
+					<p className="text-body-m text-stone-gray my-6">
+						Add/edit/remove links below and then share all your
+						profiles with the world!
+					</p>
+					<Button variant="secondary" className="w-full mt-2 ">
+						+ Add new link
+					</Button>
+				</div>
+				<div>
+					<div className="flex justify-between items-center mb-8">
+						<p>Link #1</p>
+						<p>Remove</p>
+					</div>
+					<Select>
+						<SelectTrigger className="mb-6">
+							<SelectValue placeholder="Dropdown Field Default" />
+						</SelectTrigger>
+						<SelectContent>
+							<SelectItem value="light">
+								<img
+									src="/teenyicons_github-solid.svg"
+									className="bg-stone-gray"
+								/>
+								GitHub
+							</SelectItem>
+							<SelectItem value="dark">Item 2</SelectItem>
+							<SelectItem value="system">Item 3</SelectItem>
+						</SelectContent>
+					</Select>
+					<label className="text-body-s text-pure-gray">
+						Email address
+					</label>
+					<div className="flex relative mb-4">
+						<Input
+							type="email"
+							placeholder="e.g. https://www.github.com/johnappleseed"
+							className="px-9 py-3 opacity-50"
+						/>
+						<img
+							src="/ph_link-bold.svg"
+							className="absolute top-3 left-2"
+							alt="icon"
+						/>
+					</div>
+				</div>
+				<div className="w-full h-[.15rem] bg-dark-gray md:mt-28"></div>
+				<Button className="mt-4 w-full md:w-[6rem] md:ml-auto">
+					Save
+				</Button>
+			</section>
 		</main>
 	)
 }
