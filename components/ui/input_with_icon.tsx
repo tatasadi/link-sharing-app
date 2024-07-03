@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Input } from './Input'
+import { Input } from './input'
 export default function InputWithIcon() {
 	return (
 		<div className="flex relative">
