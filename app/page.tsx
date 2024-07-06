@@ -8,8 +8,9 @@ import {
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
+	SelectSeparator,
 } from '@/components/ui/select'
-import Card from '@/components/ui/card'
+import Social from '@/components/ui/social_button'
 
 export default function Home() {
 	return (
@@ -24,32 +25,32 @@ export default function Home() {
 				<p className="text-heading-s text-stone-gray">
 					ben@example.com
 				</p>
-				<Card
+				<Social
 					color="#1A1A1A"
 					text="GitHub"
 					icon="/teenyicons_github-solid.svg"
 				/>
-				<Card
+				<Social
 					color="#EE3939"
 					text="YouTube"
 					icon="/ri_youtube-fill.svg"
 				/>
-				<Card
+				<Social
 					color="#2D68FF"
 					text="LinkedIn"
 					icon="/mdi_linkedin.svg"
 				/>
-				<Card
+				<Social
 					color="#333333"
 					text="Dev.to"
 					icon="/skill-icons_devto-dark.svg"
 				/>
-				<Card
+				<Social
 					color="#8A1A50"
 					text="Codewars"
 					icon="/cib_codewars.svg"
 				/>
-				<Card
+				<Social
 					color="#302267"
 					text="freeCodeCamp"
 					icon="/ri_codepen-line.svg"
@@ -60,17 +61,17 @@ export default function Home() {
 				<div className="hidden lg:block relative">
 					<img src="/illustration-phone-mockup.svg" />
 					<div className="flex flex-col gap-4 p-6 absolute top-[15.5rem] left-2">
-						<Card
+						<Social
 							color="#1A1A1A"
 							text="GitHub"
 							icon="/teenyicons_github-solid.svg"
 						/>
-						<Card
+						<Social
 							color="#EE3939"
 							text="YouTube"
 							icon="/ri_youtube-fill.svg"
 						/>
-						<Card
+						<Social
 							color="#2D68FF"
 							text="LinkedIn"
 							icon="/mdi_linkedin.svg"
@@ -196,37 +197,7 @@ export default function Home() {
 					</p>
 				</div>
 			</section>
-			*/ Empty /*
-			<section className="flex flex-col bg-white p-8 rounded-xl">
-				<div className="mb-28">
-					<h5 className="text-2xl font-bold leading-9 text-pure-gray">
-						Customize your links
-					</h5>
-					<p className="text-body-m text-stone-gray my-6">
-						Add/edit/remove links below and then share all your
-						profiles with the world!
-					</p>
-					<Button variant="secondary" className="w-full mt-2">
-						+ Add new link
-					</Button>
-				</div>
-				<div className="flex flex-col justify-center items-center gap-6">
-					<img src="@/Group 273.svg" alt="icon" />
-					<h6 className="text-2xl font-bold leading-9 text-pure-gray">
-						Let’s get you started
-					</h6>
-					<p className="text-body-m text-stone-gray mb-20 md:px-20">
-						Use the “Add new link” button to get started. Once you
-						have more than one link, you can reorder and edit them.
-						We’re here to help you share your profiles with everyone!
-					</p>
-				</div>
-				<div className="w-full h-[.15rem] bg-dark-gray"></div>
-				<Button className="mt-4 opacity-25 w-full md:w-[6rem] md:ml-auto">
-					Save
-				</Button>
-			</section>
-			*/ Added One Link /*
+			*/ Empty /* */ Added One Link /*
 			<section className="flex flex-col bg-white p-8 rounded-xl">
 				<div className="mb-28">
 					<h5 className="text-2xl font-bold leading-9 text-pure-gray">
@@ -251,14 +222,19 @@ export default function Home() {
 						</SelectTrigger>
 						<SelectContent>
 							<SelectItem value="light">
-								<img
-									src="/teenyicons_github-solid.svg"
-									className="bg-stone-gray"
-								/>
-								GitHub
+								<div className="flex gap-4 p-2">
+									<img
+										src="/teenyicons_github-solid.svg"
+										className="bg-stone-gray"
+									/>
+									GitHub
+								</div>
 							</SelectItem>
+							<SelectSeparator />
 							<SelectItem value="dark">Item 2</SelectItem>
+							<SelectSeparator />
 							<SelectItem value="system">Item 3</SelectItem>
+							<SelectSeparator />
 						</SelectContent>
 					</Select>
 					<label className="text-body-s text-pure-gray">
