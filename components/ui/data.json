@@ -1,0 +1,67 @@
+[
+	{
+		"title": "GitHub",
+		"color": "#1A1A1A",
+		"icon": ""
+	},
+	{
+		"title": "Frontend Mentor",
+		"color": "#FFFFFF",
+		"icon": ""
+	},
+	{
+		"title": "Twitter",
+		"color": "#43B7E9",
+		"icon": ""
+	},
+	{
+		"title": "LinkedIn",
+		"color": "#2D68FF",
+		"icon": ""
+	},
+	{
+		"title": "YouTube",
+		"color": "#EE3939",
+		"icon": ""
+	},
+	{
+		"title": "Facebook",
+		"color": "#2442AC",
+		"icon": ""
+	},
+	{
+		"title": "Twitch",
+		"color": "#EE3FC8",
+		"icon": ""
+	},
+	{
+		"title": "Dev.to",
+		"color": "#333333",
+		"icon": ""
+	},
+	{
+		"title": "Codewars",
+		"color": "#8A1A50",
+		"icon": ""
+	},
+	{
+		"title": "freeCodeCamp",
+		"color": "#302267",
+		"icon": ""
+	},
+	{
+		"title": "GitLab",
+		"color": "#EB4925",
+		"icon": ""
+	},
+	{
+		"title": "Hashnode",
+		"color": "#0330D1",
+		"icon": ""
+	},
+	{
+		"title": "Stack Overflow",
+		"color": "#EC7100",
+		"icon": ""
+	}
+]
