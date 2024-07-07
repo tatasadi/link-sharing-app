@@ -2,6 +2,8 @@ import InputWithIcon from '@/components/ui/input_with_icon'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import Image from 'next/image'
+import data from '@/components/ui/data.json'
+import { PiGithubLogoFill } from 'react-icons/pi'
 import {
 	Select,
 	SelectContent,
@@ -11,6 +13,7 @@ import {
 	SelectSeparator,
 } from '@/components/ui/select'
 import Social from '@/components/ui/social_button'
+import Tab from '@/components/sections/tablink'
 
 export default function Home() {
 	return (
@@ -142,19 +145,22 @@ export default function Home() {
 						<p>Link #1</p>
 						<p>Remove</p>
 					</div>
+					<label className="text-body-s text-pure-gray">
+						Platform
+					</label>
 					<Select>
 						<SelectTrigger className="mb-6">
 							<SelectValue placeholder="Dropdown Field Default" />
 						</SelectTrigger>
 						<SelectContent>
 							<SelectItem value="light">
-								<div className="flex gap-4 p-2">
-									<img
-										src="/teenyicons_github-solid.svg"
-										className="bg-stone-gray"
+								{data.map((item, index) => (
+									<Tab
+										key={index}
+										icon={item.icon}
+										title={item.title}
 									/>
-									GitHub
-								</div>
+								))}
 							</SelectItem>
 							<SelectSeparator />
 							<SelectItem value="dark">Item 2</SelectItem>
@@ -163,9 +169,7 @@ export default function Home() {
 							<SelectSeparator />
 						</SelectContent>
 					</Select>
-					<label className="text-body-s text-pure-gray">
-						Email address
-					</label>
+					<label className="text-body-s text-pure-gray">Link</label>
 					<div className="flex relative mb-4">
 						<Input
 							type="email"
