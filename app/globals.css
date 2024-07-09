@@ -63,4 +63,8 @@
 	.item {
 		@apply text-body-s text-pure-gray md:mt-2 md:text-stone-gray md:text-base md:font-normal;
 	}
+
+	.select-item-wrapper {
+		@apply flex gap-4 p-2 items-center;
+	}
 }

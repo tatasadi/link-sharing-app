@@ -1,11 +1,13 @@
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
+import solarLinkImage from '@/public/solar_link-circle-bold.svg'
+import Image from 'next/image'
 
 export default function Login() {
 	return (
 		<section className="bg-white p-8 rounded-xl">
 			<div className="flex gap-4 items-center mb-24 md:justify-center">
-				<img src="/solar_link-circle-bold.svg" alt="icon" />
+				<Image src={solarLinkImage} alt="icon" />
 				<img src="/devlinks.svg" alt="logo" />
 			</div>
 			<div className="mb-8">

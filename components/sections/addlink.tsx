@@ -1,5 +1,3 @@
-import data from '@/components/ui/data.json'
-import Tab from '@/components/sections/tablink'
 import {
 	Select,
 	SelectContent,
@@ -9,6 +7,8 @@ import {
 	SelectSeparator,
 } from '@/components/ui/select'
 import { Input } from '../ui/input'
+import { PiGithubLogoFill } from 'react-icons/pi'
+import { SiFrontendmentor } from 'react-icons/si'
 
 export default function Addlink() {
 	return (
@@ -23,10 +23,17 @@ export default function Addlink() {
 					<SelectValue placeholder="Dropdown Field Default" />
 				</SelectTrigger>
 				<SelectContent>
-					<SelectItem value="light">
-						{data.map((item, index) => (
-							<Tab key={index} icon={item.icon} title={item.title} />
-						))}
+					<SelectItem value="github">
+						<div className="select-item-wrapper">
+							<PiGithubLogoFill /> Github
+						</div>
+					</SelectItem>
+					<SelectSeparator />
+					<SelectItem value="frontendmentor">
+						<div className="select-item-wrapper">
+							<SiFrontendmentor />
+							Frontend Mentor
+						</div>
 					</SelectItem>
 					<SelectSeparator />
 					<SelectItem value="dark">Item 2</SelectItem>
@@ -42,11 +49,7 @@ export default function Addlink() {
 					placeholder="e.g. https://www.github.com/johnappleseed"
 					className="px-9 py-3 opacity-50"
 				/>
-				<img
-					src="/ph_link-bold.svg"
-					className="absolute top-3 left-2"
-					alt="icon"
-				/>
+				<img src="/ph_link-bold.svg" className="absolute top-3 left-2" alt="icon" />
 			</div>
 		</div>
 	)
