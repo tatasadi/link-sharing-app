@@ -2,7 +2,7 @@ import Addlink from '@/components/sections/addlink'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-	title: 'Sections/Login',
+	title: 'Sections/Addlink',
 	component: Addlink,
 	parameters: {
 		layout: 'centered',
