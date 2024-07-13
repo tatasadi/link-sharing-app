@@ -58,6 +58,7 @@ const config = {
 				'charcoal-black': '#333333',
 				'stone-gray': '#737373',
 				'dark-gray': '#D9D9D9',
+				'dark-red': '#FF3939',
 				'pure-snow': '#FAFAFA',
 				'crimson-blaze': '#FF3939',
 				'pure-gray': '#333',

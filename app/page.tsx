@@ -1,4 +1,4 @@
-import InputWithIcon from '@/components/ui/input_with_icon'
+import InputWithIcon from '@/components/ui/input-with-icon'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import Image from 'next/image'
@@ -13,7 +13,6 @@ import {
 	SelectSeparator,
 } from '@/components/ui/select'
 import Social from '@/components/ui/social_button'
-import Tab from '@/components/sections/tablink'
 
 export default function Home() {
 	return (
@@ -153,15 +152,7 @@ export default function Home() {
 							<SelectValue placeholder="Dropdown Field Default" />
 						</SelectTrigger>
 						<SelectContent>
-							<SelectItem value="light">
-								{data.map((item, index) => (
-									<Tab
-										key={index}
-										icon={item.icon}
-										title={item.title}
-									/>
-								))}
-							</SelectItem>
+							<SelectItem value="light"></SelectItem>
 							<SelectSeparator />
 							<SelectItem value="dark">Item 2</SelectItem>
 							<SelectSeparator />

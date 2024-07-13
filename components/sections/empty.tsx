@@ -1,4 +1,6 @@
 import { Button } from '../ui/button'
+import Group from '@/public/Group.svg'
+import Image from 'next/image'
 
 export default function Empty() {
 	return (
@@ -16,7 +18,7 @@ export default function Empty() {
 				</Button>
 			</div>
 			<div className="flex flex-col justify-center items-center gap-6">
-				<img src="@/Group.svg" alt="icon" />
+				<Image src={Group} alt="icon" />
 				<h6 className="text-2xl font-bold leading-9 text-pure-gray">
 					Let’s get you started
 				</h6>
