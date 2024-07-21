@@ -6,6 +6,8 @@ import {
 	SelectValue,
 	SelectSeparator,
 } from '@/components/ui/select'
+import ph_link from '@/public/ph_link-bold.svg'
+import Image from 'next/image'
 import { Input } from '../ui/input'
 import { PiGithubLogoFill } from 'react-icons/pi'
 import { SiFrontendmentor } from 'react-icons/si'
@@ -122,8 +124,8 @@ export default function Addlink() {
 					placeholder="e.g. https://www.github.com/johnappleseed"
 					className="px-9 py-3 opacity-50"
 				/>
-				<img
-					src="/ph_link-bold.svg"
+				<Image
+					src={ph_link}
 					className="absolute top-3 left-2"
 					alt="icon"
 				/>

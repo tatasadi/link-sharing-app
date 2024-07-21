@@ -1,12 +1,17 @@
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
+import Image from 'next/image'
+import ph_lock from '@/public/ph_lock-key-fill.svg'
+import ph_envelope from '@/public/ph_envelope-simple-fill.svg'
+import solar_link from '@/public/solar_link-circle-bold.svg'
+import devlinks from '@/public/devlinks.svg'
 
 export default function Create() {
 	return (
 		<section className="bg-white p-8 rounded-xl">
 			<div className="flex gap-4 items-center mb-24 md:justify-center">
-				<img src="/solar_link-circle-bold.svg" alt="icon" />
-				<img src="/devlinks.svg" alt="logo" />
+				<Image src={solar_link} alt="icon" />
+				<Image src={devlinks} alt="logo" />
 			</div>
 			<div className="mb-8">
 				<h4 className="text-2xl font-bold leading-9 text-pure-gray">
@@ -26,8 +31,8 @@ export default function Create() {
 						placeholder="e.g. alex@email.com"
 						className="px-9 py-3 opacity-50"
 					/>
-					<img
-						src="/ph_envelope-simple-fill.svg"
+					<Image
+						src={ph_envelope}
 						className="absolute top-3 left-2"
 						alt="icon"
 					/>
@@ -41,8 +46,8 @@ export default function Create() {
 						placeholder="At least .8 characters"
 						className="px-9 py-3 opacity-50"
 					/>
-					<img
-						src="/ph_lock-key-fill.svg"
+					<Image
+						src={ph_lock}
 						className="absolute top-3 left-2"
 						alt="icon"
 					/>
@@ -56,8 +61,8 @@ export default function Create() {
 						placeholder="At least .8 characters"
 						className="px-9 py-3 opacity-50"
 					/>
-					<img
-						src="/ph_lock-key-fill.svg"
+					<Image
+						src={ph_lock}
 						className="absolute top-3 left-2"
 						alt="icon"
 					/>
