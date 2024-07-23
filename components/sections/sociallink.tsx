@@ -27,9 +27,7 @@ export default function Sociallink() {
 						Add/edit/remove links below and then share all your
 						profiles with the world!
 					</p>
-					<Button variant="secondary" className="w-full mt-2 ">
-						+ Add new link
-					</Button>
+					<Button className="w-full mt-2">+ Add new link</Button>
 				</div>
 				<div className="bg-pure-snow mb-8 p-6 rounded-xl">
 					<div className="flex justify-between items-center mb-8">
@@ -44,12 +42,11 @@ export default function Sociallink() {
 							<SelectValue placeholder="Dropdown Field Default" />
 						</SelectTrigger>
 						<SelectContent>
-							<SelectItem value="light"></SelectItem>
+							<SelectItem value="light">Item 1</SelectItem>
 							<SelectSeparator />
 							<SelectItem value="dark">Item 2</SelectItem>
 							<SelectSeparator />
 							<SelectItem value="system">Item 3</SelectItem>
-							<SelectSeparator />
 						</SelectContent>
 					</Select>
 					<label className="text-body-s text-pure-gray">Link</label>
