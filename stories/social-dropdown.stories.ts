@@ -1,18 +1,18 @@
-import InputWithError from '@/components/ui/input-with-error'
+import SocialDropdown from '@/components/social-dropdown'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-	title: 'Components/InputWithError',
-	component: InputWithError,
+	title: 'Components/SocialDropdown',
+	component: SocialDropdown,
 	parameters: {
 		layout: 'centered',
 	},
 	tags: ['autodocs'],
-} satisfies Meta<typeof InputWithError>
+} satisfies Meta<typeof SocialDropdown>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-	args: { error: 'Please check again' },
+	args: {},
 }

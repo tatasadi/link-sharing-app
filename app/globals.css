@@ -10,7 +10,7 @@
 			--card: 0 0% 100%;
 			--card-foreground: 222.2 84% 4.9%;
 			--popover: 0 0% 100%;
-			--popover-foreground: 222.2 84% 4.9%;
+			--popover-foreground: 0 0% 20%;
 			--primary: 252 100% 62%;
 			--primary-foreground: 210 40% 98%;
 			--secondary: 210 40% 96.1%;
@@ -61,10 +61,10 @@
 }
 @layer utilities {
 	.item {
-		@apply text-body-s text-pure-gray md:mt-2 md:text-stone-gray md:text-base md:font-normal;
+		@apply text-body-s text-dark-gray md:mt-2 md:text-gray md:text-base md:font-normal;
 	}
 
 	.select-item-wrapper {
-		@apply flex gap-4 p-2 items-center;
+		@apply flex gap-4 items-center;
 	}
 }

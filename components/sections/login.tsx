@@ -14,51 +14,29 @@ export default function Login() {
 				<Image src={devlinks} alt="logo" />
 			</div>
 			<div className="mb-8">
-				<h4 className="text-2xl font-bold leading-9 text-pure-gray">
-					Login bla bla
-				</h4>
-				<p className="text-body-m text-stone-gray">
-					Add your details below to get back into the app
-				</p>
+				<h4 className="text-2xl font-bold leading-9 text-dark-gray">Login bla bla</h4>
+				<p className="text-body-m text-gray">Add your details below to get back into the app</p>
 			</div>
 			<div className="mb-4">
-				<label className="text-body-s text-pure-gray">
-					Email address
-				</label>
+				<label className="text-body-s text-dark-gray">Email address</label>
 				<div className="flex relative mb-4">
-					<Input
-						type="email"
-						placeholder="e.g. alex@email.com"
-						className="px-9 py-3 opacity-50"
-					/>
-					<Image
-						src={phenvelope}
-						className="absolute top-3 left-2"
-						alt="icon"
-					/>
+					<Input type="email" placeholder="e.g. alex@email.com" className="px-9 py-3 opacity-50" />
+					<Image src={phenvelope} className="absolute top-3 left-2" alt="icon" />
 				</div>
-				<label className="text-body-s text-pure-gray">Password</label>
+				<label className="text-body-s text-dark-gray">Password</label>
 				<div className="flex relative">
 					<Input
 						type="password"
 						placeholder="Enter your password"
 						className="px-9 py-3 opacity-50"
 					/>
-					<Image
-						src={phlock}
-						className="absolute top-3 left-2"
-						alt="icon"
-					/>
+					<Image src={phlock} className="absolute top-3 left-2" alt="icon" />
 				</div>
 			</div>
 			<Button className="w-full mt-4">Login</Button>
 			<div className="md:flex gap-2 mt-8 items-center justify-center">
-				<p className="text-center text-stone-gray text-body-m">
-					Don’t have an account?
-				</p>
-				<p className="text-center text-royal-violet text-body-m">
-					Create account
-				</p>
+				<p className="text-center text-gray text-body-m">Don’t have an account?</p>
+				<p className="text-center text-purple text-body-m">Create account</p>
 			</div>
 		</section>
 	)
