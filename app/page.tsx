@@ -1,3 +1,4 @@
+import InputWithIcon from '@/components/input-with-icon'
 import { Button } from '@/components/ui/button'
 import Social from '@/components/ui/social_button'
 
@@ -19,6 +20,7 @@ export default function Home() {
 				<Social color="#8A1A50" text="Codewars" icon="/cib_codewars.svg" />
 				<Social color="#302267" text="freeCodeCamp" icon="/ri_codepen-line.svg" />
 			</div>
+			<InputWithIcon id="input" label="Name" value="Hi" error="error" />
 		</main>
 	)
 }
