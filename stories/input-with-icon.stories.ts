@@ -1,6 +1,6 @@
 import InputWithIcon from '@/components/input-with-icon'
 import type { Meta, StoryObj } from '@storybook/react'
-import iconArrow from '@/public/icon-arrow.svg'
+import iconLink from '@/public/icon-link.svg'
 
 const meta = {
 	title: 'Components/Input',
@@ -40,7 +40,7 @@ export const WithIcon: Story = {
 	args: {
 		id: 'input',
 		value: 'Text Field Filled',
-		icon: iconArrow,
+		icon: iconLink,
 		iconAlt: 'Arrow Icon',
 	},
 }
@@ -48,8 +48,8 @@ export const WithIcon: Story = {
 export const WithIconAndError: Story = {
 	args: {
 		id: 'input',
-		value: 'Text Field Filled',
-		icon: iconArrow,
+		value: 'Text Field Error',
+		icon: iconLink,
 		iconAlt: 'Arrow Icon',
 		error: 'Please check again',
 	},
@@ -65,8 +65,8 @@ export const WithLabel: Story = {
 
 export const WithLabelAndError: Story = {
 	args: {
-		id: 'input2',
-		value: 'Text Field Filled',
+		id: 'input',
+		value: 'Text Field Error',
 		label: 'Label',
 		error: 'Please check again',
 	},

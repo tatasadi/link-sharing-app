@@ -4,7 +4,17 @@ import { cn } from '@/lib/utils'
 import Image, { StaticImageData } from 'next/image'
 import { Label } from './ui/label'
 
-export default function InputWithIcon({
+interface InputWithIconProps {
+	icon?: StaticImageData
+	iconAlt?: string
+	className?: string
+	error?: string
+	label?: string
+	id: string
+	[key: string]: any
+}
+
+const InputWithIcon: React.FC<InputWithIconProps> = ({
 	icon,
 	iconAlt = '',
 	className = '',
@@ -12,14 +22,7 @@ export default function InputWithIcon({
 	label = '',
 	id,
 	...props
-}: {
-	icon?: StaticImageData
-	iconAlt?: string
-	className?: string
-	error?: string
-	label?: string
-	id: string
-}) {
+}) => {
 	return (
 		<>
 			{label && (
@@ -27,25 +30,29 @@ export default function InputWithIcon({
 					{label}
 				</Label>
 			)}
-			<div className="grid items-center mt-1">
+			<div className="grid items-center *:col-start-1 *:row-start-1 mt-1">
+				{icon && <Image src={icon} className="z-10 ml-4" alt={iconAlt} />}
 				<Input
 					className={cn(
-						'py-3 col-start-1 row-start-1',
+						'py-3',
 						icon ? 'px-10' : 'px-4',
 						error ? 'text-red border-red' : '',
 						className,
 					)}
 					id={id}
 					name={id}
+					aria-invalid={!!error}
+					aria-describedby={error ? `${id}-error` : undefined}
 					{...props}
 				/>
 				{error && (
-					<p className="text-red text-body-s col-start-1 row-start-1 justify-self-end pr-4">
+					<p id={`${id}-error`} className="text-red text-xs justify-self-end pr-4 z-10">
 						{error}
 					</p>
 				)}
-				{icon && <Image src={icon} className="col-start-1 row-start-1 ml-4" alt={iconAlt} />}
 			</div>
 		</>
 	)
 }
+
+export default InputWithIcon
