@@ -7,6 +7,7 @@ import IconImage from '../icons/icon-image'
 
 export default function Upload() {
 	const [imageSrc, setImageSrc] = useState<string | null>(null)
+
 	function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
 		const file = e.target.files?.[0]
 		if (!file) return
@@ -15,12 +16,17 @@ export default function Upload() {
 
 	return (
 		<div className="flex flex-col sm:flex-row sm:items-center gap-6 ">
-			<Label className="relative bg-light-purple rounded-xl overflow-hidden aspect-square max-w-48 cursor-pointer">
+			<Label
+				className={cn(
+					'relative rounded-xl overflow-hidden aspect-square max-w-48 cursor-pointer p-6',
+					imageSrc ? 'bg-black' : 'bg-light-purple',
+				)}
+			>
 				{imageSrc && (
 					<Image
 						src={imageSrc}
 						alt="uploaded image"
-						className="absolute inset-0 object-cover object-center z-0 h-full w-full"
+						className="absolute inset-0 object-cover object-center z-0 h-full w-full opacity-75"
 						width={48}
 						height={48}
 					/>
@@ -32,7 +38,7 @@ export default function Upload() {
 					)}
 				>
 					<IconImage />
-					<span className="text-heading-s ">{imageSrc ? 'Change Image' : '+ Upload Image'}</span>
+					<span className="text-heading-s">{imageSrc ? 'Change Image' : '+ Upload Image'}</span>
 				</span>
 				<input accept="image/*" type="file" className="hidden" onChange={handleInputChange} />
 			</Label>
