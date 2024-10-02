@@ -11,6 +11,7 @@ interface InputWithIconProps {
 	error?: string
 	label?: string
 	id: string
+	inputClassName?: string
 	[key: string]: any
 }
 
@@ -21,10 +22,11 @@ const InputWithIcon: React.FC<InputWithIconProps> = ({
 	error = '',
 	label = '',
 	id,
+	inputClassName,
 	...props
 }) => {
 	return (
-		<>
+		<div className={className}>
 			{label && (
 				<Label className={cn('text-xs', error ? 'text-red' : '')} htmlFor={id}>
 					{label}
@@ -37,7 +39,7 @@ const InputWithIcon: React.FC<InputWithIconProps> = ({
 						'py-3',
 						icon ? 'px-10' : 'px-4',
 						error ? 'text-red border-red' : '',
-						className,
+						inputClassName,
 					)}
 					id={id}
 					name={id}
@@ -51,7 +53,7 @@ const InputWithIcon: React.FC<InputWithIconProps> = ({
 					</p>
 				)}
 			</div>
-		</>
+		</div>
 	)
 }
 

@@ -1,4 +1,5 @@
 import InputWithIcon from '@/components/input-with-icon'
+import Login from '@/components/sections/login'
 import { Button } from '@/components/ui/button'
 import Social from '@/components/ui/social_button'
 import Upload from '@/components/ui/upload'
@@ -23,8 +24,9 @@ export default function Home() {
 		// 	</div>
 		// 	<InputWithIcon id="input" label="Name" value="Hi" error="error" />
 		// </main>
-		<main className="grid place-content-center min-h-screen">
-			<Upload />
+		<main className="min-h-screen w-full">
+			{/* <Upload /> */}
+			<Login />
 		</main>
 	)
 }
