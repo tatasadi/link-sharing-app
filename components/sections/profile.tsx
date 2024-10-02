@@ -1,6 +1,6 @@
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
-import Social from '../ui/social_button'
+import Social from '../preview-link-item'
 import Image from 'next/image'
 import illustration from '@/public/illustration-phone-mockup.svg'
 import ph_image from '@/public/ph_image.svg'

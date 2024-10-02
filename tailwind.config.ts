@@ -1,3 +1,4 @@
+import { hash } from 'crypto'
 import type { Config } from 'tailwindcss'
 
 const config = {
@@ -60,6 +61,17 @@ const config = {
 				borders: '#D9D9D9',
 				red: '#FF3939',
 				'light-gray': '#FAFAFA',
+				github: '#1A1A1A',
+				twitter: '#43B7E9',
+				linkedin: '#2D68FF',
+				youtube: '#EE3939',
+				facebook: '#2442AC',
+				twitch: '#EE3FC8',
+				codewars: '#8A1A50',
+				freecodecamp: '#302267',
+				gitlab: '#EB4925',
+				hashnode: '#0330D1',
+				stackoverflow: '#EC7100',
 			},
 			fontSize: {
 				'heading-m': [
