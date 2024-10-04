@@ -1,14 +1,14 @@
-import Create from '@/components/sections/create-account'
+import Register from '@/components/sections/register'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-	title: 'Sections/Create',
-	component: Create,
+	title: 'Sections/Register',
+	component: Register,
 	parameters: {
 		layout: 'centered',
 	},
 	tags: ['autodocs'],
-} satisfies Meta<typeof Create>
+} satisfies Meta<typeof Register>
 
 export default meta
 type Story = StoryObj<typeof meta>
