@@ -26,7 +26,7 @@ export default function Home() {
 		// </main>
 		<main className="min-h-screen w-full">
 			{/* <Upload /> */}
-			<Login />
+			Hello!
 		</main>
 	)
 }

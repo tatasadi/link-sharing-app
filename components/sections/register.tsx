@@ -10,6 +10,8 @@ import { cn } from '@/lib/utils'
 import InputWithIcon from '../input-with-icon'
 import { Form, FormField, FormItem } from '../ui/form'
 import Link from 'next/link'
+import { register } from '@/actions/auth'
+import { useRouter } from 'next/navigation'
 
 const formSchema = z
 	.object({
@@ -31,8 +33,12 @@ const formSchema = z
 		},
 	)
 
+export type RegisterFormType = z.infer<typeof formSchema>
+
 export default function Register({ className = '' }: { className?: string }) {
-	const form = useForm<z.infer<typeof formSchema>>({
+	const router = useRouter()
+
+	const form = useForm<RegisterFormType>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			email: '',
@@ -41,8 +47,13 @@ export default function Register({ className = '' }: { className?: string }) {
 		},
 	})
 
-	function onSubmit(values: z.infer<typeof formSchema>) {
-		console.log(values)
+	async function onSubmit(values: z.infer<typeof formSchema>) {
+		const { success, error } = await register(values)
+		if (!success) {
+			form.setError('email', { message: error })
+		} else {
+			router.push('/')
+		}
 	}
 
 	return (
