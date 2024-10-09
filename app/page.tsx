@@ -1,10 +1,14 @@
+import { auth } from '@/auth'
 import InputWithIcon from '@/components/input-with-icon'
 import Login from '@/components/sections/login'
 import { Button } from '@/components/ui/button'
-import Social from '@/components/ui/social_button'
 import Upload from '@/components/ui/upload'
+import { useSession } from 'next-auth/react'
 
-export default function Home() {
+export default async function Home() {
+	const session = await auth()
+	console.log(session)
+
 	return (
 		// <main className="flex flex-col items-center mx-auto gap-4 p-4 md:bg-purple md:h-[22.31rem] rounded-b-[2rem]">
 		// 	<div className="flex p-4 w-full gap-4 justify-center md:justify-between rounded-xl md:mb-20 md:bg-white">
@@ -27,6 +31,7 @@ export default function Home() {
 		<main className="min-h-screen w-full">
 			{/* <Upload /> */}
 			Hello!
+			{session?.user?.email}
 		</main>
 	)
 }

@@ -10,8 +10,8 @@ import { cn } from '@/lib/utils'
 import InputWithIcon from '../input-with-icon'
 import { Form, FormField, FormItem } from '../ui/form'
 import Link from 'next/link'
-import { register } from '@/actions/auth'
 import { useRouter } from 'next/navigation'
+import { register } from '@/actions/auth'
 
 const formSchema = z
 	.object({

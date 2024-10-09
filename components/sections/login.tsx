@@ -10,6 +10,9 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormField, FormItem } from '../ui/form'
+import { useRouter } from 'next/navigation'
+import { signIn } from '@/auth'
+import { login } from '@/actions/auth'
 
 const formSchema = z.object({
 	email: z.string().min(1, { message: 'Can’t be empty' }).email({ message: 'Invalid email' }),
@@ -18,7 +21,11 @@ const formSchema = z.object({
 	}),
 })
 
+export type LoginFormType = z.infer<typeof formSchema>
+
 export default function Login({ className = '' }: { className?: string }) {
+	const router = useRouter()
+
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -28,7 +35,16 @@ export default function Login({ className = '' }: { className?: string }) {
 	})
 
 	function onSubmit(values: z.infer<typeof formSchema>) {
-		console.log(values)
+		signIn('credentials', { ...values, redirectTo: '/' })
+		// const response = await login(values)
+		// console.log('response', response)
+		// const { success, error, user } = response
+		// if (!success) {
+		// 	form.setError('email', { message: error })
+		// } else {
+		// 	console.log('success', user)
+		// 	router.push('/')
+		// }
 	}
 
 	return (
