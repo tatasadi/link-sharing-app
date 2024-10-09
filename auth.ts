@@ -3,7 +3,6 @@ import Credentials from 'next-auth/providers/credentials'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import { db } from './prisma/db'
 import bcrypt from 'bcryptjs'
-import { saltAndHashPassword } from './lib/utils'
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
 	adapter: PrismaAdapter(db),
@@ -48,7 +47,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 			return token
 		},
 		async session({ session, token }) {
-			session.user = token.user
+			if (token.user) {
+				session.user = token.user as any
+			}
 			return session
 		},
 	},
@@ -56,7 +57,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 		strategy: 'jwt',
 		maxAge: 30 * 24 * 60 * 60, // 30 days
 	},
-	// pages: {
-	// 	signIn: '/login',
-	// },
+	pages: {
+		signIn: '/login',
+	},
 })

@@ -1,14 +1,13 @@
-import { auth } from '@/auth'
+import { auth, signOut } from '@/auth'
 import InputWithIcon from '@/components/input-with-icon'
 import Login from '@/components/sections/login'
 import { Button } from '@/components/ui/button'
 import Upload from '@/components/ui/upload'
 import { useSession } from 'next-auth/react'
+import Link from 'next/link'
 
 export default async function Home() {
 	const session = await auth()
-	console.log(session)
-
 	return (
 		// <main className="flex flex-col items-center mx-auto gap-4 p-4 md:bg-purple md:h-[22.31rem] rounded-b-[2rem]">
 		// 	<div className="flex p-4 w-full gap-4 justify-center md:justify-between rounded-xl md:mb-20 md:bg-white">
@@ -28,10 +27,22 @@ export default async function Home() {
 		// 	</div>
 		// 	<InputWithIcon id="input" label="Name" value="Hi" error="error" />
 		// </main>
-		<main className="min-h-screen w-full">
-			{/* <Upload /> */}
-			Hello!
-			{session?.user?.email}
+		<main className="min-h-screen w-full p-4">
+			{session ? (
+				<form
+					action={async () => {
+						'use server'
+						await signOut()
+					}}
+				>
+					{JSON.stringify(session)} <br />
+					<Button type="submit">Sign Out</Button>
+				</form>
+			) : (
+				<Button asChild>
+					<Link href="/login">Log In</Link>
+				</Button>
+			)}
 		</main>
 	)
 }
