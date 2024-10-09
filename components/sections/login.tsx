@@ -11,8 +11,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormField, FormItem } from '../ui/form'
 import { login } from '@/actions/auth'
 import { useActionState } from 'react'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
 	email: z.string().min(1, { message: 'Can’t be empty' }).email({ message: 'Invalid email' }),
@@ -35,23 +33,16 @@ export default function Login({ className = '' }: { className?: string }) {
 		},
 	})
 
+	const onSubmit = async (values: z.infer<typeof formSchema>) => {
+		await formAction(values)
+	}
+
 	return (
 		<section className={cn('w-full flex flex-col bg-white p-8 sm:p-10 rounded-xl', className)}>
 			<h2 className="text-2xl font-bold leading-9 text-dark-gray">Login</h2>
 			<p className="text-body-m text-gray mb-10">Add your details below to get back into the app</p>
 			<Form {...form}>
-				<form
-					action={formAction}
-					onSubmit={async e => {
-						if (!form.formState.isValid) {
-							e.preventDefault()
-							await form.trigger()
-							return
-						}
-						await form.trigger()
-						e.currentTarget?.requestSubmit()
-					}}
-				>
+				<form onSubmit={form.handleSubmit(onSubmit)}>
 					<FormField
 						control={form.control}
 						name="email"

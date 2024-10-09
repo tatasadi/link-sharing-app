@@ -1,13 +1,13 @@
 'use server'
 
 import { signIn } from '@/auth'
+import { LoginFormType } from '@/components/sections/login'
 import { RegisterFormType } from '@/components/sections/register'
 import { saltAndHashPassword } from '@/lib/utils'
 import { db } from '@/prisma/db'
-import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
-export const register = async (data: RegisterFormType) => {
+export const register = async (state: any, data: RegisterFormType) => {
 	const email = data.email
 	const password = data.password
 
@@ -28,14 +28,17 @@ export const register = async (data: RegisterFormType) => {
 			password: hashedPassword,
 		},
 	})
-	return { success: true, user }
+	try {
+		await signIn('credentials', { email, password, redirect: false })
+	} catch (error: any) {
+		return { success: false, error: 'Something went wrong!' }
+	}
+	redirect('/')
 }
 
-export const login = async (state: any, data: FormData) => {
+export const login = async (state: any, data: LoginFormType) => {
 	try {
-		const email = data.get('email') as string
-		const password = data.get('password') as string
-		await signIn('credentials', { email, password, redirect: false })
+		await signIn('credentials', { ...data, redirect: false })
 	} catch (error: any) {
 		switch (error.type) {
 			case 'CredentialsSignin':
@@ -45,5 +48,4 @@ export const login = async (state: any, data: FormData) => {
 		}
 	}
 	redirect('/')
-	revalidatePath('/')
 }

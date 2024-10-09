@@ -10,8 +10,8 @@ import { cn } from '@/lib/utils'
 import InputWithIcon from '../input-with-icon'
 import { Form, FormField, FormItem } from '../ui/form'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { register } from '@/actions/auth'
+import { useActionState } from 'react'
 
 const formSchema = z
 	.object({
@@ -36,7 +36,8 @@ const formSchema = z
 export type RegisterFormType = z.infer<typeof formSchema>
 
 export default function Register({ className = '' }: { className?: string }) {
-	const router = useRouter()
+	const [state, formAction, isPending] = useActionState(register, null)
+	const error = state?.error
 
 	const form = useForm<RegisterFormType>({
 		resolver: zodResolver(formSchema),
@@ -48,12 +49,7 @@ export default function Register({ className = '' }: { className?: string }) {
 	})
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
-		const { success, error } = await register(values)
-		if (!success) {
-			form.setError('email', { message: error })
-		} else {
-			router.push('/')
-		}
+		await formAction(values)
 	}
 
 	return (
@@ -117,9 +113,10 @@ export default function Register({ className = '' }: { className?: string }) {
 						)}
 					/>
 					<p className="text-body-s text-gray mb-6">Password must contain at least 8 characters</p>
-					<Button type="submit" className="w-full mb-6">
-						Create new account
+					<Button type="submit" className="w-full mb-6" disabled={isPending}>
+						{isPending ? 'Loading...' : 'Create new account'}
 					</Button>
+					{error && <p className="text-red text-sm text-center mb-6">{error}</p>}
 				</form>
 			</Form>
 			<div className="sm:flex gap-2 items-center justify-center text-center text-body-m">
