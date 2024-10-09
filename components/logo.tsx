@@ -7,7 +7,7 @@ export default function Logo({ className = '' }: { className?: string }) {
 	return (
 		<div className={cn('flex gap-4 items-center', className)}>
 			<Image src={solarLinkImage} alt="logo icon" />
-			<Image src={devlinks} alt="logo text" />
+			<Image src={devlinks} alt="logo text" className="hidden md:block" />
 		</div>
 	)
 }

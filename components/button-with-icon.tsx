@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils'
 import { Button } from './ui/button'
 import Image, { StaticImageData } from 'next/image'
 
@@ -6,15 +7,20 @@ export default function ButtonWithIcon({
 	children,
 	variant = 'ghost',
 	isActive = false,
+	className = '',
 	...props
 }: {
 	icon: React.ReactNode
-	iconAlt: string
 	children: React.ReactNode
 	isActive: boolean
+	className?: string
 } & React.ComponentProps<typeof Button>) {
 	return (
-		<Button variant={variant} {...props} className={isActive ? 'bg-light-purple text-purple' : ''}>
+		<Button
+			variant={variant}
+			{...props}
+			className={cn(isActive ? 'bg-light-purple text-purple' : '', className)}
+		>
 			<span className="flex items-center gap-2">
 				{icon}
 				<span className="hidden sm:block">{children}</span>
