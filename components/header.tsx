@@ -1,20 +1,30 @@
+'use client'
+
 import ButtonWithIcon from './button-with-icon'
 import Logo from './logo'
 import IconLink from './icons/icon-link'
 import { Button } from './ui/button'
 import IconProfile from './icons/icon-profile'
 import IconEye from './icons/icon-eye'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { cn } from '@/lib/utils'
 
-export default function Header() {
+export default function Header({ className = '' }: { className?: string }) {
+	const pathname = usePathname()
 	return (
-		<header className="flex bg-white p-4 pl-6 sm:rounded-xl sm:m-6">
+		<header className={cn('flex bg-white p-4 pl-6 sm:rounded-xl sm:m-6', className)}>
 			<Logo />
-			<ButtonWithIcon icon={<IconLink />} isActive={true} className="ml-auto">
-				Links
-			</ButtonWithIcon>
-			<ButtonWithIcon icon={<IconProfile />} isActive={false} className="mr-auto">
-				Profile Details
-			</ButtonWithIcon>
+			<Link href="/links" className="ml-auto">
+				<ButtonWithIcon icon={<IconLink />} isActive={pathname === '/links'}>
+					Links
+				</ButtonWithIcon>
+			</Link>
+			<Link href="/profile" className="mr-auto">
+				<ButtonWithIcon icon={<IconProfile />} isActive={pathname === '/profile'}>
+					Profile Details
+				</ButtonWithIcon>
+			</Link>
 			<Button variant="secondary">
 				<span className="sm:hidden">
 					<IconEye />
