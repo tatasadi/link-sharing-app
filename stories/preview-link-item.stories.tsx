@@ -20,7 +20,6 @@ export const Github: Story = {
 	args: {
 		children: 'GitHub',
 		icon: <IconGithub />,
-		iconAlt: 'GitHub icon',
 		className: 'bg-github',
 	},
 }
@@ -29,7 +28,6 @@ export const Frontendmentor: Story = {
 	args: {
 		children: 'Frontendmentor',
 		icon: <IconFrontendmentor />,
-		iconAlt: 'Frontendmentor icon',
 		className: 'bg-white text-dark-gray hover:text-dark-gray border border-borders',
 	},
 }
@@ -38,7 +36,6 @@ export const Twitter: Story = {
 	args: {
 		children: 'Twitter',
 		icon: <FaTwitter />,
-		iconAlt: 'Twitter icon',
 		className: 'bg-twitter',
 	},
 }

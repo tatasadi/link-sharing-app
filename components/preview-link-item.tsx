@@ -1,19 +1,20 @@
-import React from 'react'
-import { Button } from './ui/button'
-import Image, { StaticImageData } from 'next/image'
-import arrowRight from '@/public/mdi_arrow-right.svg'
 import { cn } from '@/lib/utils'
-import IconGithub from './icons/icon-github'
+import React from 'react'
 import IconArrowRight from './icons/icon-arrow-right'
+import { Button } from './ui/button'
+
+export type PreviewLinkItemType = {
+	icon: React.ReactNode
+	text: string
+	className?: string
+}
 
 export default function PreviewLinkItem({
 	icon,
-	iconAlt,
 	children,
 	className = '',
 }: {
 	icon: React.ReactNode
-	iconAlt: string
 	children: React.ReactNode
 	className?: string
 }) {

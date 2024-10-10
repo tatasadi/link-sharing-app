@@ -58,6 +58,7 @@ const config = {
 				'light-purple': '#EFEBFF',
 				'dark-gray': '#333333',
 				gray: '#737373',
+				'very-light-gray': '#EEEEEE',
 				borders: '#D9D9D9',
 				red: '#FF3939',
 				'light-gray': '#FAFAFA',
