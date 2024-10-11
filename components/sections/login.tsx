@@ -43,41 +43,25 @@ export default function Login({ className = '' }: { className?: string }) {
 			<p className="text-body-m text-gray mb-10">Add your details below to get back into the app</p>
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)}>
-					<FormField
-						control={form.control}
+					<InputWithIcon
+						icon={iconEnvelop}
+						placeholder="e.g. alex@email.com"
 						name="email"
-						render={({ field }) => (
-							<FormItem>
-								<InputWithIcon
-									icon={iconEnvelop}
-									placeholder="e.g. alex@email.com"
-									id="email"
-									label="Email address"
-									type="email"
-									className="mb-6"
-									error={form.formState.errors.email?.message}
-									{...field}
-								/>
-							</FormItem>
-						)}
-					/>
-					<FormField
+						label="Email address"
+						type="email"
+						className="mb-6"
+						error={form.formState.errors.email?.message}
 						control={form.control}
+					/>
+					<InputWithIcon
+						icon={iconLock}
+						placeholder="Enter your password"
 						name="password"
-						render={({ field }) => (
-							<FormItem>
-								<InputWithIcon
-									icon={iconLock}
-									placeholder="Enter your password"
-									id="password"
-									label="Password"
-									type="password"
-									className="mb-6"
-									error={form.formState.errors.password?.message}
-									{...field}
-								/>
-							</FormItem>
-						)}
+						label="Password"
+						type="password"
+						className="mb-6"
+						error={form.formState.errors.password?.message}
+						control={form.control}
 					/>
 
 					<Button type="submit" className="w-full mb-6" disabled={isPending}>

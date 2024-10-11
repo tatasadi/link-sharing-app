@@ -3,6 +3,7 @@ import { Input } from './ui/input'
 import { cn } from '@/lib/utils'
 import Image, { StaticImageData } from 'next/image'
 import { Label } from './ui/label'
+import { FormField, FormItem, FormLabel, FormMessage } from './ui/form'
 
 interface InputWithIconProps {
 	icon?: StaticImageData
@@ -10,7 +11,7 @@ interface InputWithIconProps {
 	className?: string
 	error?: string
 	label?: string
-	id: string
+	name: string
 	inputClassName?: string
 	[key: string]: any
 }
@@ -21,39 +22,35 @@ const InputWithIcon: React.FC<InputWithIconProps> = ({
 	className = '',
 	error = '',
 	label = '',
-	id,
+	name,
 	inputClassName,
+	control,
 	...props
 }) => {
 	return (
-		<div className={className}>
-			{label && (
-				<Label className={cn('text-xs', error ? 'text-red' : '')} htmlFor={id}>
-					{label}
-				</Label>
+		<FormField
+			control={control}
+			name={name}
+			render={({ field }) => (
+				<FormItem className={className}>
+					{label && <FormLabel>{label}</FormLabel>}
+					<div className="grid items-center *:col-start-1 *:row-start-1 mt-1">
+						{icon && <Image src={icon} className="z-10 ml-4" alt={iconAlt} />}
+						<Input
+							className={cn(
+								'py-3',
+								icon ? 'px-10' : 'px-4',
+								error ? 'text-red border-red' : '',
+								inputClassName,
+							)}
+							{...field}
+							{...props}
+						/>
+						<FormMessage className="justify-self-end pr-4 z-10" />
+					</div>
+				</FormItem>
 			)}
-			<div className="grid items-center *:col-start-1 *:row-start-1 mt-1">
-				{icon && <Image src={icon} className="z-10 ml-4" alt={iconAlt} />}
-				<Input
-					className={cn(
-						'py-3',
-						icon ? 'px-10' : 'px-4',
-						error ? 'text-red border-red' : '',
-						inputClassName,
-					)}
-					id={id}
-					name={id}
-					aria-invalid={!!error}
-					aria-describedby={error ? `${id}-error` : undefined}
-					{...props}
-				/>
-				{error && (
-					<p id={`${id}-error`} className="text-red text-xs justify-self-end pr-4 z-10">
-						{error}
-					</p>
-				)}
-			</div>
-		</div>
+		/>
 	)
 }
 

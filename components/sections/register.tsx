@@ -58,59 +58,35 @@ export default function Register({ className = '' }: { className?: string }) {
 			<p className="text-body-m text-gray mb-10">Let’s get you started sharing your links!</p>
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)}>
-					<FormField
-						control={form.control}
+					<InputWithIcon
+						icon={iconEnvelop}
+						placeholder="e.g. alex@email.com"
 						name="email"
-						render={({ field }) => (
-							<FormItem>
-								<InputWithIcon
-									icon={iconEnvelop}
-									placeholder="e.g. alex@email.com"
-									id="email"
-									label="Email address"
-									type="email"
-									className="mb-6"
-									error={form.formState.errors.email?.message}
-									{...field}
-								/>
-							</FormItem>
-						)}
-					/>
-					<FormField
+						label="Email address"
+						type="email"
+						className="mb-6"
+						error={form.formState.errors.email?.message}
 						control={form.control}
+					/>
+					<InputWithIcon
+						icon={iconLock}
+						placeholder="At least 8 characters"
 						name="password"
-						render={({ field }) => (
-							<FormItem>
-								<InputWithIcon
-									icon={iconLock}
-									placeholder="At least 8 characters"
-									id="password"
-									label="Create password"
-									type="password"
-									className="mb-6"
-									error={form.formState.errors.password?.message}
-									{...field}
-								/>
-							</FormItem>
-						)}
-					/>
-					<FormField
+						label="Create password"
+						type="password"
+						className="mb-6"
+						error={form.formState.errors.password?.message}
 						control={form.control}
+					/>
+					<InputWithIcon
+						icon={iconLock}
+						placeholder="At least 8 characters"
 						name="confirmPassword"
-						render={({ field }) => (
-							<FormItem>
-								<InputWithIcon
-									icon={iconLock}
-									placeholder="At least 8 characters"
-									id="confirmPassword"
-									label="Confirm password"
-									type="password"
-									className="mb-6"
-									error={form.formState.errors.confirmPassword?.message}
-									{...field}
-								/>
-							</FormItem>
-						)}
+						label="Confirm password"
+						type="password"
+						className="mb-6"
+						error={form.formState.errors.confirmPassword?.message}
+						control={form.control}
 					/>
 					<p className="text-body-s text-gray mb-6">Password must contain at least 8 characters</p>
 					<Button type="submit" className="w-full mb-6" disabled={isPending}>
