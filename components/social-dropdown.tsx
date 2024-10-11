@@ -21,6 +21,7 @@ import {
 } from './ui/select'
 import iconLink from '@/public/icon-link.svg'
 import Image from 'next/image'
+import { FormField, FormItem, FormLabel, FormControl, FormMessage } from './ui/form'
 
 const socials = [
 	{
@@ -77,32 +78,52 @@ const socials = [
 	},
 ]
 
-export default function SocialDropdown() {
+export default function SocialDropdown({
+	control,
+	name,
+	handleChange,
+}: {
+	control: any
+	name: string
+	handleChange: any
+}) {
 	return (
-		<Select>
-			<SelectTrigger className="mb-6">
-				<SelectValue
-					placeholder={
-						<span className="flex gap-1">
-							<Image src={iconLink} alt="icon link" className="mr-3" />
-							Dropdown Field Default
-						</span>
-					}
-					className="pr-4"
-				/>
-			</SelectTrigger>
-			<SelectContent>
-				{socials.map((social, index) => (
-					<>
-						{index !== 0 && <SelectSeparator />}
-						<SelectItem key={social.name} value={social.name}>
-							<span className="flex gap-3 items-center">
-								{social.icon} {social.name}
-							</span>
-						</SelectItem>
-					</>
-				))}
-			</SelectContent>
-		</Select>
+		<FormField
+			control={control}
+			name={name}
+			render={({ field }) => (
+				<FormItem>
+					<FormLabel>Platform</FormLabel>
+					<Select onValueChange={handleChange} defaultValue={field.value}>
+						<FormControl>
+							<SelectTrigger className="mb-6">
+								<SelectValue
+									placeholder={
+										<span className="flex gap-1">
+											<Image src={iconLink} alt="icon link" className="mr-3" />
+											--- Select a platform ---
+										</span>
+									}
+									className="pr-4"
+								/>
+							</SelectTrigger>
+						</FormControl>
+						<SelectContent>
+							{socials.map((social, index) => (
+								<>
+									{index !== 0 && <SelectSeparator />}
+									<SelectItem key={social.name} value={social.name}>
+										<span className="flex gap-3 items-center">
+											{social.icon} {social.name}
+										</span>
+									</SelectItem>
+								</>
+							))}
+						</SelectContent>
+					</Select>
+					<FormMessage />
+				</FormItem>
+			)}
+		/>
 	)
 }

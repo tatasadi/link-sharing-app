@@ -2,7 +2,6 @@ import * as React from 'react'
 import { Input } from './ui/input'
 import { cn } from '@/lib/utils'
 import Image, { StaticImageData } from 'next/image'
-import { Label } from './ui/label'
 import { FormField, FormItem, FormLabel, FormMessage } from './ui/form'
 
 interface InputWithIconProps {
@@ -33,7 +32,7 @@ const InputWithIcon: React.FC<InputWithIconProps> = ({
 			name={name}
 			render={({ field }) => (
 				<FormItem className={className}>
-					{label && <FormLabel>{label}</FormLabel>}
+					{label && <FormLabel className="text-xs">{label}</FormLabel>}
 					<div className="grid items-center *:col-start-1 *:row-start-1 mt-1">
 						{icon && <Image src={icon} className="z-10 ml-4" alt={iconAlt} />}
 						<Input
