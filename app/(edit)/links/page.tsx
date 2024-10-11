@@ -1,7 +1,5 @@
+import CustomizeLinks from '@/components/sections/customize-links'
+
 export default function LinksPage() {
-	return (
-		<div>
-			<h1>Links Page</h1>
-		</div>
-	)
+	return <CustomizeLinks />
 }

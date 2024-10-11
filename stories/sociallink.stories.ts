@@ -2,7 +2,7 @@ import Sociallink from '@/components/sections/sociallink'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-	title: 'Components/Sociallink',
+	title: 'Unknown/Sociallink',
 	component: Sociallink,
 	parameters: {
 		layout: 'centered',

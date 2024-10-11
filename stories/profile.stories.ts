@@ -2,7 +2,7 @@ import Profile from '@/components/sections/profile'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-	title: 'Components/Profile',
+	title: 'Unknown/Profile',
 	component: Profile,
 	parameters: {
 		layout: 'centered',

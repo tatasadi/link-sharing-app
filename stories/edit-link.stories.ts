@@ -1,14 +1,14 @@
-import Addlink from '@/components/sections/addlink'
+import EditLink from '@/components/edit-link'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-	title: 'Sections/Addlink',
-	component: Addlink,
+	title: 'Components/Edit Link',
+	component: EditLink,
 	parameters: {
 		layout: 'centered',
 	},
 	tags: ['autodocs'],
-} satisfies Meta<typeof Addlink>
+} satisfies Meta<typeof EditLink>
 
 export default meta
 type Story = StoryObj<typeof meta>

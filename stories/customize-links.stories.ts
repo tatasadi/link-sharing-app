@@ -1,14 +1,14 @@
-import Empty from '@/components/sections/empty'
+import CustomizeLinks from '@/components/sections/customize-links'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-	title: 'Sections/Empty',
-	component: Empty,
+	title: 'Sections/Customize Links',
+	component: CustomizeLinks,
 	parameters: {
 		layout: 'centered',
 	},
 	tags: ['autodocs'],
-} satisfies Meta<typeof Empty>
+} satisfies Meta<typeof CustomizeLinks>
 
 export default meta
 type Story = StoryObj<typeof meta>

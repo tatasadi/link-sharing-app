@@ -2,7 +2,7 @@ import Preview from '@/components/sections/preview'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-	title: 'Sections/Preview',
+	title: 'Unknown/Preview',
 	component: Preview,
 	parameters: {
 		layout: 'centered',

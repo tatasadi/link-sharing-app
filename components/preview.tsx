@@ -19,7 +19,7 @@ export default function Preview({
 	links?: PreviewLinkItemType[]
 	showLinksPreview?: boolean
 }) {
-	const previewLinksLenght = showLinksPreview ? 5 - links.length : 0
+	const previewLinksLength = showLinksPreview ? (5 - links.length <= 0 ? 0 : 5 - links.length) : 0
 
 	return (
 		<div>
@@ -32,14 +32,14 @@ export default function Preview({
 				>
 					{image && <Image src={image} alt={imageAlt} />}
 				</div>
-				<div className="flex flex-col items-center gap-2">
+				<div className="flex flex-col items-center gap-2 text-center">
 					<h2
-						className={`text-heading-m text-dark-gray min-w-40 min-h-4 ${name ? '' : 'bg-very-light-gray rounded-full'}`}
+						className={`text-dark-gray min-w-40 min-h-4 ${name ? '' : 'bg-very-light-gray rounded-full'} ${size === 'lg' ? 'text-heading-m' : 'text-lg font-semibold'}`}
 					>
 						{name}
 					</h2>
 					<p
-						className={`text-heading-s text-gray min-w-[4.5rem] min-h-2 ${email ? '' : 'bg-very-light-gray rounded-full'}`}
+						className={`text-gray min-w-[4.5rem] min-h-2 ${email ? '' : 'bg-very-light-gray rounded-full'} ${size === 'lg' ? '' : 'text-sm'}`}
 					>
 						{email}
 					</p>
@@ -47,11 +47,15 @@ export default function Preview({
 			</div>
 			<div className="mt-14 flex flex-col gap-5">
 				{links.map(link => (
-					<PreviewLinkItem key={link.text} icon={link.icon} className={link.className}>
+					<PreviewLinkItem
+						key={link.text}
+						icon={link.icon}
+						className={`${link.className} ${size === 'lg' ? '' : 'text-xs py-3'}`}
+					>
 						{link.text}
 					</PreviewLinkItem>
 				))}
-				{Array.from({ length: previewLinksLenght }).map((_, index) => (
+				{Array.from({ length: previewLinksLength }).map((_, index) => (
 					<div key={index} className="bg-very-light-gray rounded-lg h-[2.75rem] w-full"></div>
 				))}
 			</div>

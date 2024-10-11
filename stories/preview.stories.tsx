@@ -39,12 +39,22 @@ export const EmptyWithLinksPreview: Story = {
 	},
 }
 
-export const Filled: Story = {
+export const FilledMd: Story = {
 	args: {
 		image,
 		email: 'ben@example.com',
 		name: 'Ben Wright',
 		links,
+	},
+}
+
+export const FilledLg: Story = {
+	args: {
+		image,
+		email: 'ben@example.com',
+		name: 'Ben Wright',
+		links,
+		size: 'lg',
 	},
 }
 
