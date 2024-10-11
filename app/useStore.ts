@@ -1,10 +1,13 @@
 import { create } from 'zustand'
 import { v4 as uuidv4 } from 'uuid'
+import { updateIconForLinkObject } from '@/lib/icon-helper'
 
 export interface Link {
 	id: string
 	platform: string
 	url: string
+	icon?: React.ReactNode
+	className?: string
 }
 
 interface StoreState {
@@ -26,6 +29,8 @@ export const useStore = create<StoreState>(set => ({
 		})),
 	updateLink: (id: string, platform: string, url: string) =>
 		set((state: StoreState) => ({
-			links: state.links.map(link => (link.id === id ? { ...link, platform, url } : link)),
+			links: state.links.map(link =>
+				link.id === id ? updateIconForLinkObject({ ...link, platform, url }) : link,
+			),
 		})),
 }))

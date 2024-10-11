@@ -3,12 +3,6 @@ import React from 'react'
 import IconArrowRight from './icons/icon-arrow-right'
 import { Button } from './ui/button'
 
-export type PreviewLinkItemType = {
-	icon: React.ReactNode
-	text: string
-	className?: string
-}
-
 export default function PreviewLinkItem({
 	icon,
 	children,

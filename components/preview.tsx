@@ -1,6 +1,7 @@
 import Image, { StaticImageData } from 'next/image'
 import PreviewLinkItem, { PreviewLinkItemType } from './preview-link-item'
 import { cn } from '@/lib/utils'
+import { Link } from '@/app/useStore'
 
 export default function Preview({
 	size = 'md',
@@ -16,7 +17,7 @@ export default function Preview({
 	imageAlt?: string
 	email?: string
 	name?: string
-	links?: PreviewLinkItemType[]
+	links?: Link[]
 	showLinksPreview?: boolean
 }) {
 	const previewLinksLength = showLinksPreview ? (5 - links.length <= 0 ? 0 : 5 - links.length) : 0
@@ -48,11 +49,11 @@ export default function Preview({
 			<div className="mt-14 flex flex-col gap-5">
 				{links.map(link => (
 					<PreviewLinkItem
-						key={link.text}
+						key={link.platform}
 						icon={link.icon}
 						className={`${link.className} ${size === 'lg' ? '' : 'text-xs py-3'}`}
 					>
-						{link.text}
+						{link.platform}
 					</PreviewLinkItem>
 				))}
 				{Array.from({ length: previewLinksLength }).map((_, index) => (
