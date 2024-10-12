@@ -1,5 +1,5 @@
 import Image, { StaticImageData } from 'next/image'
-import PreviewLinkItem, { PreviewLinkItemType } from './preview-link-item'
+import PreviewLinkItem from './preview-link-item'
 import { cn } from '@/lib/utils'
 import { Link } from '@/app/useStore'
 

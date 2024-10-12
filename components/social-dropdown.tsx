@@ -81,20 +81,26 @@ const socials = [
 export default function SocialDropdown({
 	control,
 	name,
-	handleChange,
+	onChange,
 }: {
 	control: any
 	name: string
-	handleChange: any
+	onChange: any
 }) {
 	return (
 		<FormField
 			control={control}
 			name={name}
-			render={({ field }) => (
+			render={({ field, fieldState }) => (
 				<FormItem>
 					<FormLabel>Platform</FormLabel>
-					<Select onValueChange={handleChange} defaultValue={field.value}>
+					<Select
+						{...field}
+						onValueChange={e => {
+							onChange()
+							field.onChange(e)
+						}}
+					>
 						<FormControl>
 							<SelectTrigger className="mb-6">
 								<SelectValue
@@ -110,14 +116,14 @@ export default function SocialDropdown({
 						</FormControl>
 						<SelectContent>
 							{socials.map((social, index) => (
-								<>
+								<span key={social.name}>
 									{index !== 0 && <SelectSeparator />}
-									<SelectItem key={social.name} value={social.name}>
+									<SelectItem value={social.name}>
 										<span className="flex gap-3 items-center">
 											{social.icon} {social.name}
 										</span>
 									</SelectItem>
-								</>
+								</span>
 							))}
 						</SelectContent>
 					</Select>
