@@ -3,33 +3,9 @@ import { Button } from './ui/button'
 import iconLink from '@/public/icon-link.svg'
 import InputWithIcon from './input-with-icon'
 import { Link, useStore } from '@/app/useStore'
-import { FormProps } from 'react-hook-form'
 
 export default function EditLink({ index, link, form }: { index: number; link: Link; form: any }) {
-	const { removeLink, updateLink } = useStore()
-
-	console.log('link in state', link)
-	// function handleLinkInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-	// 	updateLink(link.id, link.platform, e.target.value)
-	// }
-
-	// function handleDropdownChange(platform: string) {
-	// 	updateLink(link.id, platform, link.url)
-	// }
-
-	// Watch the form values for real-time updates
-	//const platformValue = form.watch(`links.${index}.platform`)
-	//const urlValue = form.watch(`links.${index}.url`)
-
-	// Handle onBlur events to update the store only if the field is valid
-	async function validate(field: string) {
-		console.log('values', form.getValues())
-		const isValid = await form.trigger(field)
-		console.log('isValid', isValid)
-		//if (isValid) {
-		//updateLink(link.id, form.formState, urlValue)
-		//}
-	}
+	const { removeLink } = useStore()
 
 	return (
 		<div className="bg-light-gray p-5 rounded-xl flex flex-col gap-3">
@@ -49,11 +25,7 @@ export default function EditLink({ index, link, form }: { index: number; link: L
 				</Button>
 			</div>
 			<label className="text-body-s text-dark-gray">
-				<SocialDropdown
-					control={form.control}
-					name={`links.${index}.platform`}
-					onChange={() => validate(`links.${index}.platform`)}
-				/>
+				<SocialDropdown control={form.control} name={`links.${index}.platform`} />
 			</label>
 			<InputWithIcon
 				icon={iconLink}
@@ -62,7 +34,6 @@ export default function EditLink({ index, link, form }: { index: number; link: L
 				label="Link"
 				type="text"
 				control={form.control}
-				validate={() => validate(`links.${index}.url`)}
 				error={form.formState.errors.url?.message}
 			/>
 		</div>

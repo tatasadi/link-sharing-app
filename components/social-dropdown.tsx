@@ -78,15 +78,7 @@ const socials = [
 	},
 ]
 
-export default function SocialDropdown({
-	control,
-	name,
-	onChange,
-}: {
-	control: any
-	name: string
-	onChange: any
-}) {
+export default function SocialDropdown({ control, name }: { control: any; name: string }) {
 	return (
 		<FormField
 			control={control}
@@ -94,13 +86,7 @@ export default function SocialDropdown({
 			render={({ field, fieldState }) => (
 				<FormItem>
 					<FormLabel>Platform</FormLabel>
-					<Select
-						{...field}
-						onValueChange={e => {
-							onChange()
-							field.onChange(e)
-						}}
-					>
+					<Select onValueChange={field.onChange} defaultValue={field.value}>
 						<FormControl>
 							<SelectTrigger className="mb-6">
 								<SelectValue

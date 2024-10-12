@@ -12,7 +12,6 @@ interface InputWithIconProps {
 	label?: string
 	name: string
 	inputClassName?: string
-	validate?: () => void
 	[key: string]: any
 }
 
@@ -25,7 +24,6 @@ const InputWithIcon: React.FC<InputWithIconProps> = ({
 	name,
 	inputClassName,
 	control,
-	validate,
 	...props
 }) => {
 	return (
@@ -46,10 +44,6 @@ const InputWithIcon: React.FC<InputWithIconProps> = ({
 							)}
 							{...field}
 							{...props}
-							onBlur={() => {
-								validate && validate()
-								field.onBlur()
-							}}
 						/>
 						<FormMessage className="justify-self-end pr-4 z-10" />
 					</div>

@@ -4,11 +4,11 @@ import Group from '@/public/Group.svg'
 import Image from 'next/image'
 import EditLink from '../edit-link'
 import { z } from 'zod'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm, useWatch } from 'react-hook-form'
 import { Form } from '../ui/form'
 import { useStore } from '@/app/useStore'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 const formSchema = z.object({
 	links: z.array(
@@ -20,15 +20,49 @@ const formSchema = z.object({
 			})
 			.refine(
 				link => {
-					console.log('inside refine', link)
-					const platform = link.platform
-					const url = link.url
-					if (platform === 'GitHub' && !url.toLocaleLowerCase().includes('github.com')) {
+					const platform = link.platform.toLowerCase()
+					const url = link.url.toLowerCase()
+
+					if (platform === 'github' && !url.includes('github.com')) {
 						return false
 					}
-					if (platform === 'YouTube' && !url.toLowerCase().includes('youtube.com')) {
+					if (platform === 'frontend mentor' && !url.includes('frontendmentor.io')) {
 						return false
 					}
+					if (platform === 'twitter' && !url.includes('twitter.com') && !url.includes('x.com')) {
+						return false
+					}
+					if (platform === 'linkedin' && !url.includes('linkedin.com')) {
+						return false
+					}
+					if (platform === 'youtube' && !url.includes('youtube.com')) {
+						return false
+					}
+					if (platform === 'facebook' && !url.includes('facebook.com')) {
+						return false
+					}
+					if (platform === 'twitch' && !url.includes('twitch.tv')) {
+						return false
+					}
+					if (platform === 'dev.to' && !url.includes('dev.to')) {
+						return false
+					}
+					if (platform === 'codewars' && !url.includes('codewars.com')) {
+						return false
+					}
+					if (platform === 'freecodecamp' && !url.includes('freecodecamp.org')) {
+						return false
+					}
+					if (platform === 'gitlab' && !url.includes('gitlab.com')) {
+						return false
+					}
+					if (platform === 'hashnode' && !url.includes('hashnode.com')) {
+						return false
+					}
+					if (platform === 'stack overflow' && !url.includes('stackoverflow.com')) {
+						return false
+					}
+
 					return true
 				},
 				{ message: 'Please check the URL', path: ['url'] },
@@ -39,29 +73,41 @@ const formSchema = z.object({
 export type LinksFormType = z.infer<typeof formSchema>
 
 export default function CustomizeLinks() {
-	const { links, addLink } = useStore()
-	console.log('links in store', links)
-
+	const { links, addLink, updateLink } = useStore()
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			links,
 		},
-		mode: 'onBlur',
+		mode: 'all',
 	})
 
-	const linksInState = form.watch('links')
+	const linksInState = useWatch({ control: form.control, name: 'links' })
+	const prevLinksRef = useRef(links)
+
+	useEffect(() => {
+		if (JSON.stringify(prevLinksRef.current) !== JSON.stringify(links)) {
+			form.setValue('links', links)
+			prevLinksRef.current = links
+		}
+	}, [links, form])
+
+	useEffect(() => {
+		if (JSON.stringify(prevLinksRef.current) !== JSON.stringify(linksInState)) {
+			linksInState.forEach((link, index) => {
+				updateLink(link.id, link.platform, link.url)
+			})
+			prevLinksRef.current = linksInState
+			if (form.formState.isDirty) {
+				form.trigger('links') // Trigger validation only if the form is dirty
+			}
+		}
+	}, [form, linksInState, updateLink])
 
 	function handleAddLink() {
 		addLink()
-		// add the new link also to the form
 		form.setValue('links', [...links])
 	}
-
-	// Sync Zustand links with form state on change
-	useEffect(() => {
-		form.setValue('links', links)
-	}, [links, form])
 
 	const onSubmit = (values: z.infer<typeof formSchema>) => {
 		console.log('form values after submit', values)
@@ -88,13 +134,11 @@ export default function CustomizeLinks() {
 			) : (
 				<Form {...form}>
 					<form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
-						{linksInState.map((link, index) => {
-							return (
-								<div key={link.id}>
-									<EditLink index={index} link={link} form={form} />
-								</div>
-							)
-						})}
+						{linksInState.map((link, index) => (
+							<div key={link.id}>
+								<EditLink index={index} link={link} form={form} />
+							</div>
+						))}
 					</form>
 				</Form>
 			)}
