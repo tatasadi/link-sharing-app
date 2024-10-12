@@ -12,7 +12,21 @@ export default function PreviewLinkItem({
 	children: React.ReactNode
 	className?: string
 }) {
-	const colorPossibilities = ['bg-github', 'bg-twitter', 'bg-linkedin', 'bg-youtube']
+	const colorPossibilities = [
+		'bg-github', // GitHub
+		'bg-frontendmentor', // Frontend Mentor
+		'bg-twitter', // Twitter
+		'bg-linkedin', // LinkedIn
+		'bg-youtube', // YouTube
+		'bg-facebook', // Facebook
+		'bg-twitch', // Twitch
+		'bg-codewars', // Codewars
+		'bg-dark-gray', // Dev.to
+		'bg-freecodecamp', // freeCodeCamp
+		'bg-gitlab', // GitLab
+		'bg-hashnode', // Hashnode
+		'bg-stackoverflow', // Stack Overflow
+	]
 
 	return (
 		<Button

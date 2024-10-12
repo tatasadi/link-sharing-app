@@ -46,10 +46,15 @@ export default function Preview({
 					</p>
 				</div>
 			</div>
-			<div className="mt-14 flex flex-col gap-5">
+			<div
+				className={cn(
+					'mt-14 flex flex-col gap-5',
+					size === 'md' ? 'overflow-y-auto max-h-[18.75rem] hide-scrollbar' : '',
+				)}
+			>
 				{links.map(link => (
 					<PreviewLinkItem
-						key={link.platform}
+						key={link.id}
 						icon={link.icon}
 						className={`${link.className} ${size === 'lg' ? '' : 'text-xs py-3'}`}
 					>

@@ -1,16 +1,3 @@
-import { AiOutlineLinkedin } from 'react-icons/ai'
-import { BiLogoDevTo } from 'react-icons/bi'
-import {
-	FaTwitter,
-	FaYoutube,
-	FaFacebook,
-	FaTwitch,
-	FaFreeCodeCamp,
-	FaGitlab,
-	FaStackOverflow,
-} from 'react-icons/fa'
-import { PiGithubLogoFill } from 'react-icons/pi'
-import { SiFrontendmentor, SiCodewars, SiHashnode } from 'react-icons/si'
 import {
 	Select,
 	SelectTrigger,
@@ -22,61 +9,7 @@ import {
 import iconLink from '@/public/icon-link.svg'
 import Image from 'next/image'
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from './ui/form'
-
-const socials = [
-	{
-		name: 'GitHub',
-		icon: <PiGithubLogoFill />,
-	},
-	{
-		name: 'Frontend Mentor',
-		icon: <SiFrontendmentor />,
-	},
-	{
-		name: 'Twitter',
-		icon: <FaTwitter />,
-	},
-	{
-		name: 'LinkedIn',
-		icon: <AiOutlineLinkedin />,
-	},
-	{
-		name: 'YouTube',
-		icon: <FaYoutube />,
-	},
-	{
-		name: 'Facebook',
-		icon: <FaFacebook />,
-	},
-	{
-		name: 'Twitch',
-		icon: <FaTwitch />,
-	},
-	{
-		name: 'Dev.to',
-		icon: <BiLogoDevTo />,
-	},
-	{
-		name: 'Codewars',
-		icon: <SiCodewars />,
-	},
-	{
-		name: 'freeCodeCamp',
-		icon: <FaFreeCodeCamp />,
-	},
-	{
-		name: 'GitLab',
-		icon: <FaGitlab />,
-	},
-	{
-		name: 'Hashnode',
-		icon: <SiHashnode />,
-	},
-	{
-		name: 'Stack Overflow',
-		icon: <FaStackOverflow />,
-	},
-]
+import getSocialIcons from '@/lib/icon-helper'
 
 export default function SocialDropdown({ control, name }: { control: any; name: string }) {
 	return (
@@ -101,7 +34,7 @@ export default function SocialDropdown({ control, name }: { control: any; name: 
 							</SelectTrigger>
 						</FormControl>
 						<SelectContent>
-							{socials.map((social, index) => (
+							{getSocialIcons().map((social, index) => (
 								<span key={social.name}>
 									{index !== 0 && <SelectSeparator />}
 									<SelectItem value={social.name}>
