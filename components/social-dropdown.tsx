@@ -10,16 +10,31 @@ import iconLink from '@/public/icon-link.svg'
 import Image from 'next/image'
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from './ui/form'
 import getSocialIcons from '@/lib/icon-helper'
+import { on } from 'events'
 
-export default function SocialDropdown({ control, name }: { control: any; name: string }) {
+export default function SocialDropdown({
+	form,
+	name,
+	onChange,
+}: {
+	form: any
+	name: string
+	onChange: () => void
+}) {
 	return (
 		<FormField
-			control={control}
+			control={form.control}
 			name={name}
 			render={({ field, fieldState }) => (
 				<FormItem>
 					<FormLabel>Platform</FormLabel>
-					<Select onValueChange={field.onChange} defaultValue={field.value}>
+					<Select
+						onValueChange={e => {
+							field.onChange(e)
+							onChange()
+						}}
+						defaultValue={field.value}
+					>
 						<FormControl>
 							<SelectTrigger className="mb-6">
 								<SelectValue

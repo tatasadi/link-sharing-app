@@ -7,7 +7,7 @@ import { z } from 'zod'
 import { useForm, useWatch } from 'react-hook-form'
 import { Form } from '../ui/form'
 import { useStore } from '@/app/useStore'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 const formSchema = z.object({
@@ -79,9 +79,10 @@ export default function CustomizeLinks() {
 		defaultValues: {
 			links,
 		},
-		mode: 'all',
+		mode: 'onBlur',
 	})
 
+	const [isAddingNewLink, setIsAddingNewLink] = useState(false)
 	const linksInState = useWatch({ control: form.control, name: 'links' })
 	const prevLinksRef = useRef(links)
 
@@ -98,15 +99,17 @@ export default function CustomizeLinks() {
 				updateLink(link.id, link.platform, link.url)
 			})
 			prevLinksRef.current = linksInState
-			if (form.formState.isDirty) {
-				form.trigger('links') // Trigger validation only if the form is dirty
+			if (form.formState.isDirty && !isAddingNewLink && linksInState.every(link => link.url)) {
+				//form.trigger('links')
 			}
+			setIsAddingNewLink(false)
 		}
-	}, [form, linksInState, updateLink])
+	}, [form, isAddingNewLink, linksInState, updateLink])
 
 	function handleAddLink() {
 		addLink()
 		form.setValue('links', [...links])
+		setIsAddingNewLink(true)
 	}
 
 	const onSubmit = (values: z.infer<typeof formSchema>) => {

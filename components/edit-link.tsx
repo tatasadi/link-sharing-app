@@ -7,6 +7,12 @@ import { Link, useStore } from '@/app/useStore'
 export default function EditLink({ index, link, form }: { index: number; link: Link; form: any }) {
 	const { removeLink } = useStore()
 
+	function handlePlatformChange() {
+		if (link.url) {
+			form.trigger(`links.${index}`)
+		}
+	}
+
 	return (
 		<div className="bg-light-gray p-5 rounded-xl flex flex-col gap-3">
 			<div className="flex items-center gap-2">
@@ -25,7 +31,11 @@ export default function EditLink({ index, link, form }: { index: number; link: L
 				</Button>
 			</div>
 			<label className="text-body-s text-dark-gray">
-				<SocialDropdown control={form.control} name={`links.${index}.platform`} />
+				<SocialDropdown
+					form={form}
+					name={`links.${index}.platform`}
+					onChange={handlePlatformChange}
+				/>
 			</label>
 			<InputWithIcon
 				icon={iconLink}
