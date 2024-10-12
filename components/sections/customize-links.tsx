@@ -10,64 +10,66 @@ import { useStore } from '@/app/useStore'
 import { useEffect, useRef, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 
+const linkSchema = z
+	.object({
+		id: z.string(),
+		platform: z.string().min(1, 'Platform is required'),
+		url: z.string().url('Must be a valid URL'),
+		icon: z.any().optional(),
+		className: z.string().optional(),
+	})
+	.refine(
+		link => {
+			const platform = link.platform.toLowerCase()
+			const url = link.url.toLowerCase()
+
+			if (platform === 'github' && !url.includes('github.com')) {
+				return false
+			}
+			if (platform === 'frontend mentor' && !url.includes('frontendmentor.io')) {
+				return false
+			}
+			if (platform === 'twitter' && !url.includes('twitter.com') && !url.includes('x.com')) {
+				return false
+			}
+			if (platform === 'linkedin' && !url.includes('linkedin.com')) {
+				return false
+			}
+			if (platform === 'youtube' && !url.includes('youtube.com')) {
+				return false
+			}
+			if (platform === 'facebook' && !url.includes('facebook.com')) {
+				return false
+			}
+			if (platform === 'twitch' && !url.includes('twitch.tv')) {
+				return false
+			}
+			if (platform === 'dev.to' && !url.includes('dev.to')) {
+				return false
+			}
+			if (platform === 'codewars' && !url.includes('codewars.com')) {
+				return false
+			}
+			if (platform === 'freecodecamp' && !url.includes('freecodecamp.org')) {
+				return false
+			}
+			if (platform === 'gitlab' && !url.includes('gitlab.com')) {
+				return false
+			}
+			if (platform === 'hashnode' && !url.includes('hashnode.com')) {
+				return false
+			}
+			if (platform === 'stack overflow' && !url.includes('stackoverflow.com')) {
+				return false
+			}
+
+			return true
+		},
+		{ message: 'Please check the URL', path: ['url'] },
+	)
+
 const formSchema = z.object({
-	links: z.array(
-		z
-			.object({
-				id: z.string(),
-				platform: z.string().min(1, 'Platform is required'),
-				url: z.string().url('Must be a valid URL'),
-			})
-			.refine(
-				link => {
-					const platform = link.platform.toLowerCase()
-					const url = link.url.toLowerCase()
-
-					if (platform === 'github' && !url.includes('github.com')) {
-						return false
-					}
-					if (platform === 'frontend mentor' && !url.includes('frontendmentor.io')) {
-						return false
-					}
-					if (platform === 'twitter' && !url.includes('twitter.com') && !url.includes('x.com')) {
-						return false
-					}
-					if (platform === 'linkedin' && !url.includes('linkedin.com')) {
-						return false
-					}
-					if (platform === 'youtube' && !url.includes('youtube.com')) {
-						return false
-					}
-					if (platform === 'facebook' && !url.includes('facebook.com')) {
-						return false
-					}
-					if (platform === 'twitch' && !url.includes('twitch.tv')) {
-						return false
-					}
-					if (platform === 'dev.to' && !url.includes('dev.to')) {
-						return false
-					}
-					if (platform === 'codewars' && !url.includes('codewars.com')) {
-						return false
-					}
-					if (platform === 'freecodecamp' && !url.includes('freecodecamp.org')) {
-						return false
-					}
-					if (platform === 'gitlab' && !url.includes('gitlab.com')) {
-						return false
-					}
-					if (platform === 'hashnode' && !url.includes('hashnode.com')) {
-						return false
-					}
-					if (platform === 'stack overflow' && !url.includes('stackoverflow.com')) {
-						return false
-					}
-
-					return true
-				},
-				{ message: 'Please check the URL', path: ['url'] },
-			),
-	),
+	links: z.array(linkSchema),
 })
 
 export type LinksFormType = z.infer<typeof formSchema>
@@ -82,7 +84,6 @@ export default function CustomizeLinks() {
 		mode: 'onBlur',
 	})
 
-	const [isAddingNewLink, setIsAddingNewLink] = useState(false)
 	const linksInState = useWatch({ control: form.control, name: 'links' })
 	const prevLinksRef = useRef(links)
 
@@ -95,21 +96,16 @@ export default function CustomizeLinks() {
 
 	useEffect(() => {
 		if (JSON.stringify(prevLinksRef.current) !== JSON.stringify(linksInState)) {
-			linksInState.forEach((link, index) => {
+			linksInState.forEach(link => {
 				updateLink(link.id, link.platform, link.url)
 			})
 			prevLinksRef.current = linksInState
-			if (form.formState.isDirty && !isAddingNewLink && linksInState.every(link => link.url)) {
-				//form.trigger('links')
-			}
-			setIsAddingNewLink(false)
 		}
-	}, [form, isAddingNewLink, linksInState, updateLink])
+	}, [form, linksInState, updateLink])
 
 	function handleAddLink() {
 		addLink()
 		form.setValue('links', [...links])
-		setIsAddingNewLink(true)
 	}
 
 	const onSubmit = (values: z.infer<typeof formSchema>) => {

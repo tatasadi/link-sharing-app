@@ -5,7 +5,7 @@ import { updateIconForLinkObject } from '@/lib/icon-helper'
 export interface Link {
 	id: string
 	platform: string
-	url?: string
+	url: string
 	icon?: React.ReactNode
 	className?: string
 }

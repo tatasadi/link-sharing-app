@@ -7,10 +7,12 @@ export default function PreviewLinkItem({
 	icon,
 	children,
 	className = '',
+	url = '',
 }: {
 	icon: React.ReactNode
 	children: React.ReactNode
 	className?: string
+	url?: string
 }) {
 	const colorPossibilities = [
 		'bg-github', // GitHub
@@ -29,18 +31,20 @@ export default function PreviewLinkItem({
 	]
 
 	return (
-		<Button
-			variant="ghost"
-			className={cn(
-				'flex text-white p-4 min-w-[13.2rem] gap-2 rounded-lg items-center hover:text-white',
-				className,
-			)}
-		>
-			{icon}
-			{children}
-			<span className="ml-auto">
-				<IconArrowRight />
-			</span>
-		</Button>
+		<a href={url ? url : '#'} target={url ? '_blank' : '_self'}>
+			<Button
+				variant="ghost"
+				className={cn(
+					'flex text-white p-4 min-w-[13.2rem] gap-2 rounded-lg items-center hover:text-white w-full',
+					className,
+				)}
+			>
+				{icon}
+				{children}
+				<span className="ml-auto">
+					<IconArrowRight />
+				</span>
+			</Button>
+		</a>
 	)
 }

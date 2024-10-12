@@ -57,6 +57,7 @@ export default function Preview({
 						key={link.id}
 						icon={link.icon}
 						className={`${link.className} ${size === 'lg' ? '' : 'text-xs py-3'}`}
+						url={link.url}
 					>
 						{link.platform}
 					</PreviewLinkItem>
