@@ -1,7 +1,5 @@
+import CustomizeProfile from '@/components/sections/customize-profile'
+
 export default function ProfilePage() {
-	return (
-		<div>
-			<h1>Profile Page</h1>
-		</div>
-	)
+	return <CustomizeProfile />
 }

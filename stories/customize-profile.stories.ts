@@ -1,14 +1,14 @@
-import Profile from '@/components/sections/profile'
+import CustomizeProfile from '@/components/sections/customize-profile'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-	title: 'Unknown/Profile',
-	component: Profile,
+	title: 'Sections/CustomizeProfile',
+	component: CustomizeProfile,
 	parameters: {
 		layout: 'centered',
 	},
 	tags: ['autodocs'],
-} satisfies Meta<typeof Profile>
+} satisfies Meta<typeof CustomizeProfile>
 
 export default meta
 type Story = StoryObj<typeof meta>

@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import IconImage from '../icons/icon-image'
 
-export default function Upload() {
+export default function Upload({ className = '' }: { className?: string }) {
 	const [imageSrc, setImageSrc] = useState<string | null>(null)
 
 	function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -15,10 +15,10 @@ export default function Upload() {
 	}
 
 	return (
-		<div className="flex flex-col sm:flex-row sm:items-center gap-6 ">
+		<div className={cn('grid sm:grid-cols-[1fr_auto] sm:items-center gap-6', className)}>
 			<Label
 				className={cn(
-					'relative rounded-xl overflow-hidden aspect-square max-w-48 cursor-pointer p-6',
+					'relative rounded-xl overflow-hidden aspect-square cursor-pointer px-6 py-8 md:px-10 md:py-[3.75rem] w-[13rem]',
 					imageSrc ? 'bg-black' : 'bg-light-purple',
 				)}
 			>
@@ -38,13 +38,11 @@ export default function Upload() {
 					)}
 				>
 					<IconImage />
-					<span className="text-heading-s">{imageSrc ? 'Change Image' : '+ Upload Image'}</span>
+					<span className="text-semibold">{imageSrc ? 'Change Image' : '+ Upload Image'}</span>
 				</span>
 				<input accept="image/*" type="file" className="hidden" onChange={handleInputChange} />
 			</Label>
-			<p className="text-body-s text-gray">
-				Image must be below 1024x1024px. Use PNG or JPG format.
-			</p>
+			<p className="text-xs text-gray">Image must be below 1024x1024px. Use PNG or JPG format.</p>
 		</div>
 	)
 }

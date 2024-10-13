@@ -60,8 +60,8 @@
 	}
 }
 @layer utilities {
-	.item {
-		@apply text-body-s text-dark-gray md:mt-2 md:text-gray md:text-base md:font-normal;
+	.profile-label {
+		@apply text-body-s text-dark-gray sm:text-gray sm:text-base sm:font-normal;
 	}
 
 	.select-item-wrapper {

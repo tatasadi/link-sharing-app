@@ -34,10 +34,16 @@ const InputWithIcon: React.FC<InputWithIconProps> = ({
 				<FormItem className={className}>
 					{label && <FormLabel className="text-xs">{label}</FormLabel>}
 					<div className="grid items-center *:col-start-1 *:row-start-1 mt-1">
-						{icon && <Image src={icon} className="z-10 ml-4" alt={iconAlt} />}
+						{icon && (
+							<Image
+								src={icon}
+								className="z-10 ml-4 self-start mt-[0.8rem] md:self-center md:mt-0"
+								alt={iconAlt}
+							/>
+						)}
 						<Input
 							className={cn(
-								'py-3',
+								'py-3 self-start md:self-center',
 								icon ? 'px-10' : 'px-4',
 								error ? 'text-red border-red' : '',
 								inputClassName,
@@ -45,7 +51,7 @@ const InputWithIcon: React.FC<InputWithIconProps> = ({
 							{...field}
 							{...props}
 						/>
-						<FormMessage className="justify-self-end pr-4 z-10" />
+						<FormMessage className="justify-self-end md:pr-4 z-10 self-end mt-12 md:self-center md:mt-0" />
 					</div>
 				</FormItem>
 			)}

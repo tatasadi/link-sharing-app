@@ -105,7 +105,6 @@ export default function CustomizeLinks() {
 
 	function handleAddLink() {
 		addLink()
-		form.setValue('links', [...links])
 	}
 
 	const onSubmit = (values: z.infer<typeof formSchema>) => {
@@ -122,7 +121,7 @@ export default function CustomizeLinks() {
 				+ Add new link
 			</Button>
 			{linksInState.length === 0 ? (
-				<div className="flex flex-col justify-center items-center gap-6 bg-light-gray rounded-xl p-5 text-center">
+				<div className="flex flex-col justify-center items-center gap-6 bg-light-gray rounded-xl px-5 py-20 text-center">
 					<Image src={Group} alt="a finger touching a cellphone" />
 					<h3 className="text-2xl font-bold leading-9 text-dark-gray">Let’s get you started</h3>
 					<p className="text-body-m text-gray max-w-[30rem]">

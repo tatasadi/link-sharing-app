@@ -12,3 +12,12 @@ export function saltAndHashPassword(password: any) {
 	const hash = bcrypt.hashSync(password, salt) // Synchronously hash the password
 	return hash // Return the hash directly as a string
 }
+
+export function isValidUrl(url: string): boolean {
+	try {
+		new URL(url) // If this works, the URL is valid
+		return true
+	} catch (error) {
+		return false // If it throws, the URL is invalid
+	}
+}

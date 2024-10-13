@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn, isValidUrl } from '@/lib/utils'
 import React from 'react'
 import IconArrowRight from './icons/icon-arrow-right'
 import { Button } from './ui/button'
@@ -30,8 +30,9 @@ export default function PreviewLinkItem({
 		'bg-stackoverflow', // Stack Overflow
 	]
 
+	const isUrlValid = isValidUrl(url)
 	return (
-		<a href={url ? url : '#'} target={url ? '_blank' : '_self'}>
+		<a href={isUrlValid ? url : '#'} target={isUrlValid ? '_blank' : '_self'}>
 			<Button
 				variant="ghost"
 				className={cn(
