@@ -10,11 +10,25 @@ export interface Link {
 	className?: string
 }
 
+export interface Profile {
+	firstName?: string
+	lastName?: string
+	email?: string
+}
+
+export interface ProfileImage {
+	image?: File
+}
+
 interface StoreState {
 	links: Link[]
 	addLink: () => void
 	removeLink: (id: string) => void
 	updateLink: (id: string, platform: string, url: string) => void
+	profile: Profile
+	updateProfile: (profile: Profile) => void
+	profileImage: ProfileImage
+	updateProfileImage: (image: File) => void
 }
 
 export const useStore = create<StoreState>(set => ({
@@ -32,5 +46,15 @@ export const useStore = create<StoreState>(set => ({
 			links: state.links.map(link =>
 				link.id === id ? updateIconForLinkObject({ ...link, platform, url }) : link,
 			),
+		})),
+	profile: { firstName: '', lastName: '', email: '' },
+	updateProfile: (profile: Profile) =>
+		set(() => ({
+			profile,
+		})),
+	profileImage: {},
+	updateProfileImage: (image: File) =>
+		set(() => ({
+			profileImage: { image },
 		})),
 }))

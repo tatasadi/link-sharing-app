@@ -1,26 +1,29 @@
+'use client'
 import Image, { StaticImageData } from 'next/image'
 import PreviewLinkItem from './preview-link-item'
 import { cn } from '@/lib/utils'
-import { Link } from '@/app/useStore'
+import { Link, useStore } from '@/app/useStore'
+import { useEffect, useState } from 'react'
 
 export default function Preview({
 	size = 'md',
-	image,
-	imageAlt = '',
-	email = '',
-	name = '',
-	links = [],
 	showLinksPreview = false,
 }: {
 	size?: 'md' | 'lg'
-	image?: StaticImageData
-	imageAlt?: string
-	email?: string
-	name?: string
-	links?: Link[]
 	showLinksPreview?: boolean
 }) {
+	const { links, profile, profileImage } = useStore()
+	const { firstName, lastName, email } = profile
+	const name = `${firstName} ${lastName}`.trim()
 	const previewLinksLength = showLinksPreview ? (5 - links.length <= 0 ? 0 : 5 - links.length) : 0
+
+	const [imageSrc, setImageSrc] = useState<string | null>(null)
+
+	useEffect(() => {
+		if (profileImage.image) {
+			setImageSrc(URL.createObjectURL(profileImage.image))
+		}
+	}, [profileImage.image])
 
 	return (
 		<div>
@@ -31,7 +34,15 @@ export default function Preview({
 						size === 'lg' ? 'size-[6.5rem]' : '',
 					)}
 				>
-					{image && <Image src={image} alt={imageAlt} />}
+					{imageSrc && (
+						<Image
+							src={imageSrc}
+							alt="profile image"
+							width={80}
+							height={80}
+							className="rounded-full w-full h-full object-cover object-center"
+						/>
+					)}
 				</div>
 				<div className="flex flex-col items-center gap-2 text-center">
 					<h2

@@ -5,16 +5,19 @@ import { Label } from '../ui/label'
 import InputWithIcon from '../input-with-icon'
 import { Form } from '../ui/form'
 import { z } from 'zod'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useStore } from '@/app/useStore'
+import { useEffect, useRef } from 'react'
 
 const formSchema = z.object({
 	firstName: z.string().min(1, 'Can’t be empty'),
 	lastName: z.string().min(1, 'Can’t be empty'),
-	email: z.string().email('Must be a valid email address'),
+	email: z.string().optional(),
 })
 
 export default function CustomizeProfile() {
+	const { profile, updateProfile } = useStore()
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -24,6 +27,25 @@ export default function CustomizeProfile() {
 		},
 		mode: 'onBlur',
 	})
+
+	const profileInState = useWatch({ control: form.control })
+	const prevProfileRef = useRef(profile)
+
+	useEffect(() => {
+		if (JSON.stringify(prevProfileRef.current) !== JSON.stringify(profile)) {
+			form.setValue('firstName', profile.firstName ?? '')
+			form.setValue('lastName', profile.lastName ?? '')
+			form.setValue('email', profile.email)
+			prevProfileRef.current = profile
+		}
+	}, [profile, form])
+
+	useEffect(() => {
+		if (JSON.stringify(prevProfileRef.current) !== JSON.stringify(profileInState)) {
+			updateProfile(profileInState)
+			prevProfileRef.current = profileInState
+		}
+	}, [form, profileInState, updateProfile])
 
 	const onSubmit = (data: z.infer<typeof formSchema>) => {
 		console.log(data)
@@ -71,7 +93,7 @@ export default function CustomizeProfile() {
 						control={form.control}
 					/>
 					<Label className="profile-label" htmlFor="email">
-						Email*
+						Email
 					</Label>
 					<InputWithIcon
 						placeholder="e.g. email@example.com"

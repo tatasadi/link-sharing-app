@@ -2,16 +2,25 @@
 import { cn } from '@/lib/utils'
 import { Label } from './label'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import IconImage from '../icons/icon-image'
+import { useStore } from '@/app/useStore'
 
 export default function Upload({ className = '' }: { className?: string }) {
+	const { profileImage, updateProfileImage } = useStore()
 	const [imageSrc, setImageSrc] = useState<string | null>(null)
+
+	useEffect(() => {
+		if (profileImage.image) {
+			setImageSrc(URL.createObjectURL(profileImage.image))
+		}
+	}, [profileImage.image])
 
 	function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
 		const file = e.target.files?.[0]
 		if (!file) return
-		setImageSrc(URL.createObjectURL(file))
+		//setImageSrc(URL.createObjectURL(file))
+		updateProfileImage(file)
 	}
 
 	return (

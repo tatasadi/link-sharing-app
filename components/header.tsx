@@ -16,21 +16,23 @@ export default function Header({ className = '' }: { className?: string }) {
 		<header className={cn('flex bg-white p-4 pl-6 sm:rounded-xl sm:m-6', className)}>
 			<Logo />
 			<Link href="/links" className="ml-auto">
-				<ButtonWithIcon icon={<IconLink />} isActive={pathname === '/links'}>
+				<ButtonWithIcon asChild icon={<IconLink />} isActive={pathname === '/links'}>
 					Links
 				</ButtonWithIcon>
 			</Link>
 			<Link href="/profile" className="mr-auto">
-				<ButtonWithIcon icon={<IconProfile />} isActive={pathname === '/profile'}>
+				<ButtonWithIcon asChild icon={<IconProfile />} isActive={pathname === '/profile'}>
 					Profile Details
 				</ButtonWithIcon>
 			</Link>
-			<Button variant="secondary">
-				<span className="sm:hidden">
-					<IconEye />
-				</span>
-				<span className="hidden sm:block">Preview</span>
-			</Button>
+			<Link href="/preview">
+				<Button variant="secondary">
+					<span className="sm:hidden">
+						<IconEye />
+					</span>
+					<span className="hidden sm:block">Preview</span>
+				</Button>
+			</Link>
 		</header>
 	)
 }
