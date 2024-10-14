@@ -1,10 +1,11 @@
 'use server'
 
-import { signIn } from '@/auth'
+import { signIn, signOut } from '@/auth'
 import { LoginFormType } from '@/components/sections/login'
 import { RegisterFormType } from '@/components/sections/register'
 import { saltAndHashPassword } from '@/lib/utils'
 import { db } from '@/prisma/db'
+import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 export const register = async (state: any, data: RegisterFormType) => {
@@ -23,7 +24,8 @@ export const register = async (state: any, data: RegisterFormType) => {
 
 	const user = await db.user.create({
 		data: {
-			name: email,
+			firstname: '',
+			lastname: '',
 			email,
 			password: hashedPassword,
 		},
@@ -48,4 +50,14 @@ export const login = async (state: any, data: LoginFormType) => {
 		}
 	}
 	redirect('/')
+}
+
+export const logout = async () => {
+	try {
+		await signOut()
+	} catch (error: any) {
+		return { success: false, error: 'Something went wrong!' }
+	}
+
+	return { success: true }
 }

@@ -9,6 +9,7 @@ import IconEye from './icons/icon-eye'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import LogoutButton from './logout-button'
 
 export default function Header({ className = '' }: { className?: string }) {
 	const pathname = usePathname()
@@ -33,6 +34,7 @@ export default function Header({ className = '' }: { className?: string }) {
 					<span className="hidden sm:block">Preview</span>
 				</Button>
 			</Link>
+			<LogoutButton />
 		</header>
 	)
 }
