@@ -18,12 +18,12 @@ export async function SaveLinks({
 
 	const session = await auth()
 	if (!session) {
-		return { success: false, error: 'User not authenticated' }
+		return { success: false, error: 'User is not authenticated' }
 	}
 
 	const userId = session.user?.id
 	if (!userId) {
-		return { success: false, error: 'User not authenticated' }
+		return { success: false, error: 'User is not authenticated' }
 	}
 
 	await db.link.deleteMany({
@@ -42,8 +42,7 @@ export async function SaveLinks({
 		})
 	})
 
-	// TODO change this later
-	return { success: false, error: 'Invalid links data' }
+	return { success: true }
 }
 
 export async function SaveProfile({
@@ -66,12 +65,12 @@ export async function SaveProfile({
 
 	const session = await auth()
 	if (!session) {
-		return { success: false, error: 'User not authenticated' }
+		return { success: false, error: 'User is not authenticated' }
 	}
 
 	const userId = session.user?.id
 	if (!userId) {
-		return { success: false, error: 'User not authenticated' }
+		return { success: false, error: 'User is not authenticated' }
 	}
 
 	// update user
@@ -85,6 +84,5 @@ export async function SaveProfile({
 			profileEmail: profile.email,
 		},
 	})
-
 	return { success: true }
 }

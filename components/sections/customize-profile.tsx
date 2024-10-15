@@ -9,14 +9,16 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useStore } from '@/app/useStore'
 import { useEffect, useRef, useState } from 'react'
 import { profileSchema } from '@/lib/schema'
-import SaveData from '../save-data'
 import { SaveProfile } from '@/actions/data'
 import { Button } from '../ui/button'
+import { MdError } from 'react-icons/md'
+import { PiFloppyDiskBackFill } from 'react-icons/pi'
+import { useToast } from '@/hooks/use-toast'
 
 export default function CustomizeProfile() {
+	const { toast } = useToast()
 	const { profile, updateProfile } = useStore()
 	const [isPending, setIsPending] = useState(false)
-	const [error, setError] = useState<string | null>(null)
 	const form = useForm<z.infer<typeof profileSchema>>({
 		resolver: zodResolver(profileSchema),
 		defaultValues: {
@@ -48,13 +50,29 @@ export default function CustomizeProfile() {
 
 	const onSubmit = async (data: z.infer<typeof profileSchema>) => {
 		setIsPending(true)
-		setError(null)
 		const { success, error } = await SaveProfile({
 			profile,
 		})
 		setIsPending(false)
 		if (!success) {
-			setError(error ?? null)
+			toast({
+				description: (
+					<span className="flex items-center gap-4">
+						<MdError className="text-xl" />
+						<span>{error}</span>
+					</span>
+				),
+				variant: 'destructive',
+			})
+		} else {
+			toast({
+				description: (
+					<span className="flex items-center gap-4">
+						<PiFloppyDiskBackFill className="text-xl" />
+						<span>Your changes have been successfully saved!</span>
+					</span>
+				),
+			})
 		}
 	}
 

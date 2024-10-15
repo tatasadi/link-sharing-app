@@ -11,6 +11,9 @@ import { useEffect, useRef, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { linkSchema } from '@/lib/schema'
 import { SaveLinks } from '@/actions/data'
+import { useToast } from '@/hooks/use-toast'
+import { MdError } from 'react-icons/md'
+import { PiFloppyDiskBackFill } from 'react-icons/pi'
 
 const formSchema = z.object({
 	links: z.array(linkSchema),
@@ -19,9 +22,9 @@ const formSchema = z.object({
 export type LinksFormType = z.infer<typeof formSchema>
 
 export default function CustomizeLinks() {
+	const { toast } = useToast()
 	const { links, addLink, updateLink } = useStore()
 	const [isPending, setIsPending] = useState(false)
-	const [error, setError] = useState<string | null>(null)
 	const linksWithoutIcon = links.map(({ id, platform, url }) => ({ id, platform, url }))
 
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -57,15 +60,30 @@ export default function CustomizeLinks() {
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		setIsPending(true)
-		setError(null)
 		const { success, error } = await SaveLinks({
 			links: linksWithoutIcon,
 		})
 		setIsPending(false)
 		if (!success) {
-			setError(error ?? null)
+			toast({
+				description: (
+					<span className="flex items-center gap-4">
+						<MdError className="text-xl" />
+						<span>{error}</span>
+					</span>
+				),
+				variant: 'destructive',
+			})
+		} else {
+			toast({
+				description: (
+					<span className="flex items-center gap-4">
+						<PiFloppyDiskBackFill className="text-xl" />
+						<span>Your changes have been successfully saved!</span>
+					</span>
+				),
+			})
 		}
-		console.log(success, error)
 	}
 
 	return (
@@ -101,8 +119,7 @@ export default function CustomizeLinks() {
 						</div>
 					)}
 				</section>
-				<div className="border-t-[0.0625rem] p-4 flex justify-end sm:px-10 sm:py-6 gap-2 items-center">
-					{error && <p className="text-destructive">{error}</p>}
+				<div className="border-t-[0.0625rem] p-4 flex justify-end sm:px-10 sm:py-6">
 					<Button type="submit" className="w-full sm:w-auto" disabled={isPending}>
 						{isPending ? 'Saving...' : 'Save'}
 					</Button>
