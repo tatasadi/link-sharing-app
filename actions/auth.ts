@@ -27,6 +27,7 @@ export const register = async (state: any, data: RegisterFormType) => {
 			firstname: '',
 			lastname: '',
 			email,
+			profileEmail: '',
 			password: hashedPassword,
 		},
 	})

@@ -8,12 +8,13 @@ datasource db {
 }
 
 model User {
-  id        String @id @default(uuid())
-  email     String @unique
-  password  String
-  firstname String
-  lastname  String
-  links     Link[] @relation("UserLinks")
+  id           String @id @default(uuid())
+  email        String @unique
+  profileEmail String
+  password     String
+  firstname    String
+  lastname     String
+  links        Link[] @relation("UserLinks")
 }
 
 model Link {

@@ -1,5 +1,4 @@
 'use client'
-import { Input } from '../ui/input'
 import Upload from '../ui/upload'
 import { Label } from '../ui/label'
 import InputWithIcon from '../input-with-icon'
@@ -8,18 +7,18 @@ import { z } from 'zod'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useStore } from '@/app/useStore'
-import { useEffect, useRef } from 'react'
-
-const formSchema = z.object({
-	firstName: z.string().min(1, 'Can’t be empty'),
-	lastName: z.string().min(1, 'Can’t be empty'),
-	email: z.string().optional(),
-})
+import { useEffect, useRef, useState } from 'react'
+import { profileSchema } from '@/lib/schema'
+import SaveData from '../save-data'
+import { SaveProfile } from '@/actions/data'
+import { Button } from '../ui/button'
 
 export default function CustomizeProfile() {
 	const { profile, updateProfile } = useStore()
-	const form = useForm<z.infer<typeof formSchema>>({
-		resolver: zodResolver(formSchema),
+	const [isPending, setIsPending] = useState(false)
+	const [error, setError] = useState<string | null>(null)
+	const form = useForm<z.infer<typeof profileSchema>>({
+		resolver: zodResolver(profileSchema),
 		defaultValues: {
 			firstName: '',
 			lastName: '',
@@ -47,65 +46,80 @@ export default function CustomizeProfile() {
 		}
 	}, [form, profileInState, updateProfile])
 
-	const onSubmit = (data: z.infer<typeof formSchema>) => {
-		console.log(data)
+	const onSubmit = async (data: z.infer<typeof profileSchema>) => {
+		setIsPending(true)
+		setError(null)
+		const { success, error } = await SaveProfile({
+			profile,
+		})
+		setIsPending(false)
+		if (!success) {
+			setError(error ?? null)
+		}
 	}
 
 	return (
-		<section className="flex flex-col p-6 sm:p-10 bg-white rounded-xl">
-			<div className="mb-10">
-				<h2 className="text-2xl font-bold leading-9 text-dark-gray mb-2">Profile Details</h2>
-				<p className="text-body-m text-gray">
-					Add your details to create a personal touch to your profile.
-				</p>
-			</div>
-			<div className="bg-light-gray rounded-xl p-5 grid sm:grid-cols-3 items-center gap-4">
-				<h3 className="text-gray">Profile picture</h3>
-				<Upload className="sm:col-span-2" />
-			</div>
-			<Form {...form}>
-				<form
-					onSubmit={form.handleSubmit(onSubmit)}
-					className="bg-light-gray rounded-xl p-5 grid sm:grid-cols-3 gap-x-4 sm:gap-y-3 sm:items-center mt-6"
-				>
-					<Label className="profile-label" htmlFor="firstName">
-						First name*
-					</Label>
-					<InputWithIcon
-						placeholder="e.g. John"
-						name="firstName"
-						id="firstName"
-						type="text"
-						className="sm:col-span-2 mb-3 sm:mb-0"
-						error={form.formState.errors.firstName?.message}
-						control={form.control}
-					/>
-					<Label className="profile-label" htmlFor="lastName">
-						Last name*
-					</Label>
-					<InputWithIcon
-						placeholder="e.g. Appleseed"
-						name="lastName"
-						id="lastName"
-						type="text"
-						className="sm:col-span-2 mb-3 sm:mb-0"
-						error={form.formState.errors.lastName?.message}
-						control={form.control}
-					/>
-					<Label className="profile-label" htmlFor="email">
-						Email
-					</Label>
-					<InputWithIcon
-						placeholder="e.g. email@example.com"
-						name="email"
-						id="email"
-						type="email"
-						className="sm:col-span-2"
-						error={form.formState.errors.email?.message}
-						control={form.control}
-					/>
-				</form>
-			</Form>
-		</section>
+		<Form {...form}>
+			<form
+				onSubmit={form.handleSubmit(onSubmit)}
+				className="grid grid-rows-[1fr_auto] bg-white rounded-xl m-4 sm:m-6 sm:mt-0 lg:col-span-3"
+			>
+				<section className="flex flex-col p-6 sm:p-10 bg-white rounded-xl">
+					<div className="mb-10">
+						<h2 className="text-2xl font-bold leading-9 text-dark-gray mb-2">Profile Details</h2>
+						<p className="text-body-m text-gray">
+							Add your details to create a personal touch to your profile.
+						</p>
+					</div>
+					<div className="bg-light-gray rounded-xl p-5 grid sm:grid-cols-3 items-center gap-4">
+						<h3 className="text-gray">Profile picture</h3>
+						<Upload className="sm:col-span-2" />
+					</div>
+					<div className="bg-light-gray rounded-xl p-5 grid sm:grid-cols-3 gap-x-4 sm:gap-y-3 sm:items-center mt-6">
+						<Label className="profile-label" htmlFor="firstName">
+							First name*
+						</Label>
+						<InputWithIcon
+							placeholder="e.g. John"
+							name="firstName"
+							id="firstName"
+							type="text"
+							className="sm:col-span-2 mb-3 sm:mb-0"
+							error={form.formState.errors.firstName?.message}
+							control={form.control}
+						/>
+						<Label className="profile-label" htmlFor="lastName">
+							Last name*
+						</Label>
+						<InputWithIcon
+							placeholder="e.g. Appleseed"
+							name="lastName"
+							id="lastName"
+							type="text"
+							className="sm:col-span-2 mb-3 sm:mb-0"
+							error={form.formState.errors.lastName?.message}
+							control={form.control}
+						/>
+						<Label className="profile-label" htmlFor="email">
+							Email
+						</Label>
+						<InputWithIcon
+							placeholder="e.g. email@example.com"
+							name="email"
+							id="email"
+							type="email"
+							className="sm:col-span-2"
+							error={form.formState.errors.email?.message}
+							control={form.control}
+						/>
+					</div>
+				</section>
+				<div className="border-t-[0.0625rem] p-4 flex justify-end sm:px-10 sm:py-6">
+					<Button type="submit" className="w-full sm:w-auto" disabled={isPending}>
+						{isPending ? 'Saving...' : 'Save'}
+					</Button>
+				</div>
+			</form>
+		</Form>
 	)
 }
