@@ -25,6 +25,7 @@ interface StoreState {
 	addLink: () => void
 	removeLink: (id: string) => void
 	updateLink: (id: string, platform: string, url: string) => void
+	updateLinks: (links: Link[]) => void
 	profile: Profile
 	updateProfile: (profile: Profile) => void
 	profileImage: ProfileImage
@@ -46,6 +47,10 @@ export const useStore = create<StoreState>(set => ({
 			links: state.links.map(link =>
 				link.id === id ? updateIconForLinkObject({ ...link, platform, url }) : link,
 			),
+		})),
+	updateLinks: (links: Link[]) =>
+		set(() => ({
+			links,
 		})),
 	profile: { firstName: '', lastName: '', email: '' },
 	updateProfile: (profile: Profile) =>

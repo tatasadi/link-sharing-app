@@ -1,29 +1,36 @@
 'use client'
-import Image, { StaticImageData } from 'next/image'
+import Image from 'next/image'
 import PreviewLinkItem from './preview-link-item'
 import { cn } from '@/lib/utils'
-import { Link, useStore } from '@/app/useStore'
+import { Link, Profile, ProfileImage } from '@/app/useStore'
 import { useEffect, useState } from 'react'
 
 export default function Preview({
 	size = 'md',
 	showLinksPreview = false,
+	links = [],
+	profile,
+	profileImage,
 }: {
 	size?: 'md' | 'lg'
 	showLinksPreview?: boolean
+	links?: Link[]
+	profile?: Profile
+	profileImage?: ProfileImage
 }) {
-	const { links, profile, profileImage } = useStore()
-	const { firstName, lastName, email } = profile
-	const name = `${firstName} ${lastName}`.trim()
+	const { firstName, lastName, email } = profile || {}
+	const name = `${firstName ?? ''} ${lastName ?? ''}`.trim()
 	const previewLinksLength = showLinksPreview ? (5 - links.length <= 0 ? 0 : 5 - links.length) : 0
 
 	const [imageSrc, setImageSrc] = useState<string | null>(null)
 
 	useEffect(() => {
-		if (profileImage.image) {
+		if (profileImage?.image) {
 			setImageSrc(URL.createObjectURL(profileImage.image))
 		}
-	}, [profileImage.image])
+	}, [profileImage?.image])
+
+	console.log('links in preview', links)
 
 	return (
 		<div>

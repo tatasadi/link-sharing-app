@@ -13,17 +13,17 @@ import {
 	FaStackOverflow,
 } from 'react-icons/fa'
 import { PiGithubLogoFill } from 'react-icons/pi'
-import { SiFrontendmentor, SiCodewars, SiHashnode } from 'react-icons/si'
+import { SiCodewars, SiHashnode } from 'react-icons/si'
 
 export default function getSocialIcons() {
 	return [
 		{
 			name: 'GitHub',
-			icon: <PiGithubLogoFill />,
+			icon: <IconGithub />,
 		},
 		{
 			name: 'Frontend Mentor',
-			icon: <SiFrontendmentor />,
+			icon: <IconFrontendmentor />,
 		},
 		{
 			name: 'Twitter',
@@ -79,7 +79,7 @@ export function updateIconForLinkObject(link: Link) {
 		case 'Frontend Mentor':
 			return {
 				...link,
-				icon: <SiFrontendmentor />,
+				icon: <IconFrontendmentor />,
 				className: 'bg-white text-dark-gray hover:text-dark-gray border border-borders',
 			}
 		case 'Twitter':

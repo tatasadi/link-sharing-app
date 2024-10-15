@@ -1,7 +1,9 @@
 import { auth } from '@/auth'
 
+const protectedRoutes = ['/', '/links', '/profile', '/preview']
+
 export default auth(req => {
-	if (!req.auth && req.nextUrl.pathname !== '/login' && req.nextUrl.pathname !== '/register') {
+	if (!req.auth && protectedRoutes.includes(req.nextUrl.pathname)) {
 		const newUrl = new URL('/login', req.nextUrl.origin)
 		return Response.redirect(newUrl)
 	}
