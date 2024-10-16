@@ -30,10 +30,17 @@ interface StoreState {
 	updateProfile: (profile: Profile) => void
 	profileImage: ProfileImage
 	updateProfileImage: (image: File) => void
+	reset: () => void
+}
+
+const initialState = {
+	links: [],
+	profile: { firstName: '', lastName: '', email: '' },
+	profileImage: {},
 }
 
 export const useStore = create<StoreState>(set => ({
-	links: [],
+	...initialState,
 	addLink: () =>
 		set((state: StoreState) => ({
 			links: [...state.links, { id: uuidv4(), platform: '', url: '' }],
@@ -52,14 +59,13 @@ export const useStore = create<StoreState>(set => ({
 		set(() => ({
 			links,
 		})),
-	profile: { firstName: '', lastName: '', email: '' },
 	updateProfile: (profile: Profile) =>
 		set(() => ({
 			profile,
 		})),
-	profileImage: {},
 	updateProfileImage: (image: File) =>
 		set(() => ({
 			profileImage: { image },
 		})),
+	reset: () => set(() => initialState),
 }))

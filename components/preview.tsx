@@ -30,8 +30,6 @@ export default function Preview({
 		}
 	}, [profileImage?.image])
 
-	console.log('links in preview', links)
-
 	return (
 		<div>
 			<div className="grid place-items-center gap-6">
@@ -53,12 +51,16 @@ export default function Preview({
 				</div>
 				<div className="flex flex-col items-center gap-2 text-center">
 					<h2
-						className={`text-dark-gray min-w-40 min-h-4 ${name ? '' : 'bg-very-light-gray rounded-full'} ${size === 'lg' ? 'text-heading-m' : 'text-lg font-semibold'}`}
+						className={`text-dark-gray min-w-40 min-h-4 ${
+							name ? '' : 'bg-very-light-gray rounded-full'
+						} ${size === 'lg' ? 'text-heading-m' : 'text-lg font-semibold'}`}
 					>
 						{name}
 					</h2>
 					<p
-						className={`text-gray min-w-[4.5rem] min-h-2 ${email ? '' : 'bg-very-light-gray rounded-full'} ${size === 'lg' ? '' : 'text-sm'}`}
+						className={`text-gray min-w-[4.5rem] min-h-2 ${
+							email ? '' : 'bg-very-light-gray rounded-full'
+						} ${size === 'lg' ? '' : 'text-sm'}`}
 					>
 						{email}
 					</p>

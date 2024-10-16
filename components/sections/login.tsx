@@ -10,7 +10,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from '../ui/form'
 import { login } from '@/actions/auth'
-import { useActionState } from 'react'
+import { useFormState, useFormStatus } from 'react-dom'
 
 const formSchema = z.object({
 	email: z.string().min(1, { message: 'Can’t be empty' }).email({ message: 'Invalid email' }),
@@ -22,7 +22,8 @@ const formSchema = z.object({
 export type LoginFormType = z.infer<typeof formSchema>
 
 export default function Login({ className = '' }: { className?: string }) {
-	const [state, formAction, isPending] = useActionState(login, null)
+	const [state, formAction] = useFormState(login, null)
+	const { pending } = useFormStatus()
 	const error = state?.error
 
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -64,8 +65,8 @@ export default function Login({ className = '' }: { className?: string }) {
 						control={form.control}
 					/>
 
-					<Button type="submit" className="w-full mb-6" disabled={isPending}>
-						{isPending ? 'Loading...' : 'Login'}
+					<Button type="submit" className="w-full mb-6" disabled={pending}>
+						{pending ? 'Loading...' : 'Login'}
 					</Button>
 
 					{error && <p className="text-red text-sm text-center mb-6">{error}</p>}

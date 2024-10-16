@@ -36,6 +36,7 @@ export const register = async (state: any, data: RegisterFormType) => {
 	} catch (error: any) {
 		return { success: false, error: 'Something went wrong!' }
 	}
+	revalidatePath('/')
 	redirect('/')
 }
 
@@ -50,6 +51,7 @@ export const login = async (state: any, data: LoginFormType) => {
 				return { success: false, error: 'Something went wrong!' }
 		}
 	}
+	revalidatePath('/')
 	redirect('/')
 }
 
@@ -59,6 +61,7 @@ export const logout = async () => {
 	} catch (error: any) {
 		return { success: false, error: 'Something went wrong!' }
 	}
-
-	return { success: true }
+	revalidatePath('/')
+	revalidatePath('/links')
+	redirect('/login')
 }

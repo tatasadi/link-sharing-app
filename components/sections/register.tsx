@@ -11,7 +11,7 @@ import InputWithIcon from '../input-with-icon'
 import { Form } from '../ui/form'
 import Link from 'next/link'
 import { register } from '@/actions/auth'
-import { useActionState } from 'react'
+import { useFormState, useFormStatus } from 'react-dom'
 
 const formSchema = z
 	.object({
@@ -36,7 +36,8 @@ const formSchema = z
 export type RegisterFormType = z.infer<typeof formSchema>
 
 export default function Register({ className = '' }: { className?: string }) {
-	const [state, formAction, isPending] = useActionState(register, null)
+	const [state, formAction] = useFormState(register, null)
+	const { pending } = useFormStatus()
 	const error = state?.error
 
 	const form = useForm<RegisterFormType>({
@@ -89,8 +90,8 @@ export default function Register({ className = '' }: { className?: string }) {
 						control={form.control}
 					/>
 					<p className="text-body-s text-gray mb-6">Password must contain at least 8 characters</p>
-					<Button type="submit" className="w-full mb-6" disabled={isPending}>
-						{isPending ? 'Loading...' : 'Create new account'}
+					<Button type="submit" className="w-full mb-6" disabled={pending}>
+						{pending ? 'Loading...' : 'Create new account'}
 					</Button>
 					{error && <p className="text-red text-sm text-center mb-6">{error}</p>}
 				</form>
