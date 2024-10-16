@@ -14,5 +14,19 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-	args: {},
+	args: {
+		index: 0,
+		link: {
+			id: '1',
+			platform: 'github',
+			url: 'https://www.github.com/',
+		},
+		form: {
+			trigger: () => {},
+			control: {},
+			formState: {
+				errors: {},
+			},
+		},
+	},
 }

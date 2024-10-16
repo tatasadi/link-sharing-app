@@ -18,6 +18,7 @@ export const Primary: Story = {
 	args: {
 		children: 'Button',
 		icon: <IconLink />,
+		isActive: false,
 	},
 }
 
