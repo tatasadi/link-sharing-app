@@ -1,16 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import Preview from '@/components/preview'
-import image from '@/public/Ellipse 3.svg'
 import IconGithub from '@/components/icons/icon-github'
 import IconFrontendmentor from '@/components/icons/icon-frontendmentor'
 
 const links = [
 	{
+		id: '1',
+		platform: 'GitHub',
+		url: 'https://github.com',
 		icon: <IconGithub />,
 		text: 'GitHub',
 		className: 'bg-github',
 	},
 	{
+		id: '2',
+		platform: 'Frontendmentor',
+		url: 'https://www.frontendmentor.io',
 		icon: <IconFrontendmentor />,
 		text: 'Frontendmentor',
 		className: 'bg-white text-dark-gray hover:text-dark-gray border border-borders',
@@ -41,18 +46,12 @@ export const EmptyWithLinksPreview: Story = {
 
 export const FilledMd: Story = {
 	args: {
-		image,
-		email: 'ben@example.com',
-		name: 'Ben Wright',
 		links,
 	},
 }
 
 export const FilledLg: Story = {
 	args: {
-		image,
-		email: 'ben@example.com',
-		name: 'Ben Wright',
 		links,
 		size: 'lg',
 	},
@@ -60,9 +59,6 @@ export const FilledLg: Story = {
 
 export const FilledWithLinksPreview: Story = {
 	args: {
-		image,
-		email: 'ben@example.com',
-		name: 'Ben Wright',
 		links,
 		showLinksPreview: true,
 	},
