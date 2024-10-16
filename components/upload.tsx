@@ -1,6 +1,5 @@
 'use client'
 import { cn } from '@/lib/utils'
-import { Label } from './ui/label'
 import Image from 'next/image'
 import { useCallback, useEffect, useState } from 'react'
 import IconImage from './icons/icon-image'
