@@ -129,8 +129,6 @@ export async function fetchUserData(id = ''): Promise<{
 		platform: link.platform,
 		url: link.url,
 	}))
-	console.log('links', links)
-	console.log('profile', profile)
 
 	return { success: true, profile, links }
 }

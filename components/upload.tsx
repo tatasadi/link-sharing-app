@@ -55,7 +55,9 @@ export default function Upload({ className = '' }: { className?: string }) {
 
 	// Clean up the file previews when component unmounts or files change
 	useEffect(() => {
-		updateProfileImage(files[0])
+		if (files[0]) {
+			updateProfileImage(files[0])
+		}
 
 		return () => files.forEach(file => URL.revokeObjectURL(file.preview))
 	}, [files, updateProfileImage])

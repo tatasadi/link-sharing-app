@@ -37,7 +37,7 @@ export const register = async (state: any, data: RegisterFormType) => {
 		return { success: false, error: 'Something went wrong!' }
 	}
 	revalidatePath('/')
-	redirect('/')
+	redirect('/links')
 }
 
 export const login = async (state: any, data: LoginFormType) => {
@@ -52,7 +52,7 @@ export const login = async (state: any, data: LoginFormType) => {
 		}
 	}
 	revalidatePath('/')
-	redirect('/')
+	redirect('/links')
 }
 
 export const logout = async () => {
