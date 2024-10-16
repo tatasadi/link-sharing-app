@@ -1,6 +1,5 @@
 import { Link } from '@/app/useStore'
 import IconGithub from '@/components/icons/icon-github'
-import IconFrontendmentor from '@/components/icons/icon-frontendmentor'
 import { AiOutlineLinkedin } from 'react-icons/ai'
 import { BiLogoDevTo } from 'react-icons/bi'
 import {
@@ -13,7 +12,7 @@ import {
 	FaStackOverflow,
 } from 'react-icons/fa'
 import { PiGithubLogoFill } from 'react-icons/pi'
-import { SiCodewars, SiHashnode } from 'react-icons/si'
+import { SiFrontendmentor, SiCodewars, SiHashnode } from 'react-icons/si'
 
 export default function getSocialIcons() {
 	return [
@@ -23,7 +22,7 @@ export default function getSocialIcons() {
 		},
 		{
 			name: 'Frontend Mentor',
-			icon: <IconFrontendmentor />,
+			icon: <SiFrontendmentor />,
 		},
 		{
 			name: 'Twitter',
@@ -79,7 +78,7 @@ export function updateIconForLinkObject(link: Link) {
 		case 'Frontend Mentor':
 			return {
 				...link,
-				icon: <IconFrontendmentor />,
+				icon: <SiFrontendmentor />,
 				className: 'bg-white text-dark-gray hover:text-dark-gray border border-borders',
 			}
 		case 'Twitter':
