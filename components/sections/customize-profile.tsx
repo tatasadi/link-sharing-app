@@ -1,5 +1,5 @@
 'use client'
-import Upload from '../ui/upload'
+import Upload from '../upload'
 import { Label } from '../ui/label'
 import InputWithIcon from '../input-with-icon'
 import { Form } from '../ui/form'

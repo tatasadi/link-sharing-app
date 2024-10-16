@@ -30,6 +30,7 @@ interface StoreState {
 	updateProfile: (profile: Profile) => void
 	profileImage: ProfileImage
 	updateProfileImage: (image: File) => void
+	removeProfileImage: () => void
 	reset: () => void
 }
 
@@ -66,6 +67,10 @@ export const useStore = create<StoreState>(set => ({
 	updateProfileImage: (image: File) =>
 		set(() => ({
 			profileImage: { image },
+		})),
+	removeProfileImage: () =>
+		set(() => ({
+			profileImage: {},
 		})),
 	reset: () => set(() => initialState),
 }))

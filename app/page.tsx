@@ -1,10 +1,5 @@
 import { auth, signOut } from '@/auth'
-import Header from '@/components/header'
-import InputWithIcon from '@/components/input-with-icon'
-import Login from '@/components/sections/login'
 import { Button } from '@/components/ui/button'
-import Upload from '@/components/ui/upload'
-import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 

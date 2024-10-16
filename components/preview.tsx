@@ -21,12 +21,15 @@ export default function Preview({
 	const { firstName, lastName, email } = profile || {}
 	const name = `${firstName ?? ''} ${lastName ?? ''}`.trim()
 	const previewLinksLength = showLinksPreview ? (5 - links.length <= 0 ? 0 : 5 - links.length) : 0
-
-	const [imageSrc, setImageSrc] = useState<string | null>(null)
+	const [imageSrc, setImageSrc] = useState<string | null>(
+		profileImage?.image ? URL.createObjectURL(profileImage.image) : null,
+	)
 
 	useEffect(() => {
 		if (profileImage?.image) {
 			setImageSrc(URL.createObjectURL(profileImage.image))
+		} else {
+			setImageSrc(null)
 		}
 	}, [profileImage?.image])
 
