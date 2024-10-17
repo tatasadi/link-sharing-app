@@ -8,7 +8,7 @@ import { useDropzone, FileRejection, FileWithPath } from 'react-dropzone'
 import { useToast } from '@/hooks/use-toast'
 import { MdError } from 'react-icons/md'
 import { FaRegTrashAlt } from 'react-icons/fa'
-import { uploadFile } from '@/actions/aws'
+import { deleteFile, uploadFile } from '@/actions/aws'
 
 export default function Upload({ className = '' }: { className?: string }) {
 	const { toast } = useToast()
@@ -48,7 +48,7 @@ export default function Upload({ className = '' }: { className?: string }) {
 		accept: {
 			'image/*': [],
 		},
-		maxSize: 1024 * 1000, // 1 MB limit
+		maxSize: 1024 * 2000, // 2 MB limit
 		maxFiles: 1,
 		onDrop,
 	})
@@ -71,7 +71,7 @@ export default function Upload({ className = '' }: { className?: string }) {
 		uploadImage()
 
 		return () => files.forEach(file => URL.revokeObjectURL(file.preview))
-	}, [files, updateProfileImage])
+	}, [files, toast, updateProfileImage])
 
 	useEffect(() => {
 		if (profileImage.image) {
@@ -79,10 +79,15 @@ export default function Upload({ className = '' }: { className?: string }) {
 		}
 	}, [profileImage.image])
 
-	const handleRemoveFile = () => {
+	const handleRemoveFile = async () => {
 		setImageSrc(null)
 		setFiles([])
 		removeProfileImage()
+		const response = await deleteFile()
+		toast({
+			description: response.message,
+			variant: response.status === 'success' ? 'default' : 'destructive',
+		})
 	}
 
 	return (
