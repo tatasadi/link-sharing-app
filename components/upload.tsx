@@ -8,6 +8,7 @@ import { useDropzone, FileRejection, FileWithPath } from 'react-dropzone'
 import { useToast } from '@/hooks/use-toast'
 import { MdError } from 'react-icons/md'
 import { FaRegTrashAlt } from 'react-icons/fa'
+import { uploadFile } from '@/actions/aws'
 
 export default function Upload({ className = '' }: { className?: string }) {
 	const { toast } = useToast()
@@ -18,7 +19,7 @@ export default function Upload({ className = '' }: { className?: string }) {
 
 	// Callback for handling file drop
 	const onDrop = useCallback(
-		(acceptedFiles: FileWithPath[], rejectedFiles: FileRejection[]) => {
+		async (acceptedFiles: FileWithPath[], rejectedFiles: FileRejection[]) => {
 			// Handle accepted files
 			if (acceptedFiles?.length) {
 				setFiles(prevFiles => [
@@ -54,9 +55,20 @@ export default function Upload({ className = '' }: { className?: string }) {
 
 	// Clean up the file previews when component unmounts or files change
 	useEffect(() => {
-		if (files[0]) {
-			updateProfileImage(files[0])
+		async function uploadImage() {
+			if (files[0]) {
+				console.log(files[0])
+				updateProfileImage(files[0])
+				const formData = new FormData()
+				formData.append('file', files[0])
+				const response = await uploadFile(formData)
+				toast({
+					description: response.message,
+					variant: response.status === 'success' ? 'default' : 'destructive',
+				})
+			}
 		}
+		uploadImage()
 
 		return () => files.forEach(file => URL.revokeObjectURL(file.preview))
 	}, [files, updateProfileImage])
