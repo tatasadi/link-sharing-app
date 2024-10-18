@@ -1,6 +1,5 @@
 import Header from '@/components/header'
 import EditPreview from '@/components/sections/edit-preview'
-import UpdateUserInStore from '@/components/update-user-in-store'
 
 export default async function EditLayout({ children }: { children: React.ReactNode }) {
 	return (
@@ -8,7 +7,6 @@ export default async function EditLayout({ children }: { children: React.ReactNo
 			<Header className="lg:col-span-5" />
 			<EditPreview />
 			{children}
-			<UpdateUserInStore />
 		</main>
 	)
 }

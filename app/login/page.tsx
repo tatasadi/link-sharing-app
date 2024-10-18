@@ -1,7 +1,6 @@
 import { auth } from '@/auth'
 import Logo from '@/components/logo'
 import Login from '@/components/sections/login'
-import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 export default async function LoginPage() {

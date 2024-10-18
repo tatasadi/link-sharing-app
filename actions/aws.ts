@@ -1,11 +1,6 @@
 'use server'
 import { revalidatePath } from 'next/cache'
-import {
-	S3Client,
-	PutObjectCommand,
-	DeleteObjectCommand,
-	GetObjectCommand,
-} from '@aws-sdk/client-s3'
+import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3'
 import sharp from 'sharp'
 import { auth } from '@/auth'
 import { db } from '@/prisma/db'
