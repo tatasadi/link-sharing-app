@@ -8,6 +8,7 @@ import {
 } from '@aws-sdk/client-s3'
 import sharp from 'sharp'
 import { auth } from '@/auth'
+import { db } from '@/prisma/db'
 
 const session = await auth()
 
@@ -50,6 +51,16 @@ async function uploadFileToS3(file: Buffer) {
 	try {
 		const response = await s3Client.send(command)
 		console.log('File uploaded successfully:', response)
+
+		// Construct the image URL
+		const imageUrl = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${userId}`
+
+		// // Save the URL in the database
+		// await db.user.update({
+		// 	where: { id: userId },
+		// 	data: { imageUrl },
+		// })
+
 		return userId
 	} catch (error) {
 		throw error
