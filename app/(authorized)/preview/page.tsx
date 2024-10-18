@@ -1,7 +1,5 @@
-import Preview from '@/components/preview'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { useStore } from '../../useStore'
 import PreviewWrapper from '@/components/sections/preview-wrapper'
 
 export default function PreviewPage() {

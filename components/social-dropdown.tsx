@@ -10,7 +10,6 @@ import iconLink from '@/public/icon-link.svg'
 import Image from 'next/image'
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from './ui/form'
 import getSocialIcons from '@/lib/icon-helper'
-import { on } from 'events'
 
 export default function SocialDropdown({
 	form,

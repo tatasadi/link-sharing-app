@@ -1,6 +1,5 @@
 import { cn } from '@/lib/utils'
 import { Button } from './ui/button'
-import Image, { StaticImageData } from 'next/image'
 
 export default function ButtonWithIcon({
 	icon,

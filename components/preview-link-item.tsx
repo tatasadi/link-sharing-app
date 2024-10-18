@@ -14,6 +14,7 @@ export default function PreviewLinkItem({
 	className?: string
 	url?: string
 }) {
+	// in order to let tailwind generate the css classes for the colors
 	const colorPossibilities = [
 		'bg-github', // GitHub
 		'bg-frontendmentor', // Frontend Mentor
