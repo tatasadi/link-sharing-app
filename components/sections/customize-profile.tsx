@@ -22,9 +22,9 @@ export default function CustomizeProfile() {
 	const form = useForm<z.infer<typeof profileSchema>>({
 		resolver: zodResolver(profileSchema),
 		defaultValues: {
-			firstName: '',
-			lastName: '',
-			email: '',
+			firstName: profile.firstName ?? '',
+			lastName: profile.lastName ?? '',
+			email: profile.email ?? '',
 		},
 		mode: 'onBlur',
 	})

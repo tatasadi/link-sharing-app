@@ -4,6 +4,7 @@ import { auth } from '@/auth'
 import { linkSchema, profileSchema } from '@/lib/schema'
 import { db } from '@/prisma/db'
 import { z } from 'zod'
+import { notFound } from 'next/navigation'
 
 export async function SaveLinks({
 	links,
@@ -109,7 +110,7 @@ export async function fetchUserData(id = ''): Promise<{
 	})
 
 	if (!userProfile) {
-		return { success: false, error: 'User not found' }
+		return notFound()
 	}
 
 	// Format the data to match Zustand store structure
