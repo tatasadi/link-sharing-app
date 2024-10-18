@@ -55,7 +55,6 @@ export default function Upload({ className = '' }: { className?: string }) {
 	useEffect(() => {
 		async function uploadImage() {
 			if (files[0]) {
-				console.log(files[0])
 				const formData = new FormData()
 				formData.append('file', files[0])
 				const response = await uploadFile(formData)

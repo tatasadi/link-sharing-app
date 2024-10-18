@@ -66,7 +66,7 @@ export async function uploadFile(formData: FormData) {
 	const file = formData.get('file') as File
 	try {
 		if (file.size === 0) {
-			return { status: 'error', message: 'Please select a file.' }
+			return { status: 'error', message: 'Please select an image.' }
 		}
 
 		const buffer = Buffer.from(await file.arrayBuffer())

@@ -19,7 +19,6 @@ export default function Preview({
 	const { firstName, lastName, email } = profile || {}
 	const name = `${firstName ?? ''} ${lastName ?? ''}`.trim()
 	const previewLinksLength = showLinksPreview ? (5 - links.length <= 0 ? 0 : 5 - links.length) : 0
-	const imageSrc = profileImageUrl
 
 	return (
 		<div>
@@ -28,12 +27,12 @@ export default function Preview({
 					className={cn(
 						'rounded-full bg-very-light-gray size-24',
 						size === 'lg' ? 'size-[6.5rem]' : '',
-						showLinksPreview ? '' : 'size-0',
+						!showLinksPreview && !profileImageUrl ? 'size-0' : '',
 					)}
 				>
-					{imageSrc && (
+					{profileImageUrl && (
 						<Image
-							src={imageSrc}
+							src={profileImageUrl}
 							alt="profile image"
 							width={80}
 							height={80}
