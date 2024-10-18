@@ -12,9 +12,7 @@ import { deleteFile, uploadFile } from '@/actions/aws'
 
 export default function Upload({ className = '' }: { className?: string }) {
 	const { toast } = useToast()
-
-	const { profileImage, updateProfileImage, removeProfileImage } = useStore()
-	const [imageSrc, setImageSrc] = useState<string | null>(null)
+	const { profileImageUrl: imageSrc, updateProfileImageUrl } = useStore()
 	const [files, setFiles] = useState<(FileWithPath & { preview: string })[]>([])
 
 	// Callback for handling file drop
@@ -58,10 +56,12 @@ export default function Upload({ className = '' }: { className?: string }) {
 		async function uploadImage() {
 			if (files[0]) {
 				console.log(files[0])
-				updateProfileImage(files[0])
 				const formData = new FormData()
 				formData.append('file', files[0])
 				const response = await uploadFile(formData)
+				if (response.status === 'success') {
+					updateProfileImageUrl(response.profileImageUrl ?? '')
+				}
 				toast({
 					description: response.message,
 					variant: response.status === 'success' ? 'default' : 'destructive',
@@ -71,18 +71,11 @@ export default function Upload({ className = '' }: { className?: string }) {
 		uploadImage()
 
 		return () => files.forEach(file => URL.revokeObjectURL(file.preview))
-	}, [files, toast, updateProfileImage])
-
-	useEffect(() => {
-		if (profileImage.image) {
-			setImageSrc(URL.createObjectURL(profileImage.image))
-		}
-	}, [profileImage.image])
+	}, [files, toast, updateProfileImageUrl])
 
 	const handleRemoveFile = async () => {
-		setImageSrc(null)
+		updateProfileImageUrl('')
 		setFiles([])
-		removeProfileImage()
 		const response = await deleteFile()
 		toast({
 			description: response.message,

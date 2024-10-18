@@ -6,7 +6,7 @@ import { updateIconForLinkObject } from '@/lib/icon-helper'
 import { useEffect } from 'react'
 
 export default function UpdateUserInStore() {
-	const { updateProfile, updateLinks } = useStore()
+	const { updateProfile, updateLinks, updateProfileImageUrl } = useStore()
 
 	useEffect(() => {
 		async function fetchData() {
@@ -19,10 +19,13 @@ export default function UpdateUserInStore() {
 					const linksWithIcons = result.links.map(link => updateIconForLinkObject(link))
 					updateLinks(linksWithIcons)
 				}
+				if (result.profileImageUrl) {
+					updateProfileImageUrl(result.profileImageUrl)
+				}
 			}
 		}
 
 		fetchData()
-	}, [updateLinks, updateProfile])
+	}, [updateLinks, updateProfile, updateProfileImageUrl])
 	return null
 }

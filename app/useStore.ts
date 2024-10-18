@@ -16,10 +16,6 @@ export interface Profile {
 	email?: string
 }
 
-export interface ProfileImage {
-	image?: File
-}
-
 interface StoreState {
 	links: Link[]
 	addLink: () => void
@@ -27,17 +23,16 @@ interface StoreState {
 	updateLink: (id: string, platform: string, url: string) => void
 	updateLinks: (links: Link[]) => void
 	profile: Profile
+	profileImageUrl?: string
 	updateProfile: (profile: Profile) => void
-	profileImage: ProfileImage
-	updateProfileImage: (image: File) => void
-	removeProfileImage: () => void
+	updateProfileImageUrl: (profileImageUrl: string) => void
 	reset: () => void
 }
 
 const initialState = {
 	links: [],
 	profile: { firstName: '', lastName: '', email: '' },
-	profileImage: {},
+	profileImageUrl: '',
 }
 
 export const useStore = create<StoreState>(set => ({
@@ -64,13 +59,9 @@ export const useStore = create<StoreState>(set => ({
 		set(() => ({
 			profile,
 		})),
-	updateProfileImage: (image: File) =>
+	updateProfileImageUrl: (profileImageUrl: string) =>
 		set(() => ({
-			profileImage: { image },
-		})),
-	removeProfileImage: () =>
-		set(() => ({
-			profileImage: {},
+			profileImageUrl,
 		})),
 	reset: () => set(() => initialState),
 }))

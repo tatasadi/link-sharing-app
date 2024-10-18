@@ -53,15 +53,15 @@ async function uploadFileToS3(file: Buffer) {
 		console.log('File uploaded successfully:', response)
 
 		// Construct the image URL
-		const imageUrl = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${userId}`
+		const profileImageUrl = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${userId}`
 
-		// // Save the URL in the database
-		// await db.user.update({
-		// 	where: { id: userId },
-		// 	data: { imageUrl },
-		// })
+		// Save the URL in the database
+		await db.user.update({
+			where: { id: userId },
+			data: { profileImageUrl },
+		})
 
-		return userId
+		return profileImageUrl
 	} catch (error) {
 		throw error
 	}
@@ -75,10 +75,10 @@ export async function uploadFile(formData: FormData) {
 		}
 
 		const buffer = Buffer.from(await file.arrayBuffer())
-		await uploadFileToS3(buffer)
+		const profileImageUrl = await uploadFileToS3(buffer)
 
 		revalidatePath('/')
-		return { status: 'success', message: 'File has been upload.' }
+		return { status: 'success', message: 'File has been upload.', profileImageUrl }
 	} catch (error) {
 		console.error(error)
 		return { status: 'error', message: 'Failed to upload file.' }
@@ -95,6 +95,13 @@ export async function deleteFile() {
 	try {
 		const response = await s3Client.send(command)
 		console.log('File deleted successfully:', response)
+
+		// Remove the image URL from the database
+		await db.user.update({
+			where: { id: userId },
+			data: { profileImageUrl: null },
+		})
+
 		return { status: 'success', message: 'File deleted successfully.' }
 	} catch (error) {
 		console.error('Error deleting file:', error)

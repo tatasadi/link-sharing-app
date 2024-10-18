@@ -1,5 +1,5 @@
 'use server'
-import { Link, Profile, ProfileImage } from '@/app/useStore'
+import { Link, Profile } from '@/app/useStore'
 import { auth } from '@/auth'
 import { linkSchema, profileSchema } from '@/lib/schema'
 import { db } from '@/prisma/db'
@@ -45,13 +45,7 @@ export async function SaveLinks({
 	return { success: true }
 }
 
-export async function SaveProfile({
-	profile,
-	profileImage,
-}: {
-	profile: Profile
-	profileImage?: ProfileImage
-}) {
+export async function SaveProfile({ profile }: { profile: Profile }) {
 	const profileValidation = profileSchema.safeParse(profile)
 
 	if (!profileValidation.success) {
@@ -91,6 +85,7 @@ export async function fetchUserData(id = ''): Promise<{
 	profile?: Profile
 	links?: Link[]
 	error?: string
+	profileImageUrl?: string
 }> {
 	let userId = id
 
@@ -130,5 +125,5 @@ export async function fetchUserData(id = ''): Promise<{
 		url: link.url,
 	}))
 
-	return { success: true, profile, links }
+	return { success: true, profile, links, profileImageUrl: userProfile.profileImageUrl ?? '' }
 }

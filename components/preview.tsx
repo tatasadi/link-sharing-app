@@ -1,37 +1,25 @@
-'use client'
 import Image from 'next/image'
 import PreviewLinkItem from './preview-link-item'
 import { cn } from '@/lib/utils'
-import { Link, Profile, ProfileImage } from '@/app/useStore'
-import { useEffect, useState } from 'react'
+import { Link, Profile } from '@/app/useStore'
 
 export default function Preview({
 	size = 'md',
 	showLinksPreview = false,
 	links = [],
 	profile,
-	profileImage,
+	profileImageUrl,
 }: {
 	size?: 'md' | 'lg'
 	showLinksPreview?: boolean
 	links?: Link[]
 	profile?: Profile
-	profileImage?: ProfileImage
+	profileImageUrl?: string
 }) {
 	const { firstName, lastName, email } = profile || {}
 	const name = `${firstName ?? ''} ${lastName ?? ''}`.trim()
 	const previewLinksLength = showLinksPreview ? (5 - links.length <= 0 ? 0 : 5 - links.length) : 0
-	const [imageSrc, setImageSrc] = useState<string | null>(
-		profileImage?.image ? URL.createObjectURL(profileImage.image) : null,
-	)
-
-	useEffect(() => {
-		if (profileImage?.image) {
-			setImageSrc(URL.createObjectURL(profileImage.image))
-		} else {
-			setImageSrc(null)
-		}
-	}, [profileImage?.image])
+	const imageSrc = profileImageUrl
 
 	return (
 		<div>
