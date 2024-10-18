@@ -8,7 +8,8 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
 	title: 'Link Sharing App',
-	description: 'A Frontend Mentor challenge',
+	description:
+		'A full-stack link-sharing app built with React, TypeScript, Next.js, and Tailwind CSS. Users can manage personalized profile links, upload profile images to Amazon S3, and authenticate securely using NextAuth.',
 }
 
 export default async function RootLayout({
