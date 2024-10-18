@@ -17,7 +17,7 @@ export default function ShareLink({ userId }: { userId?: string }) {
 			toast({
 				description: (
 					<span className="flex items-center gap-4">
-						<FaLink className="text-2xl" />
+						<FaLink className="text-xl text-gray" />
 						<span>The link has been copied to your clipboard!</span>
 					</span>
 				),

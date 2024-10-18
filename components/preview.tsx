@@ -28,6 +28,7 @@ export default function Preview({
 					className={cn(
 						'rounded-full bg-very-light-gray size-24',
 						size === 'lg' ? 'size-[6.5rem]' : '',
+						showLinksPreview ? '' : 'size-0',
 					)}
 				>
 					{imageSrc && (
@@ -50,7 +51,7 @@ export default function Preview({
 					</h2>
 					<p
 						className={`text-gray min-w-[4.5rem] min-h-2 ${
-							email ? '' : 'bg-very-light-gray rounded-full'
+							email ? '' : showLinksPreview ? 'bg-very-light-gray rounded-full' : ''
 						} ${size === 'lg' ? '' : 'text-sm'}`}
 					>
 						{email}
