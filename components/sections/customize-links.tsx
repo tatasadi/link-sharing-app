@@ -6,7 +6,7 @@ import EditLink from '../edit-link'
 import { z } from 'zod'
 import { useForm, useWatch } from 'react-hook-form'
 import { Form } from '../ui/form'
-import { useStore } from '@/app/useStore'
+import { Link, useStore } from '@/app/useStore'
 import { useEffect, useRef, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { linkSchema } from '@/lib/schema'
@@ -25,7 +25,6 @@ export default function CustomizeLinks() {
 	const { toast } = useToast()
 	const { links, addLink, updateLink } = useStore()
 	const [isPending, setIsPending] = useState(false)
-	const linksWithoutIcon = links.map(({ id, platform, url }) => ({ id, platform, url }))
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -61,7 +60,7 @@ export default function CustomizeLinks() {
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		setIsPending(true)
 		const { success, error } = await SaveLinks({
-			links: linksWithoutIcon,
+			links: links.map(link => ({ id: link.id, platform: link.platform, url: link.url })),
 		})
 		setIsPending(false)
 		if (!success) {

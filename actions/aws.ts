@@ -31,13 +31,15 @@ const s3Client = new S3Client({
 
 async function uploadFileToS3(file: Buffer) {
 	const fileBuffer = await sharp(file)
-		.jpeg({ quality: 90 })
-		.resize(400, 400, { fit: 'cover', position: 'center' })
+		.jpeg()
+		.resize(1024, 1024, { fit: 'cover', position: 'center' })
 		.toBuffer()
+
+	const timeStamp = new Date().getTime()
 
 	const params = {
 		Bucket: process.env.AWS_BUCKET_NAME,
-		Key: `${userId}`,
+		Key: `${userId}${timeStamp}`,
 		Body: fileBuffer,
 		ContentType: 'image/jpg',
 	}
@@ -48,7 +50,7 @@ async function uploadFileToS3(file: Buffer) {
 		console.log('File uploaded successfully:', response)
 
 		// Construct the image URL
-		const profileImageUrl = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${userId}`
+		const profileImageUrl = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${userId}${timeStamp}`
 
 		// Save the URL in the database
 		await db.user.update({
@@ -80,12 +82,15 @@ export async function uploadFile(formData: FormData) {
 	}
 }
 
-export async function deleteFile() {
+export async function deleteFile(url: string) {
+	// extract key from url
+	const key = url.split('/').pop()
 	const params = {
 		Bucket: process.env.AWS_BUCKET_NAME,
-		Key: `${userId}`, // Use the same key that was used for upload
+		Key: `${key}`,
 	}
 
+	console.log('Deleting file:', params)
 	const command = new DeleteObjectCommand(params)
 	try {
 		const response = await s3Client.send(command)

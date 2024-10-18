@@ -22,11 +22,11 @@ export default function Preview({
 
 	return (
 		<div>
-			<div className="grid place-items-center gap-6">
+			<div className={cn('grid place-items-center', size === 'lg' ? 'gap-10' : 'gap-4')}>
 				<div
 					className={cn(
 						'rounded-full bg-very-light-gray size-24',
-						size === 'lg' ? 'size-[6.5rem]' : '',
+						size === 'lg' ? 'size-[8rem]' : '',
 						!showLinksPreview && !profileImageUrl ? 'size-0' : '',
 					)}
 				>
@@ -34,8 +34,8 @@ export default function Preview({
 						<Image
 							src={profileImageUrl}
 							alt="profile image"
-							width={80}
-							height={80}
+							width={500}
+							height={500}
 							className="rounded-full w-full h-full object-cover object-center"
 						/>
 					)}

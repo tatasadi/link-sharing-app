@@ -13,6 +13,7 @@ export async function SaveLinks({
 }): Promise<{ success: boolean; error?: string }> {
 	const linksValidation = z.array(linkSchema).safeParse(links)
 
+	console.log('links', links, linksValidation, linksValidation.error?.message)
 	if (!linksValidation.success) {
 		return { success: false, error: 'Invalid links data' }
 	}
@@ -106,7 +107,13 @@ export async function fetchUserData(id = ''): Promise<{
 	// Fetch profile and links from the database
 	const userProfile = await db.user.findUnique({
 		where: { id: userId },
-		include: { links: true }, // Include the links associated with the user
+		include: {
+			links: {
+				orderBy: {
+					platform: 'asc',
+				},
+			},
+		},
 	})
 
 	if (!userProfile) {

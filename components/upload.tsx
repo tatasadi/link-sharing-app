@@ -20,6 +20,13 @@ export default function Upload({ className = '' }: { className?: string }) {
 		async (acceptedFiles: FileWithPath[], rejectedFiles: FileRejection[]) => {
 			// Handle accepted files
 			if (acceptedFiles?.length) {
+				// remove file if already present
+				console.log('imageSrc', imageSrc)
+				if (imageSrc) {
+					console.log('deleting last image')
+					const response = await deleteFile(imageSrc)
+					console.log('response', response)
+				}
 				setFiles(prevFiles => [
 					...acceptedFiles.map(file => Object.assign(file, { preview: URL.createObjectURL(file) })),
 				])
@@ -38,7 +45,7 @@ export default function Upload({ className = '' }: { className?: string }) {
 				})
 			}
 		},
-		[toast],
+		[imageSrc, toast],
 	)
 
 	// Setup the dropzone
@@ -73,9 +80,10 @@ export default function Upload({ className = '' }: { className?: string }) {
 	}, [files, toast, updateProfileImageUrl])
 
 	const handleRemoveFile = async () => {
+		if (!imageSrc) return
 		updateProfileImageUrl('')
 		setFiles([])
-		const response = await deleteFile()
+		const response = await deleteFile(imageSrc)
 		toast({
 			description: response.message,
 			variant: response.status === 'success' ? 'default' : 'destructive',
@@ -98,8 +106,8 @@ export default function Upload({ className = '' }: { className?: string }) {
 						src={imageSrc}
 						alt="uploaded image"
 						className="absolute inset-0 object-cover object-center z-0 h-full w-full opacity-75"
-						width={48}
-						height={48}
+						width={400}
+						height={400}
 					/>
 				)}
 				<span
