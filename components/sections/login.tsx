@@ -14,9 +14,7 @@ import { useFormState, useFormStatus } from 'react-dom'
 
 const formSchema = z.object({
 	email: z.string().min(1, { message: 'Can’t be empty' }).email({ message: 'Invalid email' }),
-	password: z.string().min(1, { message: 'Please check again' }).min(8, {
-		message: 'Password is too short',
-	}),
+	password: z.string().min(1, { message: 'Please check again' }),
 })
 
 export type LoginFormType = z.infer<typeof formSchema>
