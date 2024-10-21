@@ -9,7 +9,7 @@ import { notFound } from 'next/navigation'
 export async function SaveLinks({
 	links,
 }: {
-	links: { id: string; platform: string; url: string }[]
+	links: Link[]
 }): Promise<{ success: boolean; error?: string }> {
 	const linksValidation = z.array(linkSchema).safeParse(links)
 
@@ -40,6 +40,7 @@ export async function SaveLinks({
 				userId,
 				platform: link.platform,
 				url: link.url,
+				order: link.order,
 			},
 		})
 	})
@@ -110,7 +111,7 @@ export async function fetchUserData(id = ''): Promise<{
 		include: {
 			links: {
 				orderBy: {
-					platform: 'asc',
+					order: 'asc',
 				},
 			},
 		},
@@ -131,6 +132,7 @@ export async function fetchUserData(id = ''): Promise<{
 		id: link.id,
 		platform: link.platform,
 		url: link.url,
+		order: link.order ?? 0,
 	}))
 
 	return { success: true, profile, links, profileImageUrl: userProfile.profileImageUrl ?? '' }

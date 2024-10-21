@@ -8,6 +8,7 @@ export interface Link {
 	url: string
 	icon?: React.ReactNode
 	className?: string
+	order: number
 }
 
 export interface Profile {
@@ -22,6 +23,7 @@ interface StoreState {
 	removeLink: (id: string) => void
 	updateLink: (id: string, platform: string, url: string) => void
 	updateLinks: (links: Link[]) => void
+	reorderLinks: (updatedLinks: Link[]) => void
 	profile: Profile
 	profileImageUrl?: string
 	updateProfile: (profile: Profile) => void
@@ -38,13 +40,23 @@ const initialState = {
 export const useStore = create<StoreState>(set => ({
 	...initialState,
 	addLink: () =>
-		set((state: StoreState) => ({
-			links: [...state.links, { id: uuidv4(), platform: '', url: '' }],
-		})),
+		set((state: StoreState) => {
+			const newLink = { id: uuidv4(), platform: '', url: '', order: state.links.length }
+			return {
+				links: [...state.links, newLink],
+			}
+		}),
 	removeLink: (id: string) =>
-		set((state: StoreState) => ({
-			links: state.links.filter(link => link.id !== id),
-		})),
+		set((state: StoreState) => {
+			const filteredLinks = state.links.filter(link => link.id !== id)
+			const reorderedLinks = filteredLinks.map((link, index) => ({
+				...link,
+				order: index, // Reset order after removal
+			}))
+			return {
+				links: reorderedLinks,
+			}
+		}),
 	updateLink: (id: string, platform: string, url: string) =>
 		set((state: StoreState) => ({
 			links: state.links.map(link =>
@@ -54,6 +66,10 @@ export const useStore = create<StoreState>(set => ({
 	updateLinks: (links: Link[]) =>
 		set(() => ({
 			links,
+		})),
+	reorderLinks: (updatedLinks: Link[]) =>
+		set(() => ({
+			links: updatedLinks.map((link, index) => ({ ...link, order: index })),
 		})),
 	updateProfile: (profile: Profile) =>
 		set(() => ({

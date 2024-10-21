@@ -14,6 +14,7 @@ import { SaveLinks } from '@/actions/data'
 import { useToast } from '@/hooks/use-toast'
 import { MdError } from 'react-icons/md'
 import { PiFloppyDiskBackFill } from 'react-icons/pi'
+import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
 
 const formSchema = z.object({
 	links: z.array(linkSchema),
@@ -23,7 +24,7 @@ export type LinksFormType = z.infer<typeof formSchema>
 
 export default function CustomizeLinks() {
 	const { toast } = useToast()
-	const { links, addLink, updateLink } = useStore()
+	const { links, addLink, updateLink, reorderLinks } = useStore()
 	const [isPending, setIsPending] = useState(false)
 
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -60,7 +61,12 @@ export default function CustomizeLinks() {
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		setIsPending(true)
 		const { success, error } = await SaveLinks({
-			links: links.map(link => ({ id: link.id, platform: link.platform, url: link.url })),
+			links: links.map(link => ({
+				id: link.id,
+				platform: link.platform,
+				url: link.url,
+				order: link.order,
+			})),
 		})
 		setIsPending(false)
 		if (!success) {
@@ -83,6 +89,17 @@ export default function CustomizeLinks() {
 				),
 			})
 		}
+	}
+
+	const handleOnDragEnd = (result: any) => {
+		const { source, destination } = result
+		if (!destination) return
+
+		const updatedLinks = [...links]
+		const [reorderedLink] = updatedLinks.splice(source.index, 1)
+		updatedLinks.splice(destination.index, 0, reorderedLink)
+
+		reorderLinks(updatedLinks)
 	}
 
 	return (
@@ -109,13 +126,32 @@ export default function CustomizeLinks() {
 							</p>
 						</div>
 					) : (
-						<div className="flex flex-col gap-6">
-							{linksInState.map((link, index) => (
-								<div key={link.id}>
-									<EditLink index={index} link={link} form={form} />
-								</div>
-							))}
-						</div>
+						<DragDropContext onDragEnd={handleOnDragEnd}>
+							<Droppable droppableId="links">
+								{provided => (
+									<div
+										className="flex flex-col gap-6"
+										{...provided.droppableProps}
+										ref={provided.innerRef}
+									>
+										{linksInState.map((link, index) => (
+											<Draggable key={link.id} draggableId={link.id} index={index}>
+												{provided => (
+													<div
+														ref={provided.innerRef}
+														{...provided.draggableProps}
+														{...provided.dragHandleProps}
+													>
+														<EditLink index={index} link={link} form={form} />
+													</div>
+												)}
+											</Draggable>
+										))}
+										{provided.placeholder}
+									</div>
+								)}
+							</Droppable>
+						</DragDropContext>
 					)}
 				</section>
 				<div className="border-t-[0.0625rem] p-4 flex justify-end sm:px-10 sm:py-6">

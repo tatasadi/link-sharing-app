@@ -24,4 +24,5 @@ model Link {
   url      String
   userId   String
   user     User   @relation(fields: [userId], references: [id], name: "UserLinks")
+  order    Int
 }

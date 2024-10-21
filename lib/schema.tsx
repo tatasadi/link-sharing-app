@@ -7,6 +7,7 @@ export const linkSchema = z
 		url: z.string().url('Must be a valid URL'),
 		icon: z.any().optional(),
 		className: z.string().optional(),
+		order: z.number(),
 	})
 	.refine(
 		link => {
