@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Providers from '@/app/providers'
 import { Toaster } from '@/components/ui/toaster'
+import { Analytics } from '@vercel/analytics/react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,6 +24,7 @@ export default async function RootLayout({
 				<body className={`${inter.className} bg-light-gray`}>
 					{children}
 					<Toaster />
+					<Analytics />
 				</body>
 			</Providers>
 		</html>
