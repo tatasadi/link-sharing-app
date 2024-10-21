@@ -28,22 +28,19 @@ export async function SaveLinks({
 		return { success: false, error: 'User is not authenticated' }
 	}
 
-	await db.link.deleteMany({
-		where: {
-			userId,
-		},
-	})
-
-	links.forEach(async link => {
-		await db.link.create({
-			data: {
+	await db.$transaction([
+		db.link.deleteMany({
+			where: { userId },
+		}),
+		db.link.createMany({
+			data: links.map(link => ({
 				userId,
 				platform: link.platform,
 				url: link.url,
 				order: link.order,
-			},
-		})
-	})
+			})),
+		}),
+	])
 
 	return { success: true }
 }
