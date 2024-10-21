@@ -11,6 +11,7 @@ const links = [
 		icon: <IconGithub />,
 		text: 'GitHub',
 		className: 'bg-github',
+		order: 0,
 	},
 	{
 		id: '2',
@@ -19,6 +20,7 @@ const links = [
 		icon: <IconFrontendmentor />,
 		text: 'Frontendmentor',
 		className: 'bg-white text-dark-gray hover:text-dark-gray border border-borders',
+		order: 1,
 	},
 ]
 
