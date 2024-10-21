@@ -2,7 +2,8 @@
 
 A full-stack web application built with Next.js, React, and TypeScript for managing and sharing
 personalized profile links. Users can create, update, and delete links, customize their profiles,
-and view real-time profile previews.
+and view real-time profile previews. It also supports reordering links through a drag-and-drop
+interface, enabling full customization of how profiles are displayed.
 
 ## Table of Contents
 
@@ -21,7 +22,7 @@ and view real-time profile previews.
 
 ## Features
 
-- **Link Management**: Add, edit, and delete links.
+- **Link Management**: Add, edit, delete, and reorder links via drag-and-drop functionality.
 - **Profile Customization**: Update profile details, including profile picture, first name, last
   name, and email.
 - **Real-Time Preview**: See live changes to your profile before saving.
@@ -32,11 +33,13 @@ and view real-time profile previews.
 - **User Authentication**: Secure authentication system using NextAuth.
 - **Image Upload**: Upload profile pictures securely to Amazon S3.
 - **Clipboard Integration**: Easily copy your profile URL with one click.
+- **Public Profile Sharing**: Share your profile link with others, allowing anyone to view your
+  social links and profile information.
 - **Responsive Design**: Optimized for all screen sizes with a clean mobile-first layout.
 
 ## Tech Stack
 
-- **Frontend**: React, TypeScript, Next.js, Tailwind CSS
+- **Frontend**: React, TypeScript, Next.js, Tailwind CSS, Shadcn
 - **Forms**: React Hook Form, Zod (for validation)
 - **State Management**: Zustand
 - **Backend**: Prisma ORM, PostgreSQL
@@ -98,7 +101,9 @@ supports Next.js.
 
 ## Screenshots
 
-![](./preview-1.png) ![](./preview-2.png) ![](./preview-3.png)
+![](./preview-1.png)  
+![](./preview-2.png)  
+![](./preview-3.png)
 
 ## Links
 
@@ -125,6 +130,7 @@ supports Next.js.
 ![](https://img.shields.io/badge/Amazon_S3-fff?style=for-the-badge&logo=amazon-s3&logoColor=fff&color=569a31)
 ![](https://img.shields.io/badge/Prisma-fff?style=for-the-badge&logo=prisma&logoColor=fff&color=0c344b)
 ![](https://img.shields.io/badge/PostgreSQL-fff?style=for-the-badge&logo=postgresql&logoColor=fff&color=336791)
+![](https://img.shields.io/badge/Shadcn-fff?style=for-the-badge&logo=shadcn&logoColor=fff&color=000)
 
 ### Code Quality with
 
