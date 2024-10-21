@@ -91,7 +91,7 @@ export default function Upload({ className = '' }: { className?: string }) {
 	}
 
 	return (
-		<div className={cn('relative grid sm:grid-cols-[1fr_auto] sm:items-center gap-6', className)}>
+		<div className={cn('relative grid sm:grid-cols-[auto,1fr] sm:items-center gap-6', className)}>
 			<div
 				{...getRootProps({
 					className: cn(
@@ -133,7 +133,7 @@ export default function Upload({ className = '' }: { className?: string }) {
 					<FaRegTrashAlt className="h-5 w-5 text-red-500" />
 				</button>
 			)}
-			<p className="text-xs text-gray">Image must be below 1024x1024px. Use PNG or JPG format.</p>
+			<p className="text-xs text-gray">Image must be below 2MB. Use PNG or JPG format.</p>
 		</div>
 	)
 }
