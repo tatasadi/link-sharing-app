@@ -21,11 +21,8 @@ export default function Upload({ className = '' }: { className?: string }) {
 			// Handle accepted files
 			if (acceptedFiles?.length) {
 				// remove file if already present
-				console.log('imageSrc', imageSrc)
 				if (imageSrc) {
-					console.log('deleting last image')
 					const response = await deleteFile(imageSrc)
-					console.log('response', response)
 				}
 				setFiles(prevFiles => [
 					...acceptedFiles.map(file => Object.assign(file, { preview: URL.createObjectURL(file) })),
@@ -53,7 +50,7 @@ export default function Upload({ className = '' }: { className?: string }) {
 		accept: {
 			'image/*': [],
 		},
-		maxSize: 1024 * 2000, // 2 MB limit
+		maxSize: 1024 * 5000, // 5 MB limit
 		maxFiles: 1,
 		onDrop,
 	})
@@ -133,7 +130,7 @@ export default function Upload({ className = '' }: { className?: string }) {
 					<FaRegTrashAlt className="h-5 w-5 text-red-500" />
 				</button>
 			)}
-			<p className="text-xs text-gray">Image must be below 2MB. Use PNG or JPG format.</p>
+			<p className="text-xs text-gray">Image must be below 5MB. Use PNG or JPG format.</p>
 		</div>
 	)
 }

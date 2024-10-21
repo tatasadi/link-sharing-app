@@ -47,7 +47,6 @@ async function uploadFileToS3(file: Buffer) {
 	const command = new PutObjectCommand(params)
 	try {
 		const response = await s3Client.send(command)
-		console.log('File uploaded successfully:', response)
 
 		// Construct the image URL
 		const profileImageUrl = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${userId}${timeStamp}`
@@ -90,11 +89,9 @@ export async function deleteFile(url: string) {
 		Key: `${key}`,
 	}
 
-	console.log('Deleting file:', params)
 	const command = new DeleteObjectCommand(params)
 	try {
 		const response = await s3Client.send(command)
-		console.log('File deleted successfully:', response)
 
 		// Remove the image URL from the database
 		await db.user.update({

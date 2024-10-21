@@ -13,7 +13,6 @@ export async function SaveLinks({
 }): Promise<{ success: boolean; error?: string }> {
 	const linksValidation = z.array(linkSchema).safeParse(links)
 
-	console.log('links', links, linksValidation, linksValidation.error?.message)
 	if (!linksValidation.success) {
 		return { success: false, error: 'Invalid links data' }
 	}
