@@ -39,7 +39,13 @@ export default function SocialDropdown({
 								<SelectValue
 									placeholder={
 										<span className="flex gap-1">
-											<Image src={iconLink} alt="icon link" className="mr-3" />
+											<Image
+												src={iconLink}
+												alt="icon link"
+												className="mr-3"
+												width={16}
+												height={16}
+											/>
 											--- Select a platform ---
 										</span>
 									}

@@ -43,8 +43,8 @@ const InputWithIcon: React.FC<InputWithIconProps> = ({
 								src={icon}
 								className="z-10 ml-4 self-start mt-[0.8rem] md:self-center md:mt-0"
 								alt={iconAlt}
-								width={48}
-								height={48}
+								width={16}
+								height={16}
 							/>
 						)}
 						<Input
