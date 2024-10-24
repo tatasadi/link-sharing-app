@@ -32,13 +32,19 @@ const InputWithIcon: React.FC<InputWithIconProps> = ({
 			name={name}
 			render={({ field }) => (
 				<FormItem className={className}>
-					{label && <FormLabel className="text-xs">{label}</FormLabel>}
+					{label && (
+						<FormLabel className="text-xs" htmlFor={name}>
+							{label}
+						</FormLabel>
+					)}
 					<div className="grid items-center *:col-start-1 *:row-start-1 mt-1">
 						{icon && (
 							<Image
 								src={icon}
 								className="z-10 ml-4 self-start mt-[0.8rem] md:self-center md:mt-0"
 								alt={iconAlt}
+								width={48}
+								height={48}
 							/>
 						)}
 						<Input
@@ -48,6 +54,7 @@ const InputWithIcon: React.FC<InputWithIconProps> = ({
 								error ? 'text-red border-red' : '',
 								inputClassName,
 							)}
+							id={name}
 							{...field}
 							{...props}
 						/>
