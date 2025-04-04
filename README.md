@@ -109,7 +109,6 @@ supports Next.js.
 
 - Solution URL:
   [https://github.com/tatasadi/link-sharing-app](https://github.com/tatasadi/link-sharing-app)
-- Live Site URL: [https://link-sharing-app-ta.vercel.app](https://link-sharing-app-ta.vercel.app)
 
 ## My Process
 
