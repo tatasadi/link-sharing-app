@@ -22,7 +22,7 @@ stages:
           - task: Docker@2
             displayName: 'Build and push image'
             inputs:
-              containerRegistry: '$(acrName)'
+              containerRegistry: 'AzureContainerRegistryConnection'
               repository: '$(acrName).azurecr.io/$(imageName)'
               command: 'buildAndPush'
               Dockerfile: '**/Dockerfile'
@@ -40,7 +40,7 @@ stages:
           - task: AzureCLI@2
             displayName: 'Update Container App Image'
             inputs:
-              azureSubscription: '$(ServiceConnectionName)'
+              azureSubscription: 'AzureServiceConnection'
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
