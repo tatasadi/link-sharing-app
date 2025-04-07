@@ -6,6 +6,7 @@ pool:
 
 variables:
   - group: AppDeploymentSettings
+  - group: LinkSharingApp
   - name: imageName
     value: 'link-sharing-app'
   - name: containerAppName
@@ -47,4 +48,5 @@ stages:
                 az containerapp update \
                   --name $(containerAppName) \
                   --resource-group $(resourceGroup) \
-                  --image $(acrName).azurecr.io/$(imageName):latest
+                  --image $(acrName).azurecr.io/$(imageName):latest \
+                  --env-vars DATABASE_URL=$(DATABASE_URL) AUTH_SECRET=$(AUTH_SECRET) AWS_ACCESS_KEY_ID=$(AWS_ACCESS_KEY_ID) AWS_BUCKET_NAME=$(AWS_BUCKET_NAME) AWS_REGION=$(AWS_REGION) AWS_SECRET_ACCESS_KEY=$(AWS_SECRET_ACCESS_KEY)

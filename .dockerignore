@@ -1,0 +1,21 @@
+# Exclude node_modules (they will be installed in the image)
+node_modules
+
+# Exclude the Next.js build output (if you build it inside the container)
+.next
+out
+
+# Exclude version control directories and files
+.git
+.gitignore
+
+# Exclude local environment files (if you’re managing secrets differently)
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env
+
+# Exclude log files and temp files
+*.log
+tmp
