@@ -1,6 +1,7 @@
 name: CI/CD
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -52,4 +53,4 @@ jobs:
 
       - name: Update Container App Image
         run: |
-          az containerapp update --name ${{ env.containerAppName }} --resource-group ${{ secrets.RESOURCE_GROUP }} --image ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.imageName }}:latest --set-env-vars DATABASE_URL="${{ secrets.DATABASE_URL }}" AUTH_SECRET="${{ secrets.AUTH_SECRET }}" AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID }}" AWS_BUCKET_NAME="${{ secrets.AWS_BUCKET_NAME }}" AWS_REGION="${{ secrets.AWS_REGION }}" AWS_SECRET_ACCESS_KEY="${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+          az containerapp update --name ${{ env.containerAppName }} --resource-group ${{ secrets.RESOURCE_GROUP }} --image ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.imageName }}:latest --set-env-vars DATABASE_URL="${{ secrets.DATABASE_URL }}" AUTH_SECRET="${{ secrets.AUTH_SECRET }}" AZURE_STORAGE_CONNECTION_STRING="${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" AZURE_STORAGE_CONTAINER_NAME="${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}" AZURE_STORAGE_NAME="${{ secrets.AZURE_STORAGE_NAME }}"

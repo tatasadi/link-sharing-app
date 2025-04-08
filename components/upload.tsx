@@ -8,54 +8,45 @@ import { useDropzone, FileRejection, FileWithPath } from 'react-dropzone'
 import { useToast } from '@/hooks/use-toast'
 import { MdError } from 'react-icons/md'
 import { FaRegTrashAlt } from 'react-icons/fa'
-import { deleteFile, uploadFile } from '@/actions/aws'
+import { deleteFile, uploadFile } from '@/actions/upload-file' // Updated import
 
 export default function Upload({ className = '' }: { className?: string }) {
 	const { toast } = useToast()
 	const { profileImageUrl: imageSrc, updateProfileImageUrl } = useStore()
 	const [files, setFiles] = useState<(FileWithPath & { preview: string })[]>([])
 
-	// Callback for handling file drop
 	const onDrop = useCallback(
 		async (acceptedFiles: FileWithPath[], rejectedFiles: FileRejection[]) => {
-			// Handle accepted files
 			if (acceptedFiles?.length) {
-				// remove file if already present
 				if (imageSrc) {
-					const response = await deleteFile(imageSrc)
+					await deleteFile(imageSrc)
 				}
-				setFiles(prevFiles => [
+				setFiles(prev => [
 					...acceptedFiles.map(file => Object.assign(file, { preview: URL.createObjectURL(file) })),
 				])
 			}
-
-			// Handle rejected files
 			if (rejectedFiles?.length) {
 				toast({
 					description: (
 						<span className="flex items-center gap-4">
-							<MdError className="text-xl" />
-							<span>{rejectedFiles[0].errors[0].message}</span>
-						</span>
+              <MdError className="text-xl" />
+              <span>{rejectedFiles[0].errors[0].message}</span>
+            </span>
 					),
 					variant: 'destructive',
 				})
 			}
 		},
-		[imageSrc, toast],
+		[imageSrc, toast]
 	)
 
-	// Setup the dropzone
 	const { getRootProps, getInputProps, isDragActive } = useDropzone({
-		accept: {
-			'image/*': [],
-		},
-		maxSize: 1024 * 5000, // 5 MB limit
+		accept: { 'image/*': [] },
+		maxSize: 1024 * 5000, // 5MB
 		maxFiles: 1,
 		onDrop,
 	})
 
-	// Clean up the file previews when component unmounts or files change
 	useEffect(() => {
 		async function uploadImage() {
 			if (files[0]) {
@@ -72,7 +63,6 @@ export default function Upload({ className = '' }: { className?: string }) {
 			}
 		}
 		uploadImage()
-
 		return () => files.forEach(file => URL.revokeObjectURL(file.preview))
 	}, [files, toast, updateProfileImageUrl])
 
@@ -94,7 +84,7 @@ export default function Upload({ className = '' }: { className?: string }) {
 					className: cn(
 						'relative rounded-xl overflow-hidden aspect-square cursor-pointer px-6 py-8 md:px-10 md:py-[3.75rem] w-[13rem]',
 						imageSrc ? 'bg-black' : 'bg-light-purple',
-						isDragActive && 'border-purple border',
+						isDragActive && 'border-purple border'
 					),
 				})}
 			>
@@ -110,17 +100,16 @@ export default function Upload({ className = '' }: { className?: string }) {
 				<span
 					className={cn(
 						'z-10 relative grid place-content-center place-items-center justify-center h-full gap-2',
-						imageSrc ? 'text-white' : 'text-purple',
+						imageSrc ? 'text-white' : 'text-purple'
 					)}
 				>
-					<IconImage />
-					<span className="text-semibold">
-						{imageSrc ? 'Change Image' : isDragActive ? 'Drop Image' : '+ Upload Image'}
-					</span>
-				</span>
+          <IconImage />
+          <span className="text-semibold">
+            {imageSrc ? 'Change Image' : isDragActive ? 'Drop Image' : '+ Upload Image'}
+          </span>
+        </span>
 				<input {...getInputProps({ name: 'file' })} />
 			</div>
-			{/* Trash Icon for Removing Image */}
 			{imageSrc && (
 				<button
 					type="button"

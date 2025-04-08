@@ -5,7 +5,7 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: 'https',
-				hostname: `${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com`,
+				hostname: `${process.env.AZURE_STORAGE_NAME}.blob.core.windows.net`,
 				port: '',
 				pathname: '/**',
 			},
