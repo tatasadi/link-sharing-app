@@ -130,26 +130,26 @@ Choose the method that best fits your requirements, infrastructure, and scaling 
 
 ### Built with
 
-![](https://img.shields.io/badge/HTML5-fff?style=for-the-badge&logo=HTML5&logoColor=fff&color=E34F26)  
-![](https://img.shields.io/badge/CSS3-fff?style=for-the-badge&logo=CSS3&logoColor=fff&color=29a4d9)  
-![](https://img.shields.io/badge/TypeScript-fff?style=for-the-badge&logo=TypeScript&logoColor=fff&color=2f74c0)  
-![](https://img.shields.io/badge/git-fff?style=for-the-badge&logo=git&logoColor=fff&color=e94e31)  
-![](https://img.shields.io/badge/React-fff?style=for-the-badge&logo=React&logoColor=000&color=5ed3f3)  
-![](https://img.shields.io/badge/Next.js-fff?style=for-the-badge&logo=next.js&logoColor=fff&color=000)  
-![](https://img.shields.io/badge/tailwindcss-fff?style=for-the-badge&logo=tailwindcss&logoColor=fff&color=15b8c5)  
-![](https://img.shields.io/badge/Zod-fff?style=for-the-badge&logo=zod&logoColor=fff&color=3068b7)  
-![](https://img.shields.io/badge/Storybook-fff?style=for-the-badge&logo=storybook&logoColor=fff&color=ff4785)  
-![](https://img.shields.io/badge/React_Hook_Form-fff?style=for-the-badge&logo=react-hook-form&logoColor=fff&color=ec5990)  
-![](https://img.shields.io/badge/Zustand-fff?style=for-the-badge&logo=zustand&logoColor=fff&color=ff7e00)  
-![](https://img.shields.io/badge/Next_Auth-fff?style=for-the-badge&logo=nextauth&logoColor=fff&color=007acc)  
-![](https://img.shields.io/badge/Azure_Blob_Storage-fff?style=for-the-badge&logo=azureblobstorage&logoColor=fff&color=0078d4)  
-![](https://img.shields.io/badge/Prisma-fff?style=for-the-badge&logo=prisma&logoColor=fff&color=0c344b)  
-![](https://img.shields.io/badge/PostgreSQL-fff?style=for-the-badge&logo=postgresql&logoColor=fff&color=336791)  
+![](https://img.shields.io/badge/HTML5-fff?style=for-the-badge&logo=HTML5&logoColor=fff&color=E34F26) 
+![](https://img.shields.io/badge/CSS3-fff?style=for-the-badge&logo=CSS3&logoColor=fff&color=29a4d9) 
+![](https://img.shields.io/badge/TypeScript-fff?style=for-the-badge&logo=TypeScript&logoColor=fff&color=2f74c0) 
+![](https://img.shields.io/badge/git-fff?style=for-the-badge&logo=git&logoColor=fff&color=e94e31) 
+![](https://img.shields.io/badge/React-fff?style=for-the-badge&logo=React&logoColor=000&color=5ed3f3) 
+![](https://img.shields.io/badge/Next.js-fff?style=for-the-badge&logo=next.js&logoColor=fff&color=000) 
+![](https://img.shields.io/badge/tailwindcss-fff?style=for-the-badge&logo=tailwindcss&logoColor=fff&color=15b8c5) 
+![](https://img.shields.io/badge/Zod-fff?style=for-the-badge&logo=zod&logoColor=fff&color=3068b7) 
+![](https://img.shields.io/badge/Storybook-fff?style=for-the-badge&logo=storybook&logoColor=fff&color=ff4785) 
+![](https://img.shields.io/badge/React_Hook_Form-fff?style=for-the-badge&logo=react-hook-form&logoColor=fff&color=ec5990) 
+![](https://img.shields.io/badge/Zustand-fff?style=for-the-badge&logo=zustand&logoColor=fff&color=ff7e00) 
+![](https://img.shields.io/badge/Next_Auth-fff?style=for-the-badge&logo=nextauth&logoColor=fff&color=007acc) 
+![](https://img.shields.io/badge/Azure_Blob_Storage-fff?style=for-the-badge&logo=azureblobstorage&logoColor=fff&color=0078d4) 
+![](https://img.shields.io/badge/Prisma-fff?style=for-the-badge&logo=prisma&logoColor=fff&color=0c344b) 
+![](https://img.shields.io/badge/PostgreSQL-fff?style=for-the-badge&logo=postgresql&logoColor=fff&color=336791) 
 ![](https://img.shields.io/badge/Shadcn-fff?style=for-the-badge&logo=shadcn&logoColor=fff&color=000)
 
 ### Code Quality with
 
-![](https://img.shields.io/badge/eslint-fff?style=for-the-badge&logo=eslint&logoColor=fff&color=4930bd)  
+![](https://img.shields.io/badge/eslint-fff?style=for-the-badge&logo=eslint&logoColor=fff&color=4930bd) 
 ![](https://img.shields.io/badge/prettier-fff?style=for-the-badge&logo=prettier&logoColor=000&color=f3ae42)
 
 ## Author
