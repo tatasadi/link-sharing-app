@@ -123,8 +123,6 @@ Choose the method that best fits your requirements, infrastructure, and scaling 
 
 - **Solution URL:**  
   [https://github.com/tatasadi/link-sharing-app](https://github.com/tatasadi/link-sharing-app)
-- **Live URL:**  
-  [https://link-sharing-app.codingforweb.com](https://link-sharing-app.codingforweb.com)
 
 ## My Process
 
