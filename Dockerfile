@@ -3,9 +3,11 @@
 # Use a Debian-based Node 18 image (Bullseye slim)
 FROM node:18-bullseye-slim AS base
 
-# Update package lists and install libssl1.1 if needed.
-# (Bullseye typically includes libssl1.1, but this ensures it's present.)
-RUN apt-get update && apt-get install -y libssl1.1 && rm -rf /var/lib/apt/lists/*
+# Update package lists and install required packages
+RUN apt-get update && apt-get install -y \
+    libssl1.1 \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
 
 WORKDIR /app
 
