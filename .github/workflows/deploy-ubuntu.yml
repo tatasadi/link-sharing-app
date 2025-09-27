@@ -7,12 +7,18 @@ on:
       - main
 
 env:
-  IMAGE_NAME: link-sharing-app
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
   CONTAINER_NAME: link-sharing-app
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
 
     steps:
       - name: Checkout code
@@ -21,54 +27,54 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build Docker image
-        uses: docker/build-push-action@v5
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels)
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest
+            type=sha
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Dockerfile
-          tags: ${{ env.IMAGE_NAME }}:latest
-          outputs: type=docker,dest=/tmp/${{ env.IMAGE_NAME }}.tar
+          push: true
+          platforms: linux/amd64
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Upload and deploy Docker image
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Deploy to Ubuntu Server
+        uses: appleboy/ssh-action@v1.1.0
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_PORT || 22 }}
           script: |
+            set -euo pipefail
+
+            # Login to GitHub Container Registry
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+
             # Stop and remove existing container
             docker stop ${{ env.CONTAINER_NAME }} || true
             docker rm ${{ env.CONTAINER_NAME }} || true
 
             # Remove old image
-            docker rmi ${{ env.IMAGE_NAME }}:latest || true
+            docker rmi ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest || true
 
-            # Create app directory if it doesn't exist
-            mkdir -p ~/link-sharing-app
-
-      - name: Copy Docker image to server
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          port: ${{ secrets.SERVER_PORT || 22 }}
-          source: /tmp/${{ env.IMAGE_NAME }}.tar
-          target: ~/link-sharing-app/
-
-      - name: Load and run Docker container
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          port: ${{ secrets.SERVER_PORT || 22 }}
-          script: |
-            cd ~/link-sharing-app
-
-            # Load the Docker image
-            docker load -i ${{ env.IMAGE_NAME }}.tar
+            # Pull new image
+            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
             # Run the container with environment variables
             docker run -d \
@@ -81,14 +87,12 @@ jobs:
               -e AZURE_STORAGE_CONTAINER_NAME="${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}" \
               -e AZURE_STORAGE_NAME="${{ secrets.AZURE_STORAGE_NAME }}" \
               -e NODE_ENV=production \
-              ${{ env.IMAGE_NAME }}:latest
-
-            # Clean up the uploaded tar file
-            rm -f ${{ env.IMAGE_NAME }}.tar
+              ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
             # Show container status
+            echo "Container status:"
             docker ps | grep ${{ env.CONTAINER_NAME }}
 
-            # Show logs
-            echo "Container logs:"
-            docker logs ${{ env.CONTAINER_NAME }} --tail 50
+            # Show recent logs
+            echo "Recent container logs:"
+            docker logs ${{ env.CONTAINER_NAME }} --tail 20
