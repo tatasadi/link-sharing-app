@@ -27,9 +27,9 @@ jobs:
           context: .
           file: ./Dockerfile
           tags: ${{ env.IMAGE_NAME }}:latest
-          outputs: type=docker,dest=/tmp/image.tar
+          outputs: type=docker,dest=/tmp/${{ env.IMAGE_NAME }}.tar
 
-      - name: Copy image to server and deploy
+      - name: Upload and deploy Docker image
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -47,14 +47,14 @@ jobs:
             # Create app directory if it doesn't exist
             mkdir -p ~/link-sharing-app
 
-      - name: Upload Docker image
+      - name: Copy Docker image to server
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_PORT || 22 }}
-          source: /tmp/image.tar
+          source: /tmp/${{ env.IMAGE_NAME }}.tar
           target: ~/link-sharing-app/
 
       - name: Load and run Docker container
@@ -68,7 +68,7 @@ jobs:
             cd ~/link-sharing-app
 
             # Load the Docker image
-            docker load -i /tmp/image.tar
+            docker load -i ${{ env.IMAGE_NAME }}.tar
 
             # Run the container with environment variables
             docker run -d \
@@ -84,7 +84,7 @@ jobs:
               ${{ env.IMAGE_NAME }}:latest
 
             # Clean up the uploaded tar file
-            rm -f /tmp/image.tar
+            rm -f ${{ env.IMAGE_NAME }}.tar
 
             # Show container status
             docker ps | grep ${{ env.CONTAINER_NAME }}
