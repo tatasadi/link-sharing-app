@@ -1,10 +1,10 @@
-name: CI/CD
+name: Deploy on Azure
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
 
 jobs:
   build:
