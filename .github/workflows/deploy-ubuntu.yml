@@ -84,7 +84,7 @@ jobs:
             docker run -d \
               --name ${{ env.CONTAINER_NAME }} \
               --restart unless-stopped \
-              --network n8n-network \
+              --network ${{ secrets.DOCKER_NETWORK }} \
               -p 3003:3000 \
               -e DATABASE_URL="${{ secrets.DATABASE_URL }}" \
               -e AUTH_SECRET="${{ secrets.AUTH_SECRET }}" \

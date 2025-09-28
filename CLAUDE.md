@@ -92,6 +92,7 @@ Required GitHub secrets for Ubuntu deployment:
 - `SERVER_USER` - SSH username
 - `SERVER_SSH_KEY` - Private SSH key for authentication
 - `SERVER_PORT` - SSH port (optional, defaults to 22)
+- `DOCKER_NETWORK` - Docker network name for database connectivity
 - All environment variables listed above
 
 Server prerequisites:

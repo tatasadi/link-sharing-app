@@ -1,4 +1,4 @@
-# Link-Sharing App [![CI/CD](https://github.com/tatasadi/link-sharing-app/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/tatasadi/link-sharing-app/actions/workflows/ci-cd.yml)
+# Link-Sharing App
 
 ![workflow](https://github.com/tatasadi/link-sharing-app/actions/workflows/deploy-ubuntu.yml/badge.svg)
 
@@ -9,7 +9,7 @@ interface, enabling full customization of how profiles are displayed.
 
 ## Table of Contents
 
-- [Link-Sharing App ](#link-sharing-app-)
+- [Link-Sharing App](#link-sharing-app)
   - [Table of Contents](#table-of-contents)
   - [Features](#features)
   - [Tech Stack](#tech-stack)

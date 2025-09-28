@@ -79,6 +79,7 @@ In your GitHub repository, go to **Settings > Secrets and variables > Actions** 
 - `SERVER_USER`: Your Ubuntu server username
 - `SERVER_SSH_KEY`: Your private SSH key (the content of `~/.ssh/id_ed25519` from your local machine)
 - `SERVER_PORT`: SSH port (optional, defaults to 22)
+- `DOCKER_NETWORK`: Docker network name for database connectivity (e.g., `n8n-network`)
 
 #### Application Environment Variables:
 - `DATABASE_URL`: PostgreSQL connection string
@@ -90,6 +91,22 @@ In your GitHub repository, go to **Settings > Secrets and variables > Actions** 
 ### 2. Test SSH Connection from GitHub Actions
 
 The workflow will automatically test the connection when you push to the main branch.
+
+## Docker Network Configuration
+
+If you have existing containers (like PostgreSQL) running on a specific Docker network, you'll need to ensure your app container joins the same network for connectivity.
+
+### Find your Docker network:
+```bash
+# List all Docker networks
+docker network ls
+
+# Inspect a specific network (e.g., n8n-network)
+docker network inspect n8n-network
+```
+
+### Set DOCKER_NETWORK secret:
+Add the network name (e.g., `n8n-network`) as the `DOCKER_NETWORK` GitHub secret.
 
 ## Database Setup
 
