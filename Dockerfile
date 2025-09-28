@@ -16,15 +16,6 @@ RUN \
   elif [ -f pnpm-lock.yaml ]; then corepack enable && pnpm run build; \
   else npm run build; fi
 
-# 2) Target deps - install runtime deps for target platform
-FROM --platform=$TARGETPLATFORM node:20-alpine AS deps
-WORKDIR /app
-RUN apk add --no-cache libc6-compat
-COPY package.json package-lock.json* pnpm-lock.yaml* yarn.lock* ./
-RUN if [ -f yarn.lock ]; then corepack enable && corepack prepare yarn@stable --activate && yarn --frozen-lockfile --production; \
-    elif [ -f pnpm-lock.yaml ]; then corepack enable && corepack prepare pnpm@latest --activate && pnpm install --frozen-lockfile --prod; \
-    else npm ci --only=production; fi
-
 # 3) Runner (production image)
 FROM --platform=$TARGETPLATFORM node:20-alpine AS runner
 WORKDIR /app
@@ -38,8 +29,6 @@ RUN addgroup -S nextjs && adduser -S nextjs -G nextjs
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/public ./public
-# Copy production dependencies from deps stage
-COPY --from=deps /app/node_modules ./node_modules
 
 # Create cache directory with proper ownership
 RUN mkdir -p .next/cache && chown -R nextjs:nextjs .next
