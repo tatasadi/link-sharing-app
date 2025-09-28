@@ -10,6 +10,9 @@ export const metadata: Metadata = {
 	title: 'Link Sharing App',
 	description:
 		'An intuitive platform for developers to create personalized profiles that consolidate links to all their social media accounts, making it easy to share their online presence with others.',
+	icons: {
+		icon: '/logo-devlinks-small.svg',
+	},
 }
 
 export default async function RootLayout({
